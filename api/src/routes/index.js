@@ -11,6 +11,6 @@ router.get("/",getAllRecipe)
 router.get("/recipes",getNameRecipe)
 router.get("/recipes/:id",getIdRecipe)
 router.get("/types",getTypes)
-// router.post("/recipe",createRecipe );
+router.post("/recipes",createRecipe );
 
 module.exports = router;

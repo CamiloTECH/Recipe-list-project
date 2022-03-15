@@ -10,24 +10,24 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull:false
     },
-    nombre: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    resumen:{
+    summary:{
       type:DataTypes.TEXT,
       allowNull:false
     },
-    puntuacion:{
+    score:{
       type:DataTypes.INTEGER
     },
-    puntajeSaludable:{
+    healthScore:{
       type:DataTypes.INTEGER
     },
-    pasos:{
+    steps:{
       type:DataTypes.TEXT
     },
-    imagen: {
+    image: {
       type: DataTypes.STRING,
       allowNull: false
     }

@@ -4,6 +4,7 @@ const { Api_key } = process.env;
 const axios = require("axios");
 const { Op } = require("sequelize");
 
+//Optener todas las 100 recetas de la API
 const getData = async () => {
   try {
     const response = await axios.get(
@@ -20,7 +21,7 @@ const getData = async () => {
       return {
         id: recipe.id,
         title: recipe.title,
-        diet: recipe.diets,
+        diets: recipe.diets,
         image: recipe.image,
       };
     });
@@ -29,21 +30,20 @@ const getData = async () => {
     return []
   }
 };
-// let data = await Recipe.create({
-//   nombre:"ererre",
-//   resumen:"sdsdsd",
-//   puntuacion:23,
-//   puntajeSaludable:34,
-//   pasos:"fddffd",
-//   imagen:"sddffdfd",
-// });
 
+//Optener todas las recetas de la API y la DB
 const getAllRecipe = async (req, res) => {
   let recipes = await getData();
 
   const dataDB = await Recipe.findAll({
-    include: Diet,
-    attributes: ["imagen", "nombre"],
+    attributes: ["id","image", "title"],
+    include:{
+      model: Diet,
+      attributes:["name"],
+      through:{
+        attributes:[]
+      }
+    },
   });
 
   dataDB.forEach((recipe) => recipes.push(recipe.dataValues));
@@ -52,6 +52,7 @@ const getAllRecipe = async (req, res) => {
     : res.json({ error: "No se encontraron recetas" });
 };
 
+//Optener una receta con un ID pasado por params
 const getIdRecipe = async (req, res) => {
   const { id } = req.params;
 
@@ -62,27 +63,35 @@ const getIdRecipe = async (req, res) => {
     let datos = response.data;
     res.json({
       title: datos.title,
-      resumen: datos.summary,
-      puntaje: datos.spoonacularScore,
-      puntajeSaludable: datos.healthScore,
-      dieta: datos.diets,
-      pasos: datos.instructions,
-      imagen: datos.image,
+      summary: datos.summary,
+      score: datos.spoonacularScore,
+      healthScore: datos.healthScore,
+      diets: datos.diets,
+      steps: datos.instructions,
+      image: datos.image,
     });
   } catch (err) {
     res.json({ error: err.message });
   }
 };
 
+//Optener todas las recetas que contengna una palabra en su titulo, la palabra es pasada por query
 const getNameRecipe = async (req, res) => {
   const { name } = req.query;
 
   if (name) {
     let response = await getData();
+
     const dataDB = await Recipe.findAll({
-      include: Diet,
-      attributes: ["imagen", "nombre"],
-      where: { nombre: { [Op.substring]: name } },
+      attributes: ["id", "image", "title"],
+      where: { title: { [Op.substring]: name } },
+      include:{
+        model: Diet,
+        attributes:["name"],
+        through:{
+          attributes:[]
+        }
+      },
     });
 
     let recipes = response.filter((recipe) =>
@@ -100,31 +109,38 @@ const getNameRecipe = async (req, res) => {
   }
 };
 
+//Optener todos los tipos de dietas y guardarlas en la DB
 const getTypes= async (req,res)=>{
   const recipes=await getData()
   let types=[]
-  recipes.forEach(recipe=>types.push(...recipe.diet))
+  recipes.forEach(recipe=>types.push(...recipe.diets))
   types=new Set(types)
   types=Array.from(types)
-  types.forEach(async type=>await Diet.create({nombre:type}))
-  
+  types.forEach(async type=>await Diet.findOrCreate( { where : { name:type } } ))
+
   res.json(types)
 }
 
-// const createRecipe = async (req, res) => {
-//   let { nombre, dieta, resumen, puntuacion, puntajeSaludable, pasos, imagen } = req.body;
-//   let data = await Recipe.create({
-//     nombre,resumen,puntuacion,puntajeSaludable,pasos,imagen,});
-//   //console.log(data)
-//   //await data.setDiets(dieta);
+const createRecipe = async (req, res) => {
+  let { title, diets, summary, score, healthScore, steps, image } = req.body;
 
-//   res.send("gracias");
-// };
+  if(title && diets && summary && image){
+    let data = await Recipe.create({
+      title,summary,score,healthScore,steps,image,});
+      
+      await data.setDiets(diets);
+      res.json({message:"Receta creada satisfactoriamente"});
+  }
+  else{
+    res.json({error: "Debes ingresar todos los datos completos"})
+  }
+
+};
 
 module.exports = {
   getAllRecipe,
   getIdRecipe,
   getNameRecipe,
-  getTypes
-  // createRecipe,
+  getTypes,
+  createRecipe
 };
