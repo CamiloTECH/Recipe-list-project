@@ -27,7 +27,7 @@ const getData = async () => {
     });
     return recipes;
   } catch (error) {
-    return []
+    return [];
   }
 };
 
@@ -36,13 +36,13 @@ const getAllRecipe = async (req, res) => {
   let recipes = await getData();
 
   const dataDB = await Recipe.findAll({
-    attributes: ["id","image", "title"],
-    include:{
+    attributes: ["id", "image", "title"],
+    include: {
       model: Diet,
-      attributes:["name"],
-      through:{
-        attributes:[]
-      }
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
     },
   });
 
@@ -53,7 +53,7 @@ const getAllRecipe = async (req, res) => {
 };
 
 //Optener una receta con un ID pasado por params
-const getIdRecipe = async (req, res) => {
+const getIdRecipeAPI = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -75,6 +75,27 @@ const getIdRecipe = async (req, res) => {
   }
 };
 
+//Optener una receta de la base de datos con un ID pasado por params
+const getIdRecipeDb = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (id) {
+      const dataDB = await Recipe.findAll({
+        where: { id },
+        include: {
+          model: Diet,
+          attributes: ["name"],
+          through: { attributes: [] },
+        },
+      });
+      res.json(dataDB[0].dataValues);
+    }
+  } catch (err) {
+    res.json({ error: "No se encontro la receta" });
+  }
+};
+
 //Optener todas las recetas que contengna una palabra en su titulo, la palabra es pasada por query
 const getNameRecipe = async (req, res) => {
   const { name } = req.query;
@@ -85,12 +106,10 @@ const getNameRecipe = async (req, res) => {
     const dataDB = await Recipe.findAll({
       attributes: ["id", "image", "title"],
       where: { title: { [Op.substring]: name } },
-      include:{
+      include: {
         model: Diet,
-        attributes:["name"],
-        through:{
-          attributes:[]
-        }
+        attributes: ["name"],
+        through: { attributes: [] },
       },
     });
 
@@ -110,37 +129,44 @@ const getNameRecipe = async (req, res) => {
 };
 
 //Optener todos los tipos de dietas y guardarlas en la DB
-const getTypes= async (req,res)=>{
-  const recipes=await getData()
-  let types=[]
-  recipes.forEach(recipe=>types.push(...recipe.diets))
-  types=new Set(types)
-  types=Array.from(types)
-  types.forEach(async type=>await Diet.findOrCreate( { where : { name:type } } ))
+const getTypes = async (req, res) => {
+  const recipes = await getData();
+  let types = [];
+  recipes.forEach((recipe) => types.push(...recipe.diets));
+  types = new Set(types);
+  types = Array.from(types);
+  types.forEach(
+    async (type) => await Diet.findOrCreate({ where: { name: type } })
+  );
 
-  res.json(types)
-}
+  res.json(types);
+};
 
 const createRecipe = async (req, res) => {
   let { title, diets, summary, score, healthScore, steps, image } = req.body;
 
-  if(title && diets && summary && image){
+  if (title && diets && summary && image) {
     let data = await Recipe.create({
-      title,summary,score,healthScore,steps,image,});
-      
-      await data.setDiets(diets);
-      res.json({message:"Receta creada satisfactoriamente"});
-  }
-  else{
-    res.json({error: "Debes ingresar todos los datos completos"})
-  }
+      title,
+      summary,
+      score,
+      healthScore,
+      steps,
+      image,
+    });
 
+    await data.setDiets(diets);
+    res.json({ message: "Receta creada satisfactoriamente" });
+  } else {
+    res.json({ error: "Debes ingresar todos los datos completos" });
+  }
 };
 
 module.exports = {
   getAllRecipe,
-  getIdRecipe,
+  getIdRecipeAPI,
   getNameRecipe,
   getTypes,
-  createRecipe
+  getIdRecipeDb,
+  createRecipe,
 };
