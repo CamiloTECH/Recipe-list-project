@@ -11,6 +11,7 @@ const getData = async () => {
       `https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=${Api_key}`
     );
     let recipes = response.data.results.map((recipe) => {
+      //Agregar los tipos de dietas que no tenga la propiedad Diets de la API
       if (recipe.vegetarian && !recipe.diets.includes("vegetarian"))
         recipe.diets.push("vegetarian");
       if (recipe.vegan && !recipe.diets.includes("vegan"))
@@ -18,6 +19,7 @@ const getData = async () => {
       if (recipe.glutenFree && !recipe.diets.includes("gluten free"))
         recipe.diets.push("gluten free");
 
+      //Retorno de los valores necesarios para ser mostrados por el front 
       return {
         id: recipe.id,
         title: recipe.title,
@@ -27,6 +29,7 @@ const getData = async () => {
     });
     return recipes;
   } catch (error) {
+    //Si hay un error enviar un array vacio para que pueda ser tratado por las otras funciones
     return [];
   }
 };
@@ -35,6 +38,7 @@ const getData = async () => {
 const getAllRecipe = async (req, res) => {
   let recipes = await getData();
 
+    //Traer toda la informacion de los datos de la DB
   const dataDB = await Recipe.findAll({
     attributes: ["id", "image", "title"],
     include: {
@@ -45,11 +49,10 @@ const getAllRecipe = async (req, res) => {
       },
     },
   });
-
+    //Insertar los datos que retorno la DB a el resultado de la consulta a la API
   dataDB.forEach((recipe) => recipes.push(recipe.dataValues));
-  recipes.length > 0
-    ? res.json(recipes)
-    : res.json({ error: "No se encontraron recetas" });
+
+  res.json(recipes)
 };
 
 //Optener una receta con un ID pasado por params
@@ -61,6 +64,7 @@ const getIdRecipeAPI = async (req, res) => {
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=${Api_key}`
     );
     let datos = response.data;
+    //Enviar la informacion necesaria para ser mostrada por el Front
     res.json({
       title: datos.title,
       summary: datos.summary,
@@ -112,17 +116,14 @@ const getNameRecipe = async (req, res) => {
         through: { attributes: [] },
       },
     });
-
+    //Filtrar los datos de la respuesta de la API para obtener solo los que contengan el nombre 
     let recipes = response.filter((recipe) =>
       recipe.title.toLowerCase().includes(name.toLowerCase())
     );
+    //Insertar los datos de la DB a el resultado del filter
     dataDB.forEach((recipe) => recipes.push(recipe.dataValues));
 
-    recipes.length > 0
-      ? res.json(recipes)
-      : res.json({
-          error: "No se ha encontrado ninguna receta con ese nombre",
-        });
+    res.json(recipes)
   } else {
     res.json({ error: "No hay ningun parametro de busqueda" });
   }
@@ -132,9 +133,14 @@ const getNameRecipe = async (req, res) => {
 const getTypes = async (req, res) => {
   const recipes = await getData();
   let types = [];
+
+  //Agregar todos los tipos de dietas a el array types
   recipes.forEach((recipe) => types.push(...recipe.diets));
+  //Setear el array para obtener solo las dietas unicas
   types = new Set(types);
+  //Convertir el valor de Set a un array valido
   types = Array.from(types);
+  //Crear estos tipos de dietas en la DB
   types.forEach(
     async (type) => await Diet.findOrCreate({ where: { name: type } })
   );
