@@ -19,7 +19,7 @@ const getData = async () => {
       if (recipe.glutenFree && !recipe.diets.includes("gluten free"))
         recipe.diets.push("gluten free");
 
-      //Retorno de los valores necesarios para ser mostrados por el front 
+      //Retorno de los valores necesarios para ser mostrados por el front
       return {
         id: recipe.id,
         title: recipe.title,
@@ -38,7 +38,7 @@ const getData = async () => {
 const getAllRecipe = async (req, res) => {
   let recipes = await getData();
 
-    //Traer toda la informacion de los datos de la DB
+  //Traer toda la informacion de los datos de la DB
   const dataDB = await Recipe.findAll({
     attributes: ["id", "image", "title"],
     include: {
@@ -49,10 +49,10 @@ const getAllRecipe = async (req, res) => {
       },
     },
   });
-    //Insertar los datos que retorno la DB a el resultado de la consulta a la API
+  //Insertar los datos que retorno la DB a el resultado de la consulta a la API
   dataDB.forEach((recipe) => recipes.push(recipe.dataValues));
 
-  res.json(recipes)
+  res.json(recipes);
 };
 
 //Optener una receta con un ID pasado por params
@@ -116,14 +116,14 @@ const getNameRecipe = async (req, res) => {
         through: { attributes: [] },
       },
     });
-    //Filtrar los datos de la respuesta de la API para obtener solo los que contengan el nombre 
+    //Filtrar los datos de la respuesta de la API para obtener solo los que contengan el nombre
     let recipes = response.filter((recipe) =>
       recipe.title.toLowerCase().includes(name.toLowerCase())
     );
     //Insertar los datos de la DB a el resultado del filter
     dataDB.forEach((recipe) => recipes.push(recipe.dataValues));
 
-    res.json(recipes)
+    res.json(recipes);
   } else {
     res.json({ error: "No hay ningun parametro de busqueda" });
   }
@@ -131,20 +131,32 @@ const getNameRecipe = async (req, res) => {
 
 //Optener todos los tipos de dietas y guardarlas en la DB
 const getTypes = async (req, res) => {
-  const recipes = await getData();
   let types = [];
+  const typeDietsDB = await Diet.findAll({ attributes: ["id", "name"] });
 
-  //Agregar todos los tipos de dietas a el array types
-  recipes.forEach((recipe) => types.push(...recipe.diets));
-  //Setear el array para obtener solo las dietas unicas
-  types = new Set(types);
-  //Convertir el valor de Set a un array valido
-  types = Array.from(types);
-  //Crear estos tipos de dietas en la DB
-  types.forEach(
-    async (type) => await Diet.findOrCreate({ where: { name: type } })
-  );
-
+  //Pregunta si la consulta a la base de datos dio algun resultado,
+  //si da algun resultado es porque ya estan las dietas en la Db en caso ccontrario toca crearlas
+  if (typeDietsDB.length === 0) {
+    const recipes = await getData();
+    let typesAPI = [];
+    //Agregar todos los tipos de dietas a el array types
+    recipes.forEach((recipe) => typesAPI.push(...recipe.diets));
+    //Setear el array para obtener solo las dietas unicas
+    typesAPI = new Set(typesAPI);
+    //Convertir el valor de Set a un array valido
+    typesAPI = Array.from(typesAPI);
+    //Crear estos tipos de dietas en la DB y la incluye en el array
+    for (const type of typesAPI) {
+      let data = await Diet.create({ name: type });
+      types.push({
+        id: data.dataValues.id,
+        name: data.dataValues.name,
+      });
+    }
+  } else {
+    typeDietsDB.forEach((typeDB) => types.push(typeDB.dataValues));
+  }
+    
   res.json(types);
 };
 

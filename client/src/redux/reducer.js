@@ -1,7 +1,51 @@
+import {
+  GET_ALL_RECIPES,
+  GET_RECIPES_NAME,
+  GET_RECIPE_DETAIL_API,
+  GET_RECIPE_DETAIL_DB,
+  GET_TYPES_DIET,
+  ADD_RECIPE,
+} from "./actions";
 
-
-
-
-export default function rootReducer(){
-    
+let Inicialstate = {
+  recipes: [],
+  recipesDetail: {},
+  types: [],
+  createUser: {},
+};
+export default function rootReducer(state = Inicialstate, action) {
+  switch (action.type) {
+    case GET_ALL_RECIPES:
+      return {
+        ...state,
+        recipes: action.payload,
+      };
+    case GET_RECIPES_NAME:
+      return {
+        ...state,
+        recipes: action.payload,
+      };
+    case GET_RECIPE_DETAIL_API:
+      return {
+        ...state,
+        recipesDetail: action.payload,
+      };
+    case GET_RECIPE_DETAIL_DB:
+      return {
+        ...state,
+        recipesDetail: action.payload,
+      };
+    case GET_TYPES_DIET:
+      return {
+        ...state,
+        types: action.payload,
+      };
+    case ADD_RECIPE:
+      return {
+        ...state,
+        createUser: action.payload,
+      };
+    default:
+      return state;
+  }
 }

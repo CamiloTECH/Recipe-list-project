@@ -1,0 +1,64 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  color: black;
+  background-color: #82E0AA;
+}
+
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  text-decoration: none;
+  
+}
+
+.logo img {
+  width: 30%;
+}
+
+.logo p, .enlaces{
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: Brush Script MT;
+  color: #1B4F72;
+
+}
+
+.rutas{
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width:50%;
+    gap: 4%;
+    margin-right: 3rem;
+}
+
+.enlaces{
+    text-decoration: none;
+    font-family: Times;
+    font-size: 1.7rem;
+    position: relative;
+}
+
+.enlaces::after{
+    content: "";
+    position: absolute;
+    width: 0%;
+    background-color: #B03A2E;
+    height: 5px;
+    top: 101%;
+    left:0%;
+    border-radius: 10px;
+    transition: width .5s;
+}
+
+.enlaces:hover::after{
+    width: 100%;
+    transition: width .5s;
+}

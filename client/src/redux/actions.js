@@ -5,8 +5,6 @@ export const GET_ALL_RECIPES = "getAllrecipes",
   GET_TYPES_DIET = "getTypesDiet",
   ADD_RECIPE = "addRecipe";
 
-// router.get("/types", getTypes);
-// router.post("/recipes", createRecipe);
 export function getAllrecipes() {
   return async function (dispatch) {
     const response = await fetch("http://localhost:3001/");
@@ -70,12 +68,13 @@ export function addRecipe(recipe) {
   return async function (dispatch) {
     const response = await fetch(`http://localhost:3001/recipes`, {
       method: "POST",
-      body: recipe,
+      body: JSON.stringify(recipe),
+      headers: { "Content-Type": "application/json" },
     });
     const result = await response.json();
     return dispatch({
       type: ADD_RECIPE,
-      payload: result
+      payload: result,
     });
   };
 }
