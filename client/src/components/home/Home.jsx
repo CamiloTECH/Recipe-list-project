@@ -4,7 +4,7 @@ import style from "./Home.module.css"
 
 function Home() {
     return ( 
-        <div>
+        <div className={style.home}>
             <Cards/>
         </div>
      );
