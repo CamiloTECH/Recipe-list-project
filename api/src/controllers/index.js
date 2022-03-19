@@ -23,6 +23,7 @@ const getData = async () => {
       return {
         id: recipe.id,
         title: recipe.title,
+        score: recipe.spoonacularScore,
         diets: recipe.diets,
         image: recipe.image,
       };
@@ -40,7 +41,7 @@ const getAllRecipe = async (req, res) => {
 
   //Traer toda la informacion de los datos de la DB
   const dataDB = await Recipe.findAll({
-    attributes: ["id", "image", "title"],
+    attributes: ["id", "image", "title", "score"],
     include: {
       model: Diet,
       attributes: ["name"],
@@ -52,7 +53,9 @@ const getAllRecipe = async (req, res) => {
   //Insertar los datos que retorno la DB a el resultado de la consulta a la API
   dataDB.forEach((recipe) => recipes.push(recipe.dataValues));
 
-  res.json(recipes);
+  recipes.length > 0
+    ? res.json(recipes)
+    : res.json([{ error: "No se encontraron recetas" }]);
 };
 
 //Optener una receta con un ID pasado por params
@@ -96,7 +99,7 @@ const getIdRecipeDb = async (req, res) => {
       res.json(dataDB[0].dataValues);
     }
   } catch (err) {
-    res.json({ error: "No se encontro la receta" });
+    res.json({ error: err.message });
   }
 };
 
@@ -108,7 +111,7 @@ const getNameRecipe = async (req, res) => {
     let response = await getData();
 
     const dataDB = await Recipe.findAll({
-      attributes: ["id", "image", "title"],
+      attributes: ["id", "image", "title", "score"],
       where: { title: { [Op.substring]: name } },
       include: {
         model: Diet,
@@ -123,9 +126,11 @@ const getNameRecipe = async (req, res) => {
     //Insertar los datos de la DB a el resultado del filter
     dataDB.forEach((recipe) => recipes.push(recipe.dataValues));
 
-    res.json(recipes);
+    recipes.length > 0
+      ? res.json(recipes)
+      : res.json([{ error: "No se encontraron recetas" }]);
   } else {
-    res.json({ error: "No hay ningun parametro de busqueda" });
+    res.json([{ error: "No hay parametro de busqueda" }]);
   }
 };
 
@@ -156,7 +161,7 @@ const getTypes = async (req, res) => {
   } else {
     typeDietsDB.forEach((typeDB) => types.push(typeDB.dataValues));
   }
-    
+
   res.json(types);
 };
 

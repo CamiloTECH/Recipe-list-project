@@ -1,22 +1,30 @@
 import style from "./Search.module.css"
-import { useEffect } from "react"
-import { getTypesDiet } from "../../redux/actions"
+import { useEffect, useState } from "react"
+import { getTypesDiet, getRecipesName } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { Outlet } from "react-router-dom"
+
 function Search() {
+   const [state, setState] = useState()
    const dispatch = useDispatch()
    const types = useSelector(store => store.types)
    useEffect(() => {
-      //dispatch(getTypesDiet())
+      if (types.length === 0) dispatch(getTypesDiet())
    }, [])
+
+   const handleButtonSearch = () => {
+      if (state) {
+         dispatch(getRecipesName(state))
+      }
+   }
 
    return (
       <div>
 
          <header className={style.header}>
             <div className={style.search}>
-               <input type="text" name="search" placeholder="Search by name" />
-               <button>Search</button>
+               <input type="text" name="search" placeholder="Search by name" onChange={(e) => setState(e.target.value)} />
+               <button onClick={handleButtonSearch}>Search</button>
             </div>
             <div className={style.option}>
                <select name="alphabetical" defaultValue={0}>

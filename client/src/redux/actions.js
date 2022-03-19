@@ -19,10 +19,10 @@ export function getAllrecipes() {
 export function getRecipesName(name) {
   return async function (dispatch) {
     const response = await fetch(`http://localhost:3001/recipes?name=${name}`);
-    const result = response.json();
+    const result = await response.json();
     return dispatch({
       type: GET_RECIPES_NAME,
-      dispatch: result,
+      payload: result,
     });
   };
 }
