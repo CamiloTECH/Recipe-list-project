@@ -23,12 +23,12 @@
   margin: 4% auto;
   border-radius: 40px;
   padding: 3%;
-  background-color: #1b4f727e;
+  background-color: #1b4f72b4;
   font-family:'Trebuchet MS';
   font-size: 1.5rem;
   text-align: justify;
   width: 70%;
-  box-shadow: 0px 0px 33px 15px #F7DC6F;
+  box-shadow: 0px 0px 30px 15px #2776ac;
 }
 hr{
   border: 1px solid #B03A2E;
@@ -38,7 +38,7 @@ h1{
   text-align: center;
   margin: 0;
   margin-bottom: 3%;
-  color: #B03A2E;
+  color: #82E0AA;
 }
 
 .firtsPart{
@@ -60,7 +60,7 @@ h1{
 
 .scores p{
   margin: 4% 0%;
-  color: #186A3B;
+  color: #25a8ff;
   font-weight: bold;
 }
 
@@ -72,7 +72,7 @@ h1{
   list-style:square;
   margin: 0%;
   font-size: 1.4rem;
-  color: #186A3B;
+  color: #25a8ff;
 }
 
 .secondPart{
@@ -89,10 +89,10 @@ h1{
 }
 
 .secondPart p b{
-  color: #186A3B;
+  color: #82E0AA;
 }
 .secondPart p a{
-  color: #B03A2E;
+  color: #25a8ff;
   font-weight: bold;
 }
 

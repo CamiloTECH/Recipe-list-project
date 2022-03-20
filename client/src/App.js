@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import LandingPage from "./components/LandingPage/LandingPage.jsx";
 import Search from "./components/Search/Search";
 import NavBar from "./components/NavBar/NavBar";

@@ -9,7 +9,7 @@ function Search() {
    const dispatch = useDispatch()
    const types = useSelector(store => store.types)
    useEffect(() => {
-      //if (types.length === 0) dispatch(getTypesDiet())
+      if (types.length === 0) dispatch(getTypesDiet())
    }, [])
 
    const handleButtonSearch = () => {

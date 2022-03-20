@@ -10,52 +10,65 @@ function CardDetail() {
   const recipesDetail = useSelector(state => state.recipesDetail)
 
   useEffect(() => {
-    // const validacion = /^[0-9]+$/
-    // if (id.match(validacion)) {
-    //   dispatch(getRecipeDetailAPI(id))
-    // }
-    // else {
-    //   dispatch(getRecipeDetailDB(id))
-    // }
+    const validacion = /^[0-9]+$/
+    window.scroll(0,0)
+    if (id.match(validacion)) {
+      dispatch(getRecipeDetailAPI(id))
+    }
+    else {
+      dispatch(getRecipeDetailDB(id))
+    }
   }, [])
-
+  
   console.log(recipesDetail)
   return (
     <div className={style.card}>
-      {/* {
-        recipesDetail.error ? <h1>No se ha encontrado la receta con ID {id}, {recipesDetail.error}</h1>
+      {
+        recipesDetail.error ? <h1>No se ha encontrado la receta con ID {id}</h1>
           : recipesDetail.title ? (
-            <div>
+            <>
               <h1>{recipesDetail.title}</h1>
-              <img src={recipesDetail.image} alt="Not found" />
-              <p>{recipesDetail.score}</p>
-              <p>{recipesDetail.healthScore}</p>
-              <ul>
-                {recipesDetail.diets.map((diet, index) => (
-                  <li key={index}>{diet}</li>
-                ))}
-              </ul>
-              <p dangerouslySetInnerHTML={{__html: recipesDetail.summary}}/>
-              <br />
-              <p dangerouslySetInnerHTML={{__html: recipesDetail.steps}}/>
-            </div>
+              <div className={style.firtsPart}>
+                <img src={recipesDetail.image} alt="Not found" />
+                <div className={style.scores}>
+                  <p><b>Score:</b> {recipesDetail.score}⭐</p>
+                  <p><b>HealtScore:</b> {recipesDetail.healthScore}🌿</p>
+                  <p><b>Diet:</b></p>
+                  <ul>
+                    {recipesDetail.diets.map((diet, index) => (
+                      <li key={index}>{diet}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className={style.secondPart}>
+                <hr />
+                <h2>Summary:</h2>
+                <p dangerouslySetInnerHTML={{ __html: recipesDetail.summary }} />
+                <hr />
+                <h2>Steps:</h2>
+                <p dangerouslySetInnerHTML={{ __html: recipesDetail.steps }} />
+              </div>
+            </>
           )
             : <div className={style.load}></div>
-      } */}
-      <h1>Slow Cooker: Pork and Garbanzo Beans</h1>
-      <div className={style.firtsPart}>
-        <img src="https://spoonacular.com/recipeImages/660306-556x370.jpg" alt="imagen" />
+      }
+    </div>
+  )
+
+  {/* <div className={style.firtsPart}> */ }
+  {/*   <img src="https://spoonacular.com/recipeImages/660306-556x370.jpg" alt="imagen" />
         <div className={style.scores}>
-          <p><b>Score:</b> 76</p>
-          <p><b>HealtScore:</b> 96</p>
+          <p><b>Score:</b> 76⭐</p>
+          <p><b>HealtScore:</b> 96🌿</p>
           <p><b>Diet:</b></p>
           <ul>
             <li>gluten free</li>
             <li>dairy free</li>
           </ul>
         </div>
-      </div>
-      <div className={style.secondPart}>
+      </div> */}
+  {/* <div className={style.secondPart}>
         <hr />
         <h2>Summary:</h2>
         <p> Slow Cooker: Pork and Garbanzo Beans might be just the main course you are searching for. This gluten free and dairy free recipe serves 6 and costs <b>$2.83 per serving</b>. One serving contains <b>438 calories</b>, <b>58g of protein</b>, and <b>11g of fat</b>. A couple people made this recipe, and 22 would say it hit the spot. A mixture of onion, salt, garbanzo beans *1, and a handful of other ingredients are all it takes to make this recipe so flavorful. To use up the onion you could follow this main course with the <a href="https://spoonacular.com/recipes/candy-corn-cupcakes-63881\">Candy Corn Cupcakes</a> as a dessert. All things considered, we decided this recipe <b>deserves a spoonacular score of 97%</b>. This score is outstanding. Try <a href="https://spoonacular.com/recipes/slow-cooker-pork-and-beans-568618\">Slow Cooker Pork and Beans</a>, <a href="https://spoonacular.com/recipes/slow-cooker-pork-and-beans-244959\">Slow Cooker Pork and Beans</a>, and <a href="https://spoonacular.com/recipes/slow-cooker-pork-and-beans-619424\">Slow Cooker Pork and Beans</a> for similar recipes.</p>
@@ -70,9 +83,9 @@ function CardDetail() {
           <li>*3 If you want to shred the pork, it is easiest to do when the pork is hot. Use two forks to pull the pork apart and shred. If you want to slice the pork (like for sandwiches) it is best to do when the pork is cold. Let the pork rest in the refrigerator for several hours or over night. Slice with a serrated knife or a very sharp chef knife.</li>
           </ol>
           <hr />
-      </div>
-    </div>
-  );
+    </div>*/}
+
+
 }
 
 export default CardDetail;
