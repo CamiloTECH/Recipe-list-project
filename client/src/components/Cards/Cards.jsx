@@ -8,7 +8,7 @@ function Cards() {
   const dispatch = useDispatch()
   const recipes = useSelector(store => store.recipes)
   useEffect(() => {
-    if (recipes.length !== 100) dispatch(getAllrecipes())
+    //if (recipes.length !== 100) dispatch(getAllrecipes())
   }, [])
 
   return (
@@ -16,7 +16,7 @@ function Cards() {
       {
         recipes.length > 0
           ? recipes[0].error
-            ? <h1>{recipes[0].error}</h1>
+            ? <h2>{recipes[0].error}</h2>
             : recipes.map(recipe => (
               <Card diets={recipe.diets}
                 id={recipe.id}

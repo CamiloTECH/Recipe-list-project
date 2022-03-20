@@ -20,7 +20,6 @@ function CardDetail() {
     }
   }, [])
   
-  console.log(recipesDetail)
   return (
     <div className={style.card}>
       {

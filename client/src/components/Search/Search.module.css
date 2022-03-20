@@ -2,7 +2,7 @@
     display: flex;
     justify-content:space-between;
     align-items: center;
-    margin: 2rem 1rem;
+    margin: 2rem .8rem;
 }
 
 .search, .option{
@@ -54,7 +54,7 @@
 }
 
 .option select{
-    margin: 0.2rem 0.5rem;
+    margin: 0.2rem 0.3rem;
     border-radius: 10px;
     font-size: 1.2rem;
     text-align: center;
@@ -75,10 +75,11 @@
 
 .option button{
     font-family: Georgia;
-    padding: 8px 5px;
-    font-size: 0.9rem;
+    padding: 9px 1px;
+    font-size: 1rem;
     border-radius: 10px;
     cursor: pointer;
+    width: 100%;
     border: none;
     color: #82E0AA;
     background-color: #1B4F72;

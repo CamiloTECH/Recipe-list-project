@@ -5,6 +5,8 @@ import {
   GET_RECIPE_DETAIL_DB,
   GET_TYPES_DIET,
   ADD_RECIPE,
+  ORDER_BY_NAME,
+  ORDER_BY_SCORE,
 } from "./actions";
 
 let Inicialstate = {
@@ -21,6 +23,16 @@ export default function rootReducer(state = Inicialstate, action) {
         recipes: action.payload,
       };
     case GET_RECIPES_NAME:
+      return {
+        ...state,
+        recipes: action.payload,
+      };
+    case ORDER_BY_NAME:
+      return {
+        ...state,
+        recipes: action.payload,
+      };
+    case ORDER_BY_SCORE:
       return {
         ...state,
         recipes: action.payload,
