@@ -18,6 +18,7 @@ function CardDetail() {
     else {
       dispatch(getRecipeDetailDB(id))
     }
+    // eslint-disable-next-line
   }, [])
   
   return (
@@ -32,10 +33,16 @@ function CardDetail() {
                 <div className={style.scores}>
                   <p><b>Score:</b> {recipesDetail.score}⭐</p>
                   <p><b>HealtScore:</b> {recipesDetail.healthScore}🌿</p>
-                  <p><b>Diet:</b></p>
+                  <p><b>Type of Diet:</b></p>
                   <ul>
                     {recipesDetail.diets.map((diet, index) => (
                       <li key={index}>{diet}</li>
+                    ))}
+                  </ul>
+                  <p><b>Type of Dish:</b></p>
+                  <ul>
+                    {recipesDetail.dishes && recipesDetail.dishes.map((dish, index) => (
+                      <li key={index}>{dish}</li>
                     ))}
                   </ul>
                 </div>

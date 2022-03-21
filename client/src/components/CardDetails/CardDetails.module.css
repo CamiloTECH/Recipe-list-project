@@ -5,7 +5,10 @@
   border-top-color: transparent ;
   width: 50px;
   height: 50px;
-  margin-top: 10%;
+  margin-top: 5%;
+  position: absolute;
+  right: 50%;
+  top: 13%;
   animation: cargando 1s linear infinite;
 }
 
@@ -54,12 +57,14 @@ h1{
 }
 
 .scores{
-  font-size:1.8rem;
+  font-size:1.7rem;
   width:45%;
+  margin: 0%;
+  padding: 0;
 }
 
 .scores p{
-  margin: 4% 0%;
+  margin: 2% 0% 2% 0%;
   color: #25a8ff;
   font-weight: bold;
 }
@@ -71,7 +76,7 @@ h1{
 .scores ul{
   list-style:square;
   margin: 0%;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: #25a8ff;
 }
 

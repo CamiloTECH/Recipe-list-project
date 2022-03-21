@@ -74,6 +74,7 @@ const getIdRecipeAPI = async (req, res) => {
       score: datos.spoonacularScore,
       healthScore: datos.healthScore,
       diets: datos.diets,
+      dishes:datos.dishTypes,
       steps: datos.instructions,
       image: datos.image,
     });

@@ -8,7 +8,9 @@ function Cards() {
   const dispatch = useDispatch()
   const recipes = useSelector(store => store.recipes)
   useEffect(() => {
-    //if (recipes.length !== 100) dispatch(getAllrecipes())
+    //if (recipes.length !== 100) 
+    dispatch(getAllrecipes())
+    // eslint-disable-next-line
   }, [])
 
   return (

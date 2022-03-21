@@ -1,28 +1,27 @@
 import style from "./Search.module.css"
 import { useEffect, useState } from "react"
-import { getTypesDiet, getRecipesName, orderByName, orderByScore,orderByDiet } from "../../redux/actions"
+import { getTypesDiet, getRecipesName, orderByName, orderByScore, orderByDiet, cleaningFilters } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { Outlet } from "react-router-dom"
 
 function Search() {
    const dispatch = useDispatch()
-
    const [state, setState] = useState({
       text: "",
       alphabeticalSelect: 0,
       scoreSelect: 0,
       dietSelect: 0
    })
-
-   const { types, recipes } = useSelector(store => {
+   const { types, recipes, copyRecipes } = useSelector(store => {
       return {
          types: store.types,
          recipes: store.recipes,
+         copyRecipes: store.copyRecipes
       }
    })
-
    useEffect(() => {
       if (types.length === 0) dispatch(getTypesDiet())
+      // eslint-disable-next-line
    }, [])
 
    const handleButtonSearch = () => {
@@ -37,41 +36,46 @@ function Search() {
       }
    }
    const alphabeticalOrder = (evento) => {
-      if (recipes.length > 0 && evento.target.value !== state.alphabeticalSelect) {
+      if (recipes.length > 0) {
          dispatch(orderByName(evento.target.value, recipes))
       }
       setState({
          ...state,
          alphabeticalSelect: evento.target.value,
+         scoreSelect: 0,
       })
    }
    const scoreOrder = (evento) => {
-      if (recipes.length > 0 && evento.target.value !== state.scoreSelect) {
+      if (recipes.length > 0) {
          dispatch(orderByScore(evento.target.value, recipes))
       }
       setState({
          ...state,
          scoreSelect: evento.target.value,
+         alphabeticalSelect:0
       })
    }
    const dietOrder = (evento) => {
       let index = evento.target.selectedIndex;
-      let diet=evento.target.options[index].text
-      if (recipes.length > 0 && evento.target.value !== state.dietSelect) {
-         dispatch(orderByDiet(diet, recipes))
+      let diet = evento.target.options[index].text
+      if (recipes.length > 0) {
+         dispatch(orderByDiet(diet, copyRecipes))
       }
       setState({
          ...state,
          dietSelect: evento.target.value,
+         alphabeticalSelect: 0,
+         scoreSelect: 0,
       })
    }
-   const cleanFilters = () => {
+   const clearFilters = () => {
       setState({
          ...state,
          alphabeticalSelect: 0,
          scoreSelect: 0,
          dietSelect: 0
       })
+      dispatch(cleaningFilters(copyRecipes))
    }
 
    return (
@@ -106,7 +110,7 @@ function Search() {
                   ))}
                </select>
 
-               <button onClick={cleanFilters}>Limpiar filtros</button>
+               <button onClick={clearFilters}>Limpiar filtros</button>
             </div>
          </header>
          <Outlet />

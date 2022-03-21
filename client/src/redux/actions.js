@@ -6,7 +6,8 @@ export const GET_ALL_RECIPES = "getAllrecipes",
   ADD_RECIPE = "addRecipe",
   ORDER_BY_NAME = "orderByName",
   ORDER_BY_SCORE = "orderByScore",
-  ORDER_BY_DIET = "orderByDiet";
+  ORDER_BY_DIET = "orderByDiet",
+  CLEAR_FILTERS ="clearFilters"
 
 export function getAllrecipes() {
   return async function (dispatch) {
@@ -106,16 +107,16 @@ export function orderByName(order, recipes) {
 }
 
 export function orderByScore(score, recipes) {
-  let copyScore = [...recipes];
+  let copyRecipe = [...recipes];
   let recipesSorted;
   if (score === "1") {
-    recipesSorted = copyScore.sort((a, b) => {
+    recipesSorted = copyRecipe.sort((a, b) => {
       if (a.score > b.score) return -1;
       if (b.score > a.score) return 1;
       return 0;
     });
   } else {
-    recipesSorted = copyScore.sort((a, b) => {
+    recipesSorted = copyRecipe.sort((a, b) => {
       if (a.score > b.score) return 1;
       if (b.score > a.score) return -1;
       return 0;
@@ -128,11 +129,18 @@ export function orderByScore(score, recipes) {
   };
 }
 
-export function orderByDiet(diet, recipes) {
-  let copyScore = [...recipes];
-  let recipesSorted=copyScore.filter(recipe=>recipe.diets.includes(diet))
+export function orderByDiet(diet, copyRecipes) {
+  let copyRecipe = [...copyRecipes];
+  let recipesSorted=copyRecipe.filter(recipe=>recipe.diets.includes(diet))
   return {
     type: ORDER_BY_DIET,
     payload: recipesSorted,
   };
+}
+
+export function cleaningFilters(copyRecipes){
+  return{
+    type:CLEAR_FILTERS,
+    payload:copyRecipes
+  }
 }
