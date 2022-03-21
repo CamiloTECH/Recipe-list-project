@@ -1,6 +1,6 @@
 import style from "./Search.module.css"
 import { useEffect, useState } from "react"
-import { getTypesDiet, getRecipesName, orderByName, orderByScore } from "../../redux/actions"
+import { getTypesDiet, getRecipesName, orderByName, orderByScore,orderByDiet } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { Outlet } from "react-router-dom"
 
@@ -17,7 +17,7 @@ function Search() {
    const { types, recipes } = useSelector(store => {
       return {
          types: store.types,
-         recipes: store.recipes
+         recipes: store.recipes,
       }
    })
 
@@ -54,12 +54,15 @@ function Search() {
          scoreSelect: evento.target.value,
       })
    }
-   const dietOrder = (e) => {
-      let index = e.target.selectedIndex;
-      console.log(e.target.options[index].text)
+   const dietOrder = (evento) => {
+      let index = evento.target.selectedIndex;
+      let diet=evento.target.options[index].text
+      if (recipes.length > 0 && evento.target.value !== state.dietSelect) {
+         dispatch(orderByDiet(diet, recipes))
+      }
       setState({
          ...state,
-         dietSelect: e.target.value,
+         dietSelect: evento.target.value,
       })
    }
    const cleanFilters = () => {

@@ -7,10 +7,12 @@ import {
   ADD_RECIPE,
   ORDER_BY_NAME,
   ORDER_BY_SCORE,
+  ORDER_BY_DIET,
 } from "./actions";
 
 let Inicialstate = {
   recipes: [],
+  copyRecipes:[],
   recipesDetail: {},
   types: [],
   createUser: {},
@@ -21,6 +23,7 @@ export default function rootReducer(state = Inicialstate, action) {
       return {
         ...state,
         recipes: action.payload,
+        copyRecipes:action.payload
       };
     case GET_RECIPES_NAME:
       return {
@@ -33,6 +36,11 @@ export default function rootReducer(state = Inicialstate, action) {
         recipes: action.payload,
       };
     case ORDER_BY_SCORE:
+      return {
+        ...state,
+        recipes: action.payload,
+      };
+    case ORDER_BY_DIET:
       return {
         ...state,
         recipes: action.payload,

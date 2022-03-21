@@ -5,7 +5,8 @@ export const GET_ALL_RECIPES = "getAllrecipes",
   GET_TYPES_DIET = "getTypesDiet",
   ADD_RECIPE = "addRecipe",
   ORDER_BY_NAME = "orderByName",
-  ORDER_BY_SCORE = "orderByScore"
+  ORDER_BY_SCORE = "orderByScore",
+  ORDER_BY_DIET = "orderByDiet";
 
 export function getAllrecipes() {
   return async function (dispatch) {
@@ -83,7 +84,7 @@ export function addRecipe(recipe) {
 
 export function orderByName(order, recipes) {
   let copyRecipe = [...recipes];
-  let recipesSorted
+  let recipesSorted;
   if (order === "1") {
     recipesSorted = copyRecipe.sort((a, b) => {
       if (a.title > b.title) return 1;
@@ -91,7 +92,7 @@ export function orderByName(order, recipes) {
       return 0;
     });
   } else {
-    recipesSorted=copyRecipe.sort((a, b) => {
+    recipesSorted = copyRecipe.sort((a, b) => {
       if (a.title > b.title) return -1;
       if (b.title > a.title) return 1;
       return 0;
@@ -104,9 +105,9 @@ export function orderByName(order, recipes) {
   };
 }
 
-export function orderByScore(score,recipes){
+export function orderByScore(score, recipes) {
   let copyScore = [...recipes];
-  let recipesSorted
+  let recipesSorted;
   if (score === "1") {
     recipesSorted = copyScore.sort((a, b) => {
       if (a.score > b.score) return -1;
@@ -114,7 +115,7 @@ export function orderByScore(score,recipes){
       return 0;
     });
   } else {
-    recipesSorted=copyScore.sort((a, b) => {
+    recipesSorted = copyScore.sort((a, b) => {
       if (a.score > b.score) return 1;
       if (b.score > a.score) return -1;
       return 0;
@@ -123,6 +124,15 @@ export function orderByScore(score,recipes){
 
   return {
     type: ORDER_BY_SCORE,
+    payload: recipesSorted,
+  };
+}
+
+export function orderByDiet(diet, recipes) {
+  let copyScore = [...recipes];
+  let recipesSorted=copyScore.filter(recipe=>recipe.diets.includes(diet))
+  return {
+    type: ORDER_BY_DIET,
     payload: recipesSorted,
   };
 }
