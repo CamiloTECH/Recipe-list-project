@@ -1,20 +1,44 @@
-.load{
-    background-color: transparent;
-    border-radius: 50%;
-    border: 8px solid #1b4f72a1;
-    border-top-color: transparent ;
-    width: 50px;
-    height: 50px;
-    margin-top: 10%;
-    animation: cargando 1s linear infinite;
+.cards {
+    text-align: justify;
+    font-size: 1.8rem;
+    font-family: serif;
+    margin: 3% 2% 5% 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;  
+    align-items: center;
+    justify-content:center;
 }
 
-@keyframes cargando {
-    0%{
-        transform: rotate(0deg);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
-    
+.buttons{
+  margin: 5% 2% 0% 2%;
+  text-align: center;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 1%;
+}
+
+.buttons button{
+  font-family: Georgia;
+  padding: 9px 0px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 3%;
+  border: none;
+  color: #82E0AA;
+  background-color: #1B4F72;
+  box-shadow: 1px 1px 1px black;
+  transition: background-color .5s;
+}
+.buttons button:hover{
+  background-color: #82E0AA;
+  color:#1B4F72 ;
+  transition:background-color  1s;
+}
+
+.buttons button:active{
+  transform: translateY(1px);
+  box-shadow: none;
 }

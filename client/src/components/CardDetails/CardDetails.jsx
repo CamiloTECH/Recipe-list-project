@@ -13,7 +13,7 @@ function CardDetail() {
   useEffect(() => {
     const timer = setTimeout(() => (
       setLoad(true)
-    ), 3000)
+    ), 5000)
     window.scroll(0, 0)
 
     const validacion = /^[0-9]+$/

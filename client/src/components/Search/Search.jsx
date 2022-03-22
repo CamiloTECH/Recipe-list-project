@@ -56,6 +56,7 @@ function Search() {
    const dietOrder = (evento) => {
       let index = evento.target.selectedIndex;
       let diet = evento.target.options[index].text
+      
       if (copyRecipes.length > 0 && copyRecipes[0].title) {
          dispatch(orderByDiet(diet, copyRecipes))
       }
@@ -94,7 +95,7 @@ function Search() {
 
          <header className={style.header}>
             <div className={style.search}>
-               <input type="text" name="search" placeholder="Search by name"
+               <input type="text" name="search" value={state.text} placeholder="Search by name"
                   onChange={(e) => setState({ ...state, text: e.target.value })} />
                <button onClick={handleButtonSearch}>Search</button>
             </div>
