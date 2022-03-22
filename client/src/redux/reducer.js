@@ -9,6 +9,7 @@ import {
   ORDER_BY_SCORE,
   ORDER_BY_DIET,
   CLEAR_FILTERS,
+  CLEAR_COMPONENT_DETAIL
 } from "./actions";
 
 let Inicialstate = {
@@ -32,6 +33,11 @@ export default function rootReducer(state = Inicialstate, action) {
         recipes: action.payload,
         copyRecipes: action.payload,
       };
+    case CLEAR_COMPONENT_DETAIL:
+      return{
+        ...state,
+        recipesDetail:action.payload
+      }
     case ORDER_BY_NAME:
       return {
         ...state,

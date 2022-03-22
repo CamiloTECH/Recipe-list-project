@@ -9,7 +9,14 @@
   align-items: center;
   width: 30%;
   height: 76vh;
-  background-color: #82e0abbe;
+  background-color: #82e0ab9c;
+  transition: transform .3s, background-color .3s;
+}
+
+.card:hover{
+  background-color:#82e0ab ;
+  transform: scale(1.08,1.08);
+  transition: transform .3s,  background-color .3s;
 }
 
 .card img {

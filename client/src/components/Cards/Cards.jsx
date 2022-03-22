@@ -2,16 +2,22 @@ import style from "./Cards.module.css"
 import Card from "../Card/Card";
 import { getAllrecipes } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Cards() {
+  const [load, setLoad] = useState(false)
   const dispatch = useDispatch()
   const recipes = useSelector(store => store.recipes)
   useEffect(() => {
-    //if (recipes.length !== 100) 
-    dispatch(getAllrecipes())
+    const timer = setTimeout(() => (
+      setLoad(true)
+    ), 4000)
+    if (recipes.length === 0) dispatch(getAllrecipes())
+    
+    return () => clearTimeout(timer);
     // eslint-disable-next-line
   }, [])
+
 
   return (
     <>
@@ -26,7 +32,7 @@ function Cards() {
                 title={recipe.title}
                 key={recipe.id} />
             ))
-          : <div className={style.load}></div>
+          : load ? <h2>No se encontraron recetas</h2> : <div className={style.load}></div>
       }
     </>
   );

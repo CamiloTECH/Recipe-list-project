@@ -1,6 +1,6 @@
 import style from "./Search.module.css"
 import { useEffect, useState } from "react"
-import { getTypesDiet, getRecipesName, orderByName, orderByScore, orderByDiet, cleaningFilters } from "../../redux/actions"
+import { getTypesDiet, getRecipesName, orderByName, orderByScore, orderByDiet, cleaningFilters, getAllrecipes } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { Outlet } from "react-router-dom"
 
@@ -36,29 +36,27 @@ function Search() {
       }
    }
    const alphabeticalOrder = (evento) => {
-      if (recipes.length > 0) {
+      if (recipes.length > 0 && recipes[0].title) {
          dispatch(orderByName(evento.target.value, recipes))
       }
       setState({
          ...state,
          alphabeticalSelect: evento.target.value,
-         scoreSelect: 0,
       })
    }
    const scoreOrder = (evento) => {
-      if (recipes.length > 0) {
+      if (recipes.length > 0 && recipes[0].title) {
          dispatch(orderByScore(evento.target.value, recipes))
       }
       setState({
          ...state,
          scoreSelect: evento.target.value,
-         alphabeticalSelect:0
       })
    }
    const dietOrder = (evento) => {
       let index = evento.target.selectedIndex;
       let diet = evento.target.options[index].text
-      if (recipes.length > 0) {
+      if (copyRecipes.length > 0 && copyRecipes[0].title) {
          dispatch(orderByDiet(diet, copyRecipes))
       }
       setState({
@@ -75,7 +73,20 @@ function Search() {
          scoreSelect: 0,
          dietSelect: 0
       })
-      dispatch(cleaningFilters(copyRecipes))
+      if (copyRecipes.length > 0 && copyRecipes[0].title) {
+         dispatch(cleaningFilters(copyRecipes))
+      }
+   }
+   const allRecipes = () => {
+      if (recipes.length < 100) {
+         dispatch(getAllrecipes())
+         setState({
+            text: "",
+            alphabeticalSelect: 0,
+            scoreSelect: 0,
+            dietSelect: 0
+         })
+      }
    }
 
    return (
@@ -110,9 +121,13 @@ function Search() {
                   ))}
                </select>
 
-               <button onClick={clearFilters}>Limpiar filtros</button>
+               <button onClick={clearFilters}>Clean Filters</button>
             </div>
+
          </header>
+         <div className={style.All}>
+            <button onClick={allRecipes}>All Recipes</button>
+         </div>
          <Outlet />
       </div>
    );

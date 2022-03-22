@@ -2,7 +2,7 @@
     display: flex;
     justify-content:space-between;
     align-items: center;
-    margin: 2rem .8rem;
+    margin: 2rem .8rem .5rem .8rem;
 }
 
 .search, .option{
@@ -73,7 +73,7 @@
     font-weight: bold;
 }
 
-.option button{
+.option button, .All button{
     font-family: Georgia;
     padding: 9px 1px;
     font-size: 1rem;
@@ -93,6 +93,28 @@
 }
 
 .option button:active{
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+.All{
+    width: 100%;
+    text-align: right;
+    margin: 0 auto;
+}
+.All button{
+    width: 6.7%;
+    padding: 8px 0px;
+    margin: 0 .8rem;
+}
+
+.All button:hover{
+    background-color: #82E0AA;
+    color:#1B4F72 ;
+    transition:background-color  1s;
+}
+
+.All button:active{
     transform: translateY(1px);
     box-shadow: none;
 }

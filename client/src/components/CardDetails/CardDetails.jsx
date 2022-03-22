@@ -1,26 +1,36 @@
 import style from "./CardDetails.module.css"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getRecipeDetailAPI, getRecipeDetailDB } from "../../redux/actions"
+import { getRecipeDetailAPI, getRecipeDetailDB, clearComponentDetail } from "../../redux/actions"
 
 function CardDetail() {
+  const [load, setLoad] = useState(false)
   const { id } = useParams()
   const dispatch = useDispatch()
   const recipesDetail = useSelector(state => state.recipesDetail)
 
   useEffect(() => {
+    const timer = setTimeout(() => (
+      setLoad(true)
+    ), 3000)
+    window.scroll(0, 0)
+
     const validacion = /^[0-9]+$/
-    window.scroll(0,0)
     if (id.match(validacion)) {
       dispatch(getRecipeDetailAPI(id))
     }
     else {
       dispatch(getRecipeDetailDB(id))
     }
+
+    return () => {
+      clearTimeout(timer);
+      dispatch(clearComponentDetail())
+    }
     // eslint-disable-next-line
   }, [])
-  
+
   return (
     <div className={style.card}>
       {
@@ -57,7 +67,7 @@ function CardDetail() {
               </div>
             </>
           )
-            : <div className={style.load}></div>
+            : load ? <h1>No se ha encontrado la receta con ID {id}</h1> : <div className={style.load}></div>
       }
     </div>
   )
