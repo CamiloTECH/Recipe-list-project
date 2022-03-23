@@ -5,6 +5,7 @@ import Search from "./components/Search/Search";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/home/Home";
 import CardDetail from "./components/CardDetails/CardDetails";
+import CreateRecipe from "./components/CreateRecipe/CreateRecipe.jsx";
 
 function App() {
   return (
@@ -12,15 +13,14 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<NavBar />}>
-
           <Route path="/home" element={<Search />}>
             <Route path="/home/" element={<Home />} />
-          </Route> 
+          </Route>
 
-          <Route path="/home/add" element />
-          <Route path="/home/details/:id" element={<CardDetail/>} />
+          <Route path="/home/add" element={<CreateRecipe />} />
+          <Route path="/home/details/:id" element={<CardDetail />} />
         </Route>
-        
+
         <Route path="*" element={<NavBar />} />
       </Routes>
     </>

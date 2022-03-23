@@ -12,7 +12,7 @@ function Home() {
   useEffect(() => {
     const timer = setTimeout(() => (
       setLoad(true)
-    ), 5000)
+    ), 8000)
     if (recipes.length === 0) dispatch(getAllrecipes())
 
     return () => clearTimeout(timer);
