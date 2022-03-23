@@ -13,7 +13,7 @@ function Home() {
     const timer = setTimeout(() => (
       setLoad(true)
     ), 8000)
-    if (recipes.length === 0) dispatch(getAllrecipes())
+    //if (recipes.length === 0) dispatch(getAllrecipes())
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line
