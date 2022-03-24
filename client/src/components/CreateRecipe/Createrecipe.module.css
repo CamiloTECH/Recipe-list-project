@@ -135,7 +135,7 @@
   gap: 15%;
 }
 
-.submit, .link{
+.submit, .link, .error{
   text-decoration: none;
   text-align: center;
   width:50%;
@@ -169,5 +169,12 @@
 
 .link{
   width: 40%;
+}
+
+.error{
+  cursor:default;
+  box-shadow: none;
+  background-color:#1b4f729d;
+  color: #82e0aa9d;
 }
 
