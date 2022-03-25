@@ -9,7 +9,8 @@ export const GET_ALL_RECIPES = "getAllrecipes",
   ORDER_BY_DIET = "orderByDiet",
   CLEAR_FILTERS = "clearFilters",
   CLEAR_COMPONENT_DETAIL = "clearComponentDetail",
-  CLEAR_COMPONENT_USER="clearComponentUser";
+  CLEAR_COMPONENT_USER = "clearComponentUser",
+  CLEAR_RECIPES = "clearRecipes";
 
 export function getAllrecipes() {
   return async function (dispatch) {
@@ -147,9 +148,19 @@ export function orderByScore(score, recipes) {
 
 export function orderByDiet(diet, copyRecipes) {
   let copyRecipe = [...copyRecipes];
-  let recipesSorted = copyRecipe.filter((recipe) =>
-    recipe.diets.includes(diet)
-  );
+  let recipesSorted=[]
+  copyRecipe.forEach((recipe) => {
+    
+    if (typeof recipe.diets[0] === "string") {
+      if (recipe.diets.includes(diet)) {
+        recipesSorted.push(recipe);
+      }
+    } else {
+      if (recipe.diets.find((objDiet) => objDiet.name === diet)) {
+        recipesSorted.push(recipe);
+      }
+    }
+  });
   return {
     type: ORDER_BY_DIET,
     payload: recipesSorted,
@@ -160,5 +171,12 @@ export function cleaningFilters(copyRecipes) {
   return {
     type: CLEAR_FILTERS,
     payload: copyRecipes,
+  };
+}
+
+export function cleaningRecipes() {
+  return {
+    type: CLEAR_RECIPES,
+    payload: [],
   };
 }

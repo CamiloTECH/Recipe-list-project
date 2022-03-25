@@ -11,6 +11,7 @@ import {
   CLEAR_FILTERS,
   CLEAR_COMPONENT_DETAIL,
   CLEAR_COMPONENT_USER,
+  CLEAR_RECIPES,
 } from "./actions";
 
 let Inicialstate = {
@@ -43,6 +44,12 @@ export default function rootReducer(state = Inicialstate, action) {
       return {
         ...state,
         createUser: action.payload,
+      };
+    case CLEAR_RECIPES:
+      return {
+        ...state,
+        recipes: action.payload,
+        copyRecipes: action.payload,
       };
     case ORDER_BY_NAME:
       return {

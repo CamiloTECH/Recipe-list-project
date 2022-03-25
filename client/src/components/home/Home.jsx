@@ -10,17 +10,18 @@ function Home() {
   const [load, setLoad] = useState(false)
 
   useEffect(() => {
-    window.scroll(0, 0)
-    const timer = setTimeout(() => (
-      setLoad(true)
-    ), 8000)
-    
     if (recipes.length === 0) dispatch(getAllrecipes())
-
-    return () => clearTimeout(timer)
     // eslint-disable-next-line
   }, [])
 
+  useEffect(() => {
+    setLoad(false)
+    window.scroll(0, 0)
+    const timer = setTimeout(() => setLoad(true), 8000)
+
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line
+  }, [recipes])
   return (
     <>
       {

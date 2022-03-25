@@ -1,6 +1,6 @@
 import style from "./Search.module.css"
 import { useEffect, useState } from "react"
-import { getTypesDiet, getRecipesName, orderByName, orderByScore, orderByDiet, cleaningFilters, getAllrecipes } from "../../redux/actions"
+import { getTypesDiet, getRecipesName, orderByName, orderByScore, orderByDiet, cleaningFilters, getAllrecipes, cleaningRecipes } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { Outlet } from "react-router-dom"
 
@@ -26,6 +26,7 @@ function Search() {
 
    const handleButtonSearch = () => {
       if (state.text) {
+         dispatch(cleaningRecipes())
          dispatch(getRecipesName(state.text))
          setState({
             ...state,
@@ -80,6 +81,7 @@ function Search() {
    }
    const allRecipes = () => {
       if (recipes.length < 100) {
+         dispatch(cleaningRecipes())
          dispatch(getAllrecipes())
          setState({
             text: "",

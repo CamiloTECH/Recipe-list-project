@@ -1,7 +1,7 @@
 import style from "./Createrecipe.module.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { getTypesDiet, addRecipe, clearUser } from "../../redux/actions"
+import { getTypesDiet, addRecipe, clearUser, cleaningRecipes } from "../../redux/actions"
 import { Link, useNavigate } from "react-router-dom"
 
 function CreateRecipe() {
@@ -57,7 +57,9 @@ function CreateRecipe() {
   }, [user])
 
   useEffect(() => {
-    return () => dispatch(clearUser())
+    return () => {
+      dispatch(clearUser())
+    }
     // eslint-disable-next-line
   }, [])
 
@@ -166,6 +168,7 @@ function CreateRecipe() {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(addRecipe(state))
+    dispatch(cleaningRecipes())
   }
 
 
