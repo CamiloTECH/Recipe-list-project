@@ -8,7 +8,8 @@ export const GET_ALL_RECIPES = "getAllrecipes",
   ORDER_BY_SCORE = "orderByScore",
   ORDER_BY_DIET = "orderByDiet",
   CLEAR_FILTERS = "clearFilters",
-  CLEAR_COMPONENT_DETAIL = "clearComponentDetail";
+  CLEAR_COMPONENT_DETAIL = "clearComponentDetail",
+  CLEAR_COMPONENT_USER="clearComponentUser";
 
 export function getAllrecipes() {
   return async function (dispatch) {
@@ -87,6 +88,13 @@ export function addRecipe(recipe) {
 export function clearComponentDetail() {
   return {
     type: CLEAR_COMPONENT_DETAIL,
+    payload: {},
+  };
+}
+
+export function clearUser() {
+  return {
+    type: CLEAR_COMPONENT_USER,
     payload: {},
   };
 }

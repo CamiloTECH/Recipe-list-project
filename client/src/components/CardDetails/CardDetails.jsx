@@ -45,9 +45,10 @@ function CardDetail() {
                   <p><b>HealtScore:</b> {recipesDetail.healthScore}🌿</p>
                   <p><b>Type of Diet:</b></p>
                   <ul>
-                    {recipesDetail.diets.map((diet, index) => (
-                      <li key={index}>{diet}</li>
-                    ))}
+                    {typeof recipesDetail.diets[0] === "string"
+                      ? recipesDetail.diets.map((diet, index) => <li key={index}>{diet}</li>)
+                      : recipesDetail.diets.map((diet, index) => <li key={index}>{diet.name}</li>)
+                    }
                   </ul>
                   <p><b>Type of Dish:</b></p>
                   <ul>

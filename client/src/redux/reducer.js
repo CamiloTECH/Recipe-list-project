@@ -9,7 +9,8 @@ import {
   ORDER_BY_SCORE,
   ORDER_BY_DIET,
   CLEAR_FILTERS,
-  CLEAR_COMPONENT_DETAIL
+  CLEAR_COMPONENT_DETAIL,
+  CLEAR_COMPONENT_USER,
 } from "./actions";
 
 let Inicialstate = {
@@ -34,10 +35,15 @@ export default function rootReducer(state = Inicialstate, action) {
         copyRecipes: action.payload,
       };
     case CLEAR_COMPONENT_DETAIL:
-      return{
+      return {
         ...state,
-        recipesDetail:action.payload
-      }
+        recipesDetail: action.payload,
+      };
+    case CLEAR_COMPONENT_USER:
+      return {
+        ...state,
+        createUser: action.payload,
+      };
     case ORDER_BY_NAME:
       return {
         ...state,

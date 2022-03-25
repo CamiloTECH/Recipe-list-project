@@ -29,15 +29,32 @@
   width: 100%;
 }
 
-.data label,
-.large label,
-.diets .title {
-  font-size: 1.8rem;
+.name {
+  font-size: 1.6rem;
   font-family: Georgia;
   font-weight: bold;
-  margin: 4% 0% 0.8% 0%;
   color: var(--color3);
   width: max-content;
+}
+.message, .gridDiet{
+  margin: 4% 0% 2% 0%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.gridDiet{
+  grid-column: 1/3;
+}
+
+.labelError{
+  margin-left: 6%;
+  font-size:1.3rem;
+  color: #E8FF06;
+  text-align: right;
+  font-family:Georgia ;
+  font-weight: bold;
 }
 
 .data input,
@@ -46,7 +63,7 @@
   outline: none;
   border: none;
   border-bottom: 3px solid white;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.060);
   color: white;
   border-radius: 5px 5px 0px 0px;
   font-size: 1.5rem;
@@ -72,6 +89,7 @@
   align-self: flex-end;
 }
 .image img {
+  position:sticky;
   width: 90%;
 }
 
@@ -82,11 +100,9 @@
   margin-bottom: 1%;
 }
 
-.large label {
-  margin-top: 3%;
-}
 .large textarea {
   font-size: 1.3rem;
+  margin-left: 1%;
 }
 
 .large textarea::placeholder {
@@ -108,10 +124,6 @@
   grid-template-rows: min-content;
 }
 
-.diets .title {
-  grid-column: 1/3;
-  margin-bottom: 1.5%;
-}
 
 .diet{
   margin: 2% 0% 0% 4%;

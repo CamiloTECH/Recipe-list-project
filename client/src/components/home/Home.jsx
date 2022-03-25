@@ -10,12 +10,14 @@ function Home() {
   const [load, setLoad] = useState(false)
 
   useEffect(() => {
+    window.scroll(0, 0)
     const timer = setTimeout(() => (
       setLoad(true)
     ), 8000)
-    //if (recipes.length === 0) dispatch(getAllrecipes())
+    
+    if (recipes.length === 0) dispatch(getAllrecipes())
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer)
     // eslint-disable-next-line
   }, [])
 
@@ -25,7 +27,7 @@ function Home() {
         recipes.length > 0
           ? recipes[0].error
             ? <div className={style.home}> <h2>{recipes[0].error}</h2> </div>
-            : <Cards recipes={[...recipes]}/>
+            : <Cards recipes={recipes} />
           : load
             ? <div className={style.home}> <h2>No se encontraron recetas</h2> </div>
             : <div className={style.home}> <div className={style.load}></div> </div>

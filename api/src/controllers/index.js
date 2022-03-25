@@ -91,6 +91,7 @@ const getIdRecipeDb = async (req, res) => {
     if (id) {
       const dataDB = await Recipe.findAll({
         where: { id },
+        attributes: ["id", "title","summary","score","healthScore","steps","image", ],
         include: {
           model: Diet,
           attributes: ["name"],
@@ -180,7 +181,7 @@ const createRecipe = async (req, res) => {
     });
 
     await data.setDiets(diets);
-    res.json({ message: "Receta creada satisfactoriamente" });
+    res.json({ id: data.dataValues.id});
   } else {
     res.json({ error: "Debes ingresar todos los datos completos" });
   }
