@@ -3,7 +3,7 @@ import Card from "../Card/Card";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination";
 
-function Cards({ recipes}) {
+function Cards({ recipes }) {
   const recipesPerPage = 9
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -15,14 +15,14 @@ function Cards({ recipes}) {
     setCurrentPage(num)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     setCurrentPage(1)
-  },[recipes])
+  }, [recipes])
 
   return (
     <>
       <div className={style.buttons}>
-        <Pagination recipes={recipes} pagination={cPage} recipesPerPage={recipesPerPage} currentPage={currentPage}/>
+        <Pagination recipes={recipes} pagination={cPage} recipesPerPage={recipesPerPage} currentPage={currentPage} currentCards={currentCards}/>
       </div>
 
       <div className={style.cards}>

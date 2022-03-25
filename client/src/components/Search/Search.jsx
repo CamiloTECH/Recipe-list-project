@@ -80,7 +80,16 @@ function Search() {
       }
    }
    const allRecipes = () => {
-      if (recipes.length < 100) {
+      if(recipes.length < 100 && copyRecipes.length>=100){
+         setState({
+            ...state,
+            alphabeticalSelect: 0,
+            scoreSelect: 0,
+            dietSelect: 0
+         })
+         dispatch(cleaningFilters(copyRecipes))
+      }
+      else if (recipes.length < 100 && copyRecipes.length<100) {
          dispatch(cleaningRecipes())
          dispatch(getAllrecipes())
          setState({
