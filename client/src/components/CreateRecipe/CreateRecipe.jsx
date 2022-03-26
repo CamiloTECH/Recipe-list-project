@@ -57,9 +57,7 @@ function CreateRecipe() {
   }, [user])
 
   useEffect(() => {
-    return () => {
-      dispatch(clearUser())
-    }
+    return () => dispatch(clearUser())
     // eslint-disable-next-line
   }, [])
 
@@ -92,7 +90,7 @@ function CreateRecipe() {
           ...state,
           [name]: parseInt(value)
         })
-        if (parseInt(value) >= 1 && parseInt(value) <= 100) {
+        if (parseInt(value) >= 1 && parseInt(value) <= 100 && !value.includes(".")) {
           setError({
             ...error,
             [name]: false

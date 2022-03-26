@@ -22,7 +22,8 @@ function Cards({ recipes }) {
   return (
     <>
       <div className={style.buttons}>
-        <Pagination recipes={recipes} pagination={cPage} recipesPerPage={recipesPerPage} currentPage={currentPage} currentCards={currentCards}/>
+        <Pagination recipes={recipes} pagination={cPage} recipesPerPage={recipesPerPage} 
+        currentPage={currentPage} currentCards={currentCards}/>
       </div>
 
       <div className={style.cards}>

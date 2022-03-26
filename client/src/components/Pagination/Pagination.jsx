@@ -7,20 +7,20 @@ function Pagination({ recipes, pagination, recipesPerPage, currentPage, currentC
     next: false,
     previus: false
   })
+  for (let i = 0; i < maxPage; i++) numberOfButtons.push(i)
 
   useEffect(() => {
-    console.log(maxPage)
     if (maxPage === 1) {
       setStateButton({
         previus: true,
         next: true
       })
-    } else if (currentPage === maxPage && maxPage > 1) {
+    } else if (currentPage === maxPage) {
       setStateButton({
         previus: false,
         next: true
       })
-    } else if (currentPage === 1 && maxPage > 1) {
+    } else if (currentPage === 1) {
       setStateButton({
         next: false,
         previus: true
@@ -34,9 +34,7 @@ function Pagination({ recipes, pagination, recipesPerPage, currentPage, currentC
     // eslint-disable-next-line 
   }, [currentPage, currentCards])
 
-  for (let i = 0; i < maxPage; i++) {
-    numberOfButtons.push(i)
-  }
+
 
   return (
     <>
@@ -53,7 +51,10 @@ function Pagination({ recipes, pagination, recipesPerPage, currentPage, currentC
 
       {numberOfButtons.map(pag => (
         <button key={pag} onClick={() => pagination(pag + 1)}
-          style={currentPage === pag + 1 ? { "backgroundColor": "#B03A2E", "color": "#82E0AA", "fontWeight": "bold" } : {}}>
+          style={currentPage === pag + 1 ? {
+            "backgroundColor": "#B03A2E",
+            "color": "#82E0AA", "fontWeight": "bold"
+          } : {}}>
           {pag + 1}
         </button>
       ))

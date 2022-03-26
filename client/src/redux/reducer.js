@@ -51,6 +51,11 @@ export default function rootReducer(state = Inicialstate, action) {
         recipes: action.payload,
         copyRecipes: action.payload,
       };
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        recipes: action.payload,
+      };
     case ORDER_BY_NAME:
       return {
         ...state,
@@ -66,11 +71,7 @@ export default function rootReducer(state = Inicialstate, action) {
         ...state,
         recipes: action.payload,
       };
-    case CLEAR_FILTERS:
-      return {
-        ...state,
-        recipes: action.payload,
-      };
+
     case GET_RECIPE_DETAIL_API:
       return {
         ...state,

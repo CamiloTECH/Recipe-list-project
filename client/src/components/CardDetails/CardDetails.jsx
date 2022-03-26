@@ -34,40 +34,42 @@ function CardDetail() {
   return (
     <div className={style.card}>
       {
-        recipesDetail.error ? <h1>No se ha encontrado la receta con ID {id}</h1>
-          : recipesDetail.title ? (
-            <>
-              <h1>{recipesDetail.title}</h1>
-              <div className={style.firtsPart}>
-                <img src={recipesDetail.image} alt="Not found" />
-                <div className={style.scores}>
-                  <p><b>Score:</b> {recipesDetail.score}⭐</p>
-                  <p><b>HealtScore:</b> {recipesDetail.healthScore}🌿</p>
-                  <p><b>Type of Diet:</b></p>
-                  <ul>
-                    {typeof recipesDetail.diets[0] === "string"
-                      ? recipesDetail.diets.map((diet, index) => <li key={index}>{diet}</li>)
-                      : recipesDetail.diets.map((diet, index) => <li key={index}>{diet.name}</li>)
-                    }
-                  </ul>
-                  <p><b>Type of Dish:</b></p>
-                  <ul>
-                    {recipesDetail.dishes && recipesDetail.dishes.map((dish, index) => (
-                      <li key={index}>{dish}</li>
-                    ))}
-                  </ul>
+        recipesDetail.error
+          ? <h1>No se ha encontrado la receta con ID {id}</h1>
+          : recipesDetail.title
+            ? (
+              <>
+                <h1>{recipesDetail.title}</h1>
+                <div className={style.firtsPart}>
+                  <img src={recipesDetail.image} alt="Not found" />
+                  <div className={style.scores}>
+                    <p><b>Score:</b> {recipesDetail.score}⭐</p>
+                    <p><b>HealtScore:</b> {recipesDetail.healthScore}🌿</p>
+                    <p><b>Type of Diet:</b></p>
+                    <ul>
+                      {typeof recipesDetail.diets[0] === "string"
+                        ? recipesDetail.diets.map((diet, index) => <li key={index}>{diet}</li>)
+                        : recipesDetail.diets.map((diet, index) => <li key={index}>{diet.name}</li>)
+                      }
+                    </ul>
+                    <p><b>Type of Dish:</b></p>
+                    <ul>
+                      {recipesDetail.dishes && recipesDetail.dishes.map((dish, index) => (
+                        <li key={index}>{dish}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <div className={style.secondPart}>
-                <hr />
-                <h2>Summary:</h2>
-                <p dangerouslySetInnerHTML={{ __html: recipesDetail.summary }} />
-                <hr />
-                <h2>Steps:</h2>
-                <p dangerouslySetInnerHTML={{ __html: recipesDetail.steps }} />
-              </div>
-            </>
-          )
+                <div className={style.secondPart}>
+                  <hr />
+                  <h2>Summary:</h2>
+                  <p dangerouslySetInnerHTML={{ __html: recipesDetail.summary }} />
+                  <hr />
+                  <h2>Steps:</h2>
+                  <p dangerouslySetInnerHTML={{ __html: recipesDetail.steps }} />
+                </div>
+              </>
+            )
             : load ? <h1>No se ha encontrado la receta con ID {id}</h1> : <div className={style.load}></div>
       }
     </div>

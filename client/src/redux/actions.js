@@ -86,20 +86,6 @@ export function addRecipe(recipe) {
   };
 }
 
-export function clearComponentDetail() {
-  return {
-    type: CLEAR_COMPONENT_DETAIL,
-    payload: {},
-  };
-}
-
-export function clearUser() {
-  return {
-    type: CLEAR_COMPONENT_USER,
-    payload: {},
-  };
-}
-
 export function orderByName(order, recipes) {
   let copyRecipe = [...recipes];
   let recipesSorted;
@@ -148,9 +134,8 @@ export function orderByScore(score, recipes) {
 
 export function orderByDiet(diet, copyRecipes) {
   let copyRecipe = [...copyRecipes];
-  let recipesSorted=[]
+  let recipesSorted = [];
   copyRecipe.forEach((recipe) => {
-    
     if (typeof recipe.diets[0] === "string") {
       if (recipe.diets.includes(diet)) {
         recipesSorted.push(recipe);
@@ -164,6 +149,20 @@ export function orderByDiet(diet, copyRecipes) {
   return {
     type: ORDER_BY_DIET,
     payload: recipesSorted,
+  };
+}
+
+export function clearComponentDetail() {
+  return {
+    type: CLEAR_COMPONENT_DETAIL,
+    payload: {},
+  };
+}
+
+export function clearUser() {
+  return {
+    type: CLEAR_COMPONENT_USER,
+    payload: {},
   };
 }
 
