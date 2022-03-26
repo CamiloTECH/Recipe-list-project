@@ -55,7 +55,7 @@ const getAllRecipe = async (req, res) => {
 
   recipes.length > 0
     ? res.json(recipes)
-    : res.json([{ error: "No se encontraron recetas" }]);
+    : res.json([{ error: "No recipes found" }]);
 };
 
 //Optener una receta con un ID pasado por params
@@ -130,7 +130,7 @@ const getNameRecipe = async (req, res) => {
 
     recipes.length > 0
       ? res.json(recipes)
-      : res.json([{ error: "No se encontraron recetas" }]);
+      : res.json([{ error: "No recipes found" }]);
   } else {
     res.json([{ error: "No hay parametro de busqueda" }]);
   }

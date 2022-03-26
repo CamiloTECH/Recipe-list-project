@@ -35,7 +35,7 @@ function CardDetail() {
     <div className={style.card}>
       {
         recipesDetail.error
-          ? <h1>No se ha encontrado la receta con ID {id}</h1>
+          ? <h1>Recipe with ID {id} not found </h1>
           : recipesDetail.title
             ? (
               <>
