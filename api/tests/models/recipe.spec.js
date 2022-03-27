@@ -1,22 +1,75 @@
-const { Recipe, conn } = require('../../src/db.js');
-const { expect } = require('chai');
+const { Recipe, conn, Diet } = require("../../src/db.js");
+const { expect } = require("chai");
 
-describe('Recipe model', () => {
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    }));
-  describe('Validators', () => {
-    beforeEach(() => Recipe.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
-        Recipe.create({})
-          .then(() => done(new Error('It requires a valid name')))
+describe("Models", () => {
+  before(() =>
+    conn.authenticate().catch((err) => {
+      console.error("Unable to connect to the database:", err);
+    })
+  );
+
+  describe("Recipe Model", () => {
+    beforeEach(async () => await Recipe.sync({ force: true }));
+
+    describe("Title", () => {
+
+      it("should throw an error if title is null", (done) => {
+        Recipe.create({
+          summary: "summary",
+          image: "image",
+        })
+          .then(() => done(new Error("The title property cannot be null")))
           .catch(() => done());
       });
-      it('should work when its a valid name', () => {
-        Recipe.create({ name: 'Milanesa a la napolitana' });
+    });
+
+    describe("Summary", () => {
+
+      it("should throw an error if summary is null", (done) => {
+        Recipe.create({
+          title: "Title",
+          image: "image",
+        })
+          .then(() => done(new Error("The summary property cannot be null")))
+          .catch(() => done());
       });
     });
+
+    describe("Image", () => {
+
+      it("should throw an error if image is null", (done) => {
+        Recipe.create({
+          title: "Title",
+          summary: "summary",
+        })
+          .then(() => done(new Error("The image property cannot be null")))
+          .catch(() => done());
+      });
+    });
+
+    describe("Enter data", () => {
+
+      it("should throw an error if all data is null", (done) => {
+        Recipe.create({})
+          .then(() => done(new Error("The information cannot be null")))
+          .catch(() => done());
+      });
+
+      it("should work when its a valid name", (done) => {
+        Recipe.create({
+          title: "Milanesa a la napolitana",
+          summary: "summary",
+          image: "image",
+        })
+          .then(() => done())
+          .catch((err) => done(err));
+      });
+    });
+
   });
+
+  describe("Diet Model",()=>{
+    
+  })
+
 });
