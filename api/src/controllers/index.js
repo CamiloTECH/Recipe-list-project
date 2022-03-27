@@ -79,7 +79,7 @@ const getIdRecipeAPI = async (req, res) => {
       image: datos.image,
     });
   } catch (err) {
-    res.json({ error: err.message });
+    res.status(404).json({ error: `Recipe with ID ${id} not found` });
   }
 };
 
@@ -101,7 +101,7 @@ const getIdRecipeDb = async (req, res) => {
       res.json(dataDB[0].dataValues);
     }
   } catch (err) {
-    res.json({ error: err.message });
+    res.status(404).json({ error: `Recipe with ID ${id} not found` });
   }
 };
 
@@ -130,9 +130,9 @@ const getNameRecipe = async (req, res) => {
 
     recipes.length > 0
       ? res.json(recipes)
-      : res.json([{ error: "No recipes found" }]);
+      : res.status(404).json([{ error: "No recipes found" }]);
   } else {
-    res.json([{ error: "No hay parametro de busqueda" }]);
+    res.status(404).json([{ error: "No hay parametro de busqueda" }]);
   }
 };
 
@@ -183,7 +183,7 @@ const createRecipe = async (req, res) => {
     await data.setDiets(diets);
     res.json({ id: data.dataValues.id});
   } else {
-    res.json({ error: "Debes ingresar todos los datos completos" });
+    res.status(400).json({ error: "You must enter the complete data" });
   }
 };
 
