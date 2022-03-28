@@ -11,18 +11,17 @@ function CardDetail() {
   const recipesDetail = useSelector(state => state.recipesDetail)
 
   useEffect(() => {
-    const timer = setTimeout(() => (
-      setLoad(true)
-    ), 8000)
     window.scroll(0, 0)
 
     const validacion = /^[0-9]+$/
-    if (id.match(validacion)) {
-      dispatch(getRecipeDetailAPI(id))
-    }
-    else {
-      dispatch(getRecipeDetailDB(id))
-    }
+
+    if (id.match(validacion)) dispatch(getRecipeDetailAPI(id))
+    else dispatch(getRecipeDetailDB(id))
+    // eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoad(true), 8000)
 
     return () => {
       clearTimeout(timer);

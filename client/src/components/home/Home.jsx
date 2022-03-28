@@ -30,7 +30,7 @@ function Home() {
             ? <div className={style.home}> <h2>{recipes[0].error}</h2> </div>
             : <Cards recipes={recipes} />
           : load
-            ? <div className={style.home}> <h2>No se encontraron recetas</h2> </div>
+            ? <div className={style.home}> <h2>No recipes found</h2> </div>
             : <div className={style.home}> <div className={style.load}></div> </div>
       }
 
