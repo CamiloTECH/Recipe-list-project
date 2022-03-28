@@ -104,6 +104,7 @@ function CreateRecipe() {
         break
       case "image":
         const regex = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/
+        // eslint-disable-next-line
         setState({
           ...state,
           [name]: value
