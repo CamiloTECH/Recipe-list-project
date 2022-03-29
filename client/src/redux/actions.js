@@ -1,7 +1,6 @@
 export const GET_ALL_RECIPES = "getAllrecipes",
   GET_RECIPES_NAME = "getRecipesName",
-  GET_RECIPE_DETAIL_API = "getRecipeDetailAPI",
-  GET_RECIPE_DETAIL_DB = "getRecipeDetailDB",
+  GET_RECIPE_DETAIL = "getRecipeDetail",
   GET_TYPES_DIET = "getTypesDiet",
   ADD_RECIPE = "addRecipe",
   ORDER_BY_NAME = "orderByName",
@@ -24,6 +23,7 @@ export function getAllrecipes() {
 }
 
 export function getRecipesName(name) {
+  name=name.trim()
   return async function (dispatch) {
     const response = await fetch(`http://localhost:3001/recipes?name=${name}`);
     const result = await response.json();
@@ -40,7 +40,7 @@ export function getRecipeDetailAPI(id) {
       .then((response) => response.json())
       .then((result) =>
         dispatch({
-          type: GET_RECIPE_DETAIL_API,
+          type: GET_RECIPE_DETAIL,
           payload: result,
         })
       );
@@ -52,7 +52,7 @@ export function getRecipeDetailDB(id) {
     const response = await fetch(`http://localhost:3001/recipes/db/${id}`);
     const result = await response.json();
     return dispatch({
-      type: GET_RECIPE_DETAIL_DB,
+      type: GET_RECIPE_DETAIL,
       payload: result,
     });
   };

@@ -111,11 +111,10 @@ const getNameRecipe = async (req, res) => {
 
   if (name) {
     let response = await getData();
-    name=name[0].toUpperCase() + name.slice(1).toLowerCase();
 
     const dataDB = await Recipe.findAll({
       attributes: ["id", "image", "title", "score"],
-      where: { title: { [Op.substring]: name } },
+      where: { title: { [Op.substring]: name.toLowerCase() } },
       include: {
         model: Diet,
         attributes: ["name"],
@@ -172,7 +171,7 @@ const createRecipe = async (req, res) => {
   let { title, diets, summary, score, healthScore, steps, image } = req.body;
 
   if (title && diets && summary && image) {
-    title=title[0].toUpperCase() + title.slice(1).toLowerCase();
+    title=title.toLowerCase();
     let data = await Recipe.create({
       title,
       summary,

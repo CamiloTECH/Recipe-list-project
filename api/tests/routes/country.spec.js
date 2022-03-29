@@ -6,7 +6,7 @@ const { Recipe, conn, Diet } = require("../../src/db.js");
 
 const agent = session(app);
 const recipe = {
-  title: "Milanea a la napolitana",
+  title: "milanea a la napolitana",
   summary: "summary",
   image: "image",
 };
@@ -102,7 +102,7 @@ describe("Recipe routes", () => {
         .expect(200)
         .expect("Content-Type", /json/)
         .expect((res) => {
-          expect(res.body.title).to.eql("Milanea a la napolitana");
+          expect(res.body.title).to.eql("milanea a la napolitana");
         });
     });
   });

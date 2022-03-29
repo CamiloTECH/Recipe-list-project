@@ -1,8 +1,7 @@
 import {
   GET_ALL_RECIPES,
   GET_RECIPES_NAME,
-  GET_RECIPE_DETAIL_API,
-  GET_RECIPE_DETAIL_DB,
+  GET_RECIPE_DETAIL,
   GET_TYPES_DIET,
   ADD_RECIPE,
   ORDER_BY_NAME,
@@ -72,12 +71,7 @@ export default function rootReducer(state = Inicialstate, action) {
         recipes: action.payload,
       };
 
-    case GET_RECIPE_DETAIL_API:
-      return {
-        ...state,
-        recipesDetail: action.payload,
-      };
-    case GET_RECIPE_DETAIL_DB:
+    case GET_RECIPE_DETAIL:
       return {
         ...state,
         recipesDetail: action.payload,

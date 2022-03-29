@@ -25,7 +25,7 @@ function Search() {
    }, [])
 
    const handleButtonSearch = () => {
-      if (state.text) {
+      if (state.text.trim()) {
          dispatch(cleaningRecipes())
          dispatch(getRecipesName(state.text))
          setState({

@@ -70,9 +70,9 @@ function CreateRecipe() {
       case "steps":
         setState({
           ...state,
-          [name]: value
+          [name]: value.trim()
         })
-        if (value.length > 0) {
+        if (value.trim().length > 0) {
           setError({
             ...error,
             [name]: false
