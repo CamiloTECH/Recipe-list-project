@@ -27,7 +27,7 @@ function Search() {
    const handleButtonSearch = () => {
       if (state.text.trim()) {
          dispatch(cleaningRecipes())
-         dispatch(getRecipesName(state.text))
+         dispatch(getRecipesName(state.text.trim()))
          setState({
             ...state,
             alphabeticalSelect: 0,
@@ -36,6 +36,7 @@ function Search() {
          })
       }
    }
+
    const alphabeticalOrder = (evento) => {
       if (recipes.length > 0 && recipes[0].title) {
          dispatch(orderByName(evento.target.value, recipes))
@@ -45,6 +46,7 @@ function Search() {
          alphabeticalSelect: evento.target.value,
       })
    }
+
    const scoreOrder = (evento) => {
       if (recipes.length > 0 && recipes[0].title) {
          dispatch(orderByScore(evento.target.value, recipes))
@@ -54,6 +56,7 @@ function Search() {
          scoreSelect: evento.target.value,
       })
    }
+
    const dietOrder = (evento) => {
       let index = evento.target.selectedIndex;
       let diet = evento.target.options[index].text
@@ -68,6 +71,7 @@ function Search() {
          scoreSelect: 0,
       })
    }
+
    const clearFilters = () => {
       setState({
          ...state,
@@ -79,6 +83,7 @@ function Search() {
          dispatch(cleaningFilters(copyRecipes))
       }
    }
+   
    const allRecipes = () => {
       if(recipes.length < 100 && copyRecipes.length>=100){
          setState({

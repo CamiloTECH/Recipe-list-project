@@ -79,6 +79,7 @@ const getIdRecipeAPI = async (req, res) => {
       image: datos.image,
     });
   } catch (err) {
+    //Si se presenta algun error enviar un mensaje adecuado para se rmostrado por el front
     res.status(404).json({ error: `Recipe with ID ${id} not found` });
   }
 };
@@ -132,7 +133,7 @@ const getNameRecipe = async (req, res) => {
       ? res.json(recipes)
       : res.status(404).json([{ error: "No recipes found" }]);
   } else {
-    res.status(404).json([{ error: "No hay parametro de busqueda" }]);
+    res.status(404).json([{ error: "There is no search parameter" }]);
   }
 };
 

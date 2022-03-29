@@ -23,7 +23,6 @@ export function getAllrecipes() {
 }
 
 export function getRecipesName(name) {
-  name=name.trim()
   return async function (dispatch) {
     const response = await fetch(`http://localhost:3001/recipes?name=${name}`);
     const result = await response.json();

@@ -6,7 +6,7 @@ function Card(props) {
       <div className={style.card}>
          <img src={props.image} alt="Comida" />
          <div className={style.info}>
-            <p className={style.title}>{props.title}</p>
+            <p className={style.title}>{props.title[0].toUpperCase()+props.title.slice(1)}</p>
             <p className={style.dieta}>Diet:</p>
             <ul>
                {typeof props.diets[0] === "string"

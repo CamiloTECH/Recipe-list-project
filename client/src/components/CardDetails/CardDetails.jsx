@@ -38,7 +38,7 @@ function CardDetail() {
           : recipesDetail.title
             ? (
               <>
-                <h1>{recipesDetail.title}</h1>
+                <h1>{recipesDetail.title[0].toUpperCase()+recipesDetail.title.slice(1)}</h1>
                 <div className={style.firtsPart}>
                   <img src={recipesDetail.image} alt="Not found" />
                   <div className={style.scores}>

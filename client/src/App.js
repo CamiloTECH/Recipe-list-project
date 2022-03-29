@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage.jsx";
 import Search from "./components/Search/Search";
 import NavBar from "./components/NavBar/NavBar";
@@ -12,7 +12,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        
+
         <Route path="/home" element={<NavBar />}>
           <Route path="/home" element={<Search />}>
             <Route path="/home/" element={<Home />} />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/home/details/:id" element={<CardDetail />} />
         </Route>
 
-        <Route path="*" element={<NavBar />} />
+        <Route path="*" element={<Navigate to="/home" replace={true} />} />
       </Routes>
     </>
   );
