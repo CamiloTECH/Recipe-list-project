@@ -1,120 +1,336 @@
-.header{
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    margin: 2rem .8rem .5rem .8rem;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0.8rem 0.5rem 0.8rem;
+  flex-wrap: wrap;
 }
 
-.search, .option{
-    width:100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
+.search,
+.option {
+  width: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
-.search input{
-    margin-right: 1rem;
-    padding: 10px 5px;
-    width: 70%;
-    outline: none;
-    border: 1px solid black;
-    border-radius: 10px;
-    font-size: 1.3rem;
-    font-family: Georgia;
-    background-color: #B03A2E;  
-    color: white;
+.search input {
+  margin-right: 1rem;
+  padding: 10px 5px;
+  width: 70%;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  font-family: Georgia;
+  background-color: #b03a2e;
+  color: white;
 }
 
-.search input::placeholder{
-    color: #ffffffc0;
+.search input::placeholder {
+  color: #ffffffc0;
 }
 
-.search button{
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: #1B4F72;
-    border: none;
-    color: #82E0AA;
-    font-weight: bolder;
-    font-size: 1.2rem;
-    font-family: Georgia;
-    box-shadow: 1px 1px 1px black;
-    transition: background-color .5s;
+.search button {
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #1b4f72;
+  border: none;
+  color: #82e0aa;
+  font-weight: bolder;
+  font-size: 1.2rem;
+  font-family: Georgia;
+  box-shadow: 1px 1px 1px black;
+  transition: background-color 0.5s;
 }
 
-.search button:hover{
-    background-color: #82E0AA;
-    color:#1B4F72 ;
-    transition:background-color  1s;
+.search button:hover {
+  background-color: #82e0aa;
+  color: #1b4f72;
+  transition: background-color 1s;
 }
-.search button:active{
-    transform: translateY(1px);
-    box-shadow: none;
-}
-
-.option select{
-    margin: 0.2rem 0.3rem;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 10px;
-    outline: none;
-    font-family: Georgia;
-    background-color: #B03A2E;  
-    color: white;  
-    font-weight: bold;
-    cursor: pointer;
+.search button:active {
+  transform: translateY(1px);
+  box-shadow: none;
 }
 
-.option select option{
-    background-color: #82E0AA;
-    color: #1B4F72;
-    font-weight: bold;
+.option select {
+  margin: 0.2rem 0.3rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 10px;
+  outline: none;
+  font-family: Georgia;
+  background-color: #b03a2e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.option button, .All button{
-    font-family: Georgia;
-    padding: 9px 1px;
+.option select option {
+  background-color: #82e0aa;
+  color: #1b4f72;
+  font-weight: bold;
+}
+
+.option button,
+.All button {
+  font-family: Georgia;
+  padding: 9px 1px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  color: #82e0aa;
+  background-color: #1b4f72;
+  box-shadow: 1px 1px 1px black;
+  transition: background-color 1s;
+}
+.option button:hover {
+  background-color: #82e0aa;
+  color: #1b4f72;
+  transition: background-color 1s;
+}
+
+.option button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.All {
+  width: 100%;
+  text-align: right;
+  margin: 0 auto;
+}
+.All button {
+  width: 7%;
+  padding: 8px 0px;
+}
+
+.All button:hover {
+  background-color: #82e0aa;
+  color: #1b4f72;
+  transition: background-color 1s;
+}
+
+.All button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+@media (max-width: 1370px) {
+  .search,.option{
+    width: max-content;
+  }
+  .search input  {
+    width: 100%;
+  }
+}
+@media (max-width: 1190px) {
+  .search {
+    width: 35%;
+  }
+  .search input {
+    width: 100%;
+    margin-right: 0.5rem;
     font-size: 1rem;
-    border-radius: 10px;
-    cursor: pointer;
+  }
+
+  .search button {
+    font-size: 1rem;
+  }
+  .option {
+    width: min-content;
+  }
+
+  .option select {
+    font-size: 0.8rem;
+    width: 180px;
+  }
+
+  .option select option {
+    font-size: 0.8rem;
+  }
+
+  .option button,
+  .All button {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 940px) {
+  .header {
+    flex-direction: column;
+  }
+  .search {
+    width: 50%;
+    margin-bottom: 2%;
+  }
+
+  .option button,
+  .All button {
+    font-size: 0.9rem;
+    width: max-content;
+  }
+
+  .All {
     width: 100%;
-    border: none;
-    color: #82E0AA;
-    background-color: #1B4F72;
-    box-shadow: 1px 1px 1px black;
-    transition: background-color 1s;
-}
-.option button:hover{
-    background-color: #82E0AA;
-    color:#1B4F72 ;
-    transition:background-color  1s;
-}
+    text-align: center;
+    margin-top: 2%;
+  }
 
-.option button:active{
-    transform: translateY(1px);
-    box-shadow: none;
+  .All button {
+    width: 30%;
+    margin: 0%;
+    padding: 1.5% 3%;
+  }
 }
+@media (max-width: 665px) {
+  .search {
+    width: 70%;
+    text-align: left;
+  }
+  .search input {
+    width: 65%;
+    padding: 2% 1%;
+  }
+  .search button {
+    font-size: 0.8rem;
+  }
 
-.All{
+  .option button {
+    font-size: 0.8rem;
+  }
+
+  .option select {
+    font-size: 0.7rem;
+    width: min-content;
+  }
+
+  .option select option {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 570px) {
+  .search {
     width: 100%;
-    text-align: right;
-    margin: 0 auto;
-}
-.All button{
-    width: 6.7%;
-    padding: 8px 0px;
-    margin: 0 .8rem;
+    justify-content: flex-start;
+  }
+  .search input {
+    width: 60%;
+    padding: 1.5% 1%;
+  }
+  .search button {
+    font-size: 0.8rem;
+  }
+
+  .option {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .option button {
+    width: 10%;
+  }
+
+  .All {
+    text-align: left;
+    
+  }
+  .All button{
+    margin-left: 1%;
+  }
 }
 
-.All button:hover{
-    background-color: #82E0AA;
-    color:#1B4F72 ;
-    transition:background-color  1s;
+@media (max-width: 540px) {
+  .search input {
+    width: 50%;
+  }
 }
 
-.All button:active{
-    transform: translateY(1px);
-    box-shadow: none;
+@media (max-width: 490px) {
+  .option {
+    flex-direction: column;
+  }
+  .option select {
+    font-size: 0.8rem;
+    width: 90%;
+  }
+
+  .option button {
+    width: 90%;
+  }
+
+  .search {
+    justify-content: center;
+    margin-bottom: 7%;
+  }
+  .search input {
+    width: 70%;
+    padding: 2% 1%;
+  }
+
+  .All {
+    text-align: center;
+    margin-bottom: 10%;
+  }
+
+  .All button {
+    width: 90%;
+    margin: 0%;
+  }
+}
+
+@media (max-width: 370px) {
+
+  .option select {
+    width: 95%;
+  }
+
+  .option button {
+    width: 95%;
+  }
+
+  .search input {
+    width: 70%;
+  }
+  .All button{
+    width: 95%;
+    padding: 2% 0%;
+  }
+}
+
+@media (max-width: 285px) {
+  .option {
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .option select {
+    width: 100%;
+    align-self: flex-start;
+    font-size: 0.7rem;
+    margin: 1% 0%;
+  }
+
+  .option button {
+    width: 100%;
+    margin-top: 2%;
+  }
+
+  .search input {
+    width: 70%;
+  }
+
+  .search button {
+    font-size: 0.7rem;
+  }
+  .All button{
+      width: 100%;
+      padding: 3% 0%;
+  }
 }

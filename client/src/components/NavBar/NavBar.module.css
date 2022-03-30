@@ -4,7 +4,7 @@
   align-items: center;
   padding: 0.5rem;
   color: black;
-  background-color: #82E0AA;
+  background-color: #82e0aa;
 }
 
 .logo {
@@ -14,51 +14,117 @@
   gap: 1rem;
   margin-left: 1rem;
   text-decoration: none;
-  
 }
 
 .logo img {
   width: 30%;
 }
 
-.logo p, .enlaces{
+.logo p,
+.enlaces {
   font-size: 1.5rem;
   font-weight: bold;
   font-family: Brush Script MT;
-  color: #1B4F72;
-
+  color: #1b4f72;
 }
 
-.rutas{
-    text-align: center;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width:50%;
+.rutas {
+  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 50%;
+  gap: 4%;
+  margin-right: 3rem;
+}
+
+.enlaces {
+  text-decoration: none;
+  font-family: Times;
+  font-size: 1.7rem;
+  position: relative;
+}
+
+.enlaces::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  background-color: #b03a2e;
+  height: 5px;
+  top: 101%;
+  left: 0%;
+  border-radius: 10px;
+  transition: width 0.5s;
+}
+
+.enlaces:hover::after {
+  width: 100%;
+  transition: width 0.5s;
+}
+
+@media (max-width: 665px) {
+  .logo img {
+    width: 20%;
+  }
+
+  .logo p,
+  .enlaces {
+    font-size: 1.3rem;
+  }
+  .navigation {
+    padding: 0.1rem;
+  }
+
+  .rutas {
     gap: 4%;
-    margin-right: 3rem;
+    margin-right: 1rem;
+  }
 }
 
-.enlaces{
-    text-decoration: none;
-    font-family: Times;
-    font-size: 1.7rem;
-    position: relative;
+@media (max-width: 490px) {
+  .logo img {
+    width: 19%;
+  }
+
+  .logo p,
+  .enlaces {
+    font-size: 1.1rem;
+  }
+
+  .rutas {
+    gap: 6%;
+    margin-right: 1rem;
+  } 
 }
 
-.enlaces::after{
-    content: "";
-    position: absolute;
-    width: 0%;
-    background-color: #B03A2E;
-    height: 5px;
-    top: 101%;
-    left:0%;
-    border-radius: 10px;
-    transition: width .5s;
+@media (max-width: 370px) {
+  .logo p,
+  .enlaces {
+    font-size: 1rem;
+  }
+
+  .rutas {
+    gap: 5%;
+    margin-right: .8rem;
+  } 
 }
 
-.enlaces:hover::after{
-    width: 100%;
-    transition: width .5s;
+@media (max-width: 285px) {
+  
+.logo {
+  gap: .5rem;
+  margin-left: .5rem;
+  width: 30%;
+}
+.logo p, .enlaces{
+  font-size: .8rem;
+}
+
+.rutas {
+  margin-right: .1rem;
+  width: 60%;
+  gap: 7%;
+  
+} 
+
 }

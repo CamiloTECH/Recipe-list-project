@@ -1,25 +1,25 @@
 .cards {
-    text-align: justify;
-    font-size: 1.8rem;
-    font-family: serif;
-    margin: 3% 2% 5% 2%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4rem;  
-    align-items: center;
-    justify-content:center;
+  text-align: justify;
+  font-size: 1.8rem;
+  font-family: serif;
+  margin: 3% 2% 5% 2%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.buttons{
+.buttons {
   margin: 5% 2% 0% 2%;
   text-align: center;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   gap: 1%;
 }
 
-.buttons button{
+.buttons button {
   font-family: Georgia;
   padding: 9px 0px;
   font-size: 1rem;
@@ -27,18 +27,65 @@
   cursor: pointer;
   width: 3%;
   border: none;
-  color: #82E0AA;
-  background-color: #1B4F72;
+  color: #82e0aa;
+  background-color: #1b4f72;
   box-shadow: 1px 1px 1px black;
-  transition: background-color .5s;
+  transition: background-color 0.5s;
 }
-.buttons button:hover{
-  background-color: #82E0AA;
-  color:#1B4F72 ;
-  transition:background-color  1s;
+.buttons button:hover {
+  background-color: #82e0aa;
+  color: #1b4f72;
+  transition: background-color 1s;
 }
 
-.buttons button:active{
+.buttons button:active {
   transform: translateY(1px);
   box-shadow: none;
+}
+
+@media (max-width: 1190px) {
+  .cards {
+    gap: 2rem;
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 940px) {
+  .buttons button {
+    padding: 5px 0px;
+    width: 4%;
+  }
+  .buttons{
+    gap: .5%;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 780px) {
+  .cards {
+    justify-content: space-around;
+    gap: 2rem 0rem;
+  }
+  .buttons{
+    gap: 0%;
+  }
+}
+
+@media (max-width: 665px) {
+.cards{
+  font-size: 1.2rem;
+}
+}
+
+@media (max-width: 540px) {
+
+  .buttons{
+    gap: 5%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 370px) {
+.cards{
+  margin-top: 10%;
+}
 }

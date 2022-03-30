@@ -140,11 +140,10 @@ function Search() {
 
                <button onClick={clearFilters}>Clean Filters</button>
             </div>
-
-         </header>
-         <div className={style.All}>
+            <div className={style.All}>
             <button onClick={allRecipes}>All Recipes</button>
          </div>
+         </header>
          <Outlet />
       </div>
    );

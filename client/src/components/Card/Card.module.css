@@ -5,18 +5,18 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  color: #1B4F72;
+  color: #1b4f72;
   align-items: center;
   width: 30%;
   height: 76vh;
   background-color: #82e0ab9c;
-  transition: transform .3s, background-color .3s;
+  transition: transform 0.3s, background-color 0.3s;
 }
 
-.card:hover{
-  background-color:#82e0ab ;
-  transform: scale(1.08,1.08);
-  transition: transform .3s,  background-color .3s;
+.card:hover {
+  background-color: #82e0ab;
+  transform: scale(1.08, 1.08);
+  transition: transform 0.3s, background-color 0.3s;
 }
 
 .card img {
@@ -37,38 +37,120 @@
   margin-top: 3%;
 }
 
-.title{
+.title {
   font-weight: bold;
-  text-align:justify;
+  text-align: justify;
   height: 12vh;
 }
 
 .dieta {
   font-size: 1.5rem;
-  color: #B03A2E;
+  color: #b03a2e;
   font-weight: bold;
-  margin:0%;
+  margin: 0%;
 }
 
 .info ul {
-  list-style:square;
+  list-style: square;
   display: flex;
   font-size: 1.3rem;
   margin: 0;
   margin-top: 2%;
-  gap:20%;
-  flex-wrap:wrap;
+  gap: 20%;
+  flex-wrap: wrap;
 }
 
-.link{
+.link {
   text-align: center;
   text-decoration: none;
-  color: #B03A2E;
+  color: #b03a2e;
   font-weight: bold;
-  transition: color .5s;
+  transition: color 0.5s;
 }
 
-.link:hover{
-  color:white;
-  transition: color .5s;
+.link:hover {
+  color: white;
+  transition: color 0.5s;
+}
+
+@media (max-width: 1190px) {
+  .card {
+    height: min-content;
+  }
+
+  .card img {
+    height: 200px;
+  }
+
+  .info {
+    height: 33vh;
+  }
+
+  .title {
+    height: 10vh;
+  }
+
+  .info ul {
+    font-size: 1rem;
+    padding: 0% 6%;
+    margin-top: 1%;
+    margin-left: 5%;
+    gap: 15%;
+  }
+  .link {
+    margin-bottom: 5%;
+  }
+}
+
+@media (max-width:915px){
+  .info {
+    height: 21vh;
+  }
+  
+  .title {
+    height: 7vh;
+  }
+}
+
+@media (max-width: 780px) {
+  .card {
+    width: 45%;
+}
+}
+
+@media (max-width: 665px) {
+  .dieta{
+    font-size: 1.2rem;  
+  }
+}
+@media (max-width: 490px) {
+  .card {
+    width: 90%;
+}
+.info {
+  height: 24vh;
+}
+
+.title {
+  height: 9vh;
+}
+}
+
+@media (max-width: 370px) {
+  .card {
+    width: 90%;
+}
+}
+
+@media (max-width: 285px) {
+  .card{
+    width: 95%;
+  }
+  .info {
+    height: 30vh;
+  }
+  
+  .title {
+    height: 10vh;
+  }
 }

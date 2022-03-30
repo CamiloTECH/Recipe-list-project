@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import style from "./Pagination.module.css"
 
 function Pagination({ recipes, pagination, recipesPerPage, currentPage, currentCards }) {
   const numberOfButtons = []
@@ -38,19 +39,19 @@ function Pagination({ recipes, pagination, recipesPerPage, currentPage, currentC
 
   return (
     <>
-      <button onClick={() => pagination(currentPage - 1)} disabled={stateButton.previus}
+      <button onClick={() => pagination(currentPage - 1)} className={style.bigButtons} disabled={stateButton.previus}
         style={stateButton.previus ? {
           "boxShadow": "none", "backgroundColor": "#B03A2E9d",
-          "color": "#82E0AA9d", "width": "8%", "cursor": "default"
+          "color": "#82E0AA9d", "width": "max-content", "cursor": "default","padding":".6% 1%"
         }
-          : { "width": "8%", "backgroundColor": "#B03A2E", "color": "#82E0AA" }
+          : { "width": "max-content", "backgroundColor": "#B03A2E", "color": "#82E0AA","padding":".6% 1%" }
         }
       >
         Previus Page
       </button>
 
       {numberOfButtons.map(pag => (
-        <button key={pag} onClick={() => pagination(pag + 1)}
+        <button key={pag} onClick={() => pagination(pag + 1)} className={style.sButtons}
           style={currentPage === pag + 1 ? {
             "backgroundColor": "#B03A2E",
             "color": "#82E0AA", "fontWeight": "bold"
@@ -59,12 +60,12 @@ function Pagination({ recipes, pagination, recipesPerPage, currentPage, currentC
         </button>
       ))
       }
-      <button onClick={() => pagination(currentPage + 1)} disabled={stateButton.next}
+      <button onClick={() => pagination(currentPage + 1)} className={style.bigButtons} disabled={stateButton.next}
         style={stateButton.next ? {
           "boxShadow": "none", "backgroundColor": "#B03A2E9d",
-          "color": "#82E0AA9d", "width": "7%", "cursor": "default"
+          "color": "#82E0AA9d", "width": "max-content", "cursor": "default","padding":".6% 1%"
         }
-          : { "width": "7%", "backgroundColor": "#B03A2E", "color": "#82E0AA" }
+          : { "width": "max-content", "backgroundColor": "#B03A2E", "color": "#82E0AA","padding":".6% 1%" }
         }
       >
         Next Page
