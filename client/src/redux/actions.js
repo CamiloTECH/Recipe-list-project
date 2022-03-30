@@ -90,14 +90,14 @@ export function orderByName(order, recipes) {
   let recipesSorted;
   if (order === "1") {
     recipesSorted = copyRecipe.sort((a, b) => {
-      if (a.title > b.title) return 1;
-      if (b.title > a.title) return -1;
+      if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+      if (b.title.toLowerCase() > a.title.toLowerCase()) return -1;
       return 0;
     });
   } else {
     recipesSorted = copyRecipe.sort((a, b) => {
-      if (a.title > b.title) return -1;
-      if (b.title > a.title) return 1;
+      if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+      if (b.title.toLowerCase() > a.title.toLowerCase()) return 1;
       return 0;
     });
   }

@@ -121,11 +121,11 @@
   box-shadow: none;
 }
 
-@media (max-width: 1370px) {
+@media (max-width: 1470px) {
   .search,.option{
     width: max-content;
   }
-  .search input  {
+  .search input {
     width: 100%;
   }
 }

@@ -103,8 +103,7 @@ function CreateRecipe() {
         }
         break
       case "image":
-        const regex = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/
-        // eslint-disable-next-line
+        const regex = /^https?:\/\/[\w]+(\.[\w]+)+[/#?]?.*$/
         setState({
           ...state,
           [name]: value
@@ -224,7 +223,7 @@ function CreateRecipe() {
       </div>
 
       <div className={style.image}>
-        <img src={state.image} alt="" />
+        <img src={state.image} alt="Image not found" />
       </div>
 
       <div className={style.large}>
