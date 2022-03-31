@@ -36,24 +36,24 @@
   color: var(--color3);
   width: max-content;
 }
-.message, .gridDiet{
+.message,
+.gridDiet {
   margin: 4% 0% 2% 0%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 
-.gridDiet{
+.gridDiet {
   grid-column: 1/3;
 }
 
-.labelError{
+.labelError {
   margin-left: 6%;
-  font-size:1.3rem;
-  color: #E8FF06;
+  font-size: 0.8rem;
+  color: #e8ff06;
   text-align: right;
-  font-family:Georgia ;
+  font-family: Georgia;
   font-weight: bold;
 }
 
@@ -63,7 +63,7 @@
   outline: none;
   border: none;
   border-bottom: 3px solid white;
-  background-color: rgba(255, 255, 255, 0.060);
+  background-color: rgba(255, 255, 255, 0.06);
   color: white;
   border-radius: 5px 5px 0px 0px;
   font-size: 1.5rem;
@@ -87,13 +87,13 @@
   width: 100%;
   text-align: center;
   align-self: flex-end;
-}
-.image img {
-  position:sticky;
-  width: 90%;
-  color:  white;
+  color: white;
   font-weight: bold;
   font-size: 1.5rem;
+}
+.image img {
+  position: sticky;
+  width: 90%;
 }
 
 .large {
@@ -122,38 +122,39 @@
 
 .diets {
   display: grid;
-  width: 100%;
+  width: max-content;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content;
 }
 
-
-.diet{
+.diet {
   margin: 2% 0% 0% 4%;
   width: max-content;
 }
 
-.diet label{
+.diet label {
   font-size: 1.5rem;
   color: var(--color1);
-  font-weight:500;
+  font-weight: 500;
   font-family: Georgia;
 }
-.diet input:checked + label{
-  color: var(--color3)
+.diet input:checked + label {
+  color: var(--color3);
 }
 
-.buttons{
+.buttons {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   gap: 15%;
 }
 
-.submit, .link, .error{
+.submit,
+.link,
+.error {
   text-decoration: none;
   text-align: center;
-  width:50%;
+  width: 50%;
   height: min-content;
   justify-self: center;
   align-self: center;
@@ -167,29 +168,174 @@
   color: var(--color3);
   border-radius: 10px;
   box-shadow: 1px 1px 2px black;
-  transition:background-color  .7s;
-
+  transition: background-color 0.7s;
 }
 
-.submit:hover, .link:hover{
-  background-color: #82E0AA;
-  color:#1B4F72 ;
-  transition:background-color  .7s;
+.submit:hover,
+.link:hover {
+  background-color: #82e0aa;
+  color: #1b4f72;
+  transition: background-color 0.7s;
 }
 
-.submit:active, .link:active{
+.submit:active,
+.link:active {
   transform: translateY(1px);
   box-shadow: none;
 }
 
-.link{
+.link {
   width: 40%;
 }
 
-.error{
-  cursor:default;
+.error {
+  cursor: default;
   box-shadow: none;
-  background-color:#1b4f729d;
+  background-color: #1b4f729d;
   color: #82e0aa9d;
 }
 
+@media (max-width: 1140px) {
+  .form {
+    width: 60%;
+  }
+}
+
+@media (max-width: 950px) {
+  .form {
+    width: 70%;
+  }
+}
+
+@media (max-width: 790px) {
+  .form {
+    width: 80%;
+  }
+
+  .name {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 620px) {
+  .form h2 {
+    font-size: 2rem;
+    margin-bottom: 2%;
+  }
+
+  .data input,
+  .large textarea {
+    font-size: 1.2rem;
+  }
+
+  .data input::placeholder {
+    font-size: 0.7rem;
+  }
+  .large textarea::placeholder {
+    font-size: 0.7rem;
+  }
+
+  .image {
+    font-size: 1rem;
+  }
+
+  .large textarea {
+    font-size: 1.1rem;
+  }
+
+  .diets {
+    grid-column: 1/3;
+    margin-bottom: 4%;
+  }
+
+  .diet label {
+    font-size: 1.3rem;
+  }
+
+  .buttons {
+    flex-direction: row;
+    grid-column: 1/3;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    margin-bottom: 4%;
+  }
+
+  .submit,
+  .link,
+  .error {
+    width: 30%;
+    padding: 2%;
+    font-size: 1.3rem;
+  }
+
+  .link {
+    width: 27%;
+  }
+}
+
+@media (max-width: 530px) {
+  .image {
+    display: none;
+  }
+  .data {
+    grid-column: 1/3;
+  }
+}
+
+@media (max-width: 440px) {
+  .diets {
+    grid-template-columns: min-content;
+  }
+
+  .diet label {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+}
+
+@media (max-width: 350px) {
+  .diet label {
+    font-size: 1rem;
+  }
+  .form h2 {
+    font-size: 1.5rem;
+  }
+  .name {
+    font-size: 1rem;
+  }
+  .data input,
+  .large textarea {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 290px) {
+  .name {
+    font-size: 0.8rem;
+  }
+
+  .diet label {
+    font-size: 0.8rem;
+  }
+  .labelError {
+    font-size: 0.5rem;
+  }
+  .data input,
+  .large textarea {
+    font-size: 0.8rem;
+  }
+
+  .data input::placeholder {
+    font-size: 0.6rem;
+  }
+  .large textarea::placeholder {
+    font-size: 0.6rem;
+  }
+}

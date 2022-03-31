@@ -73,6 +73,7 @@
   background-color: #82e0aa;
   color: #1b4f72;
   font-weight: bold;
+  width: min-content;
 }
 
 .option button,
@@ -161,7 +162,7 @@
   }
 }
 
-@media (max-width: 940px) {
+@media (max-width: 960px) {
   .header {
     flex-direction: column;
   }
@@ -252,7 +253,7 @@
   }
 }
 
-@media (max-width: 490px) {
+@media (max-width: 510px) {
   .option {
     flex-direction: column;
   }

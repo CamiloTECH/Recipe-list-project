@@ -61,6 +61,8 @@
   width: 100%;
   transition: width 0.5s;
 }
+ 
+
 
 @media (max-width: 665px) {
   .logo img {
@@ -79,6 +81,7 @@
     gap: 4%;
     margin-right: 1rem;
   }
+
 }
 
 @media (max-width: 490px) {
@@ -106,7 +109,8 @@
   .rutas {
     gap: 5%;
     margin-right: .8rem;
-  } 
+  }
+
 }
 
 @media (max-width: 285px) {

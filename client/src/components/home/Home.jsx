@@ -3,6 +3,8 @@ import style from "./Home.module.css"
 import { getAllrecipes } from "../../redux/actions"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import linkedin from "../../img/linkedin.png"
+import github from "../../img/github.png"
 
 function Home() {
   const recipes = useSelector(store => store.recipes)
@@ -33,7 +35,17 @@ function Home() {
             ? <div className={style.home}> <h2>No recipes found</h2> </div>
             : <div className={style.home}> <div className={style.load}></div> </div>
       }
-
+      <footer>
+        <p>&copy;2022 Camilo Montoya</p>
+        <div className={style.info}>
+          <a href="https://www.linkedin.com/in/camilomontoya-fullstackdev" target="_blank">
+            <img src={linkedin} alt="Linkedln" />
+          </a>
+          <a href="https://github.com/CamiloTECH/Recipe-list-project" target="_blank">
+            <img src={github} alt="gitHub" />
+          </a>
+        </div>
+      </footer>
     </>
   );
 }

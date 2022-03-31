@@ -9,7 +9,7 @@ function NavBar() {
             <nav className={style.navigation}>
                 <NavLink to="/home" className={style.logo} >
                     <img src={salad} alt="logotipo" />
-                    <p>RECIPES</p> 
+                    <p>RECIPES</p>
                 </NavLink>
                 <div className={style.rutas}>
                     <NavLink to="/home" className={style.enlaces}>Home</NavLink>
@@ -17,6 +17,7 @@ function NavBar() {
                 </div>
             </nav>
             <Outlet />
+           
         </div>
     );
 }
