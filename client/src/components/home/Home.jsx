@@ -38,10 +38,10 @@ function Home() {
       <footer>
         <p>&copy;2022 Camilo Montoya</p>
         <div className={style.info}>
-          <a href="https://www.linkedin.com/in/camilomontoya-fullstackdev" target="_blank">
+          <a href="https://www.linkedin.com/in/camilomontoya-fullstackdev" target="_blank" rel="noreferrer">
             <img src={linkedin} alt="Linkedln" />
           </a>
-          <a href="https://github.com/CamiloTECH/Recipe-list-project" target="_blank">
+          <a href="https://github.com/CamiloTECH/Recipe-list-project" target="_blank" rel="noreferrer">
             <img src={github} alt="gitHub" />
           </a>
         </div>

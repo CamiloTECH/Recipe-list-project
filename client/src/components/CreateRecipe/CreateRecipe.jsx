@@ -223,7 +223,7 @@ function CreateRecipe() {
       </div>
 
       <div className={style.image}>
-        <img src={state.image} alt="Image not found" />
+        <img src={state.image} alt="Imagen not found" />
       </div>
 
       <div className={style.large}>
