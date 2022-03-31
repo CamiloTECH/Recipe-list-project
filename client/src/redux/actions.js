@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+dotenv.config()
 export const GET_ALL_RECIPES = "getAllrecipes",
   GET_RECIPES_NAME = "getRecipesName",
   GET_RECIPE_DETAIL = "getRecipeDetail",
@@ -11,9 +13,11 @@ export const GET_ALL_RECIPES = "getAllrecipes",
   CLEAR_COMPONENT_USER = "clearComponentUser",
   CLEAR_RECIPES = "clearRecipes";
 
+const URL= process.env.REACT_APP_API
+
 export function getAllrecipes() {
   return async function (dispatch) {
-    const response = await fetch("http://localhost:3001/");
+    const response = await fetch(URL);
     const result = await response.json();
     return dispatch({
       type: GET_ALL_RECIPES,
@@ -24,7 +28,7 @@ export function getAllrecipes() {
 
 export function getRecipesName(name) {
   return async function (dispatch) {
-    const response = await fetch(`http://localhost:3001/recipes?name=${name}`);
+    const response = await fetch(`${URL}/recipes?name=${name}`);
     const result = await response.json();
     return dispatch({
       type: GET_RECIPES_NAME,
@@ -35,7 +39,7 @@ export function getRecipesName(name) {
 
 export function getRecipeDetailAPI(id) {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/recipes/${id}`)
+    return fetch(`${URL}/recipes/${id}`)
       .then((response) => response.json())
       .then((result) =>
         dispatch({
@@ -48,7 +52,7 @@ export function getRecipeDetailAPI(id) {
 
 export function getRecipeDetailDB(id) {
   return async function (dispatch) {
-    const response = await fetch(`http://localhost:3001/recipes/db/${id}`);
+    const response = await fetch(`${URL}/recipes/db/${id}`);
     const result = await response.json();
     return dispatch({
       type: GET_RECIPE_DETAIL,
@@ -59,7 +63,7 @@ export function getRecipeDetailDB(id) {
 
 export function getTypesDiet() {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/types`)
+    return fetch(`${URL}/types`)
       .then((response) => response.json())
       .then((result) =>
         dispatch({
@@ -72,7 +76,7 @@ export function getTypesDiet() {
 
 export function addRecipe(recipe) {
   return async function (dispatch) {
-    const response = await fetch(`http://localhost:3001/recipes`, {
+    const response = await fetch(`${URL}/recipes`, {
       method: "POST",
       body: JSON.stringify(recipe),
       headers: { "Content-Type": "application/json" },
