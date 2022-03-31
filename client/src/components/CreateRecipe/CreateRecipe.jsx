@@ -164,7 +164,6 @@ function CreateRecipe() {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
     dispatch(addRecipe(state))
     dispatch(cleaningRecipes())
   }
