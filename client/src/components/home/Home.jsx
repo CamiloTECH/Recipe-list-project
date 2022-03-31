@@ -19,7 +19,7 @@ function Home() {
   useEffect(() => {
     setLoad(false)
     window.scroll(0, 0)
-    const timer = setTimeout(() => setLoad(true), 8000)
+    const timer = setTimeout(() => setLoad(true), 10000)
 
     return () => clearTimeout(timer)
     // eslint-disable-next-line
