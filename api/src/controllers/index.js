@@ -8,7 +8,7 @@ const { Op } = require("sequelize");
 const getData = async () => {
   try {
     const response = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=${Api_key}`
+      `https://api.spoonacular.com/recipes/complexSearch?number=40&addRecipeInformation=true&apiKey=${Api_key}`
     );
     let recipes = response.data.results.map((recipe) => {
       //Agregar los tipos de dietas que no tenga la propiedad Diets de la API
