@@ -85,7 +85,7 @@ function Search() {
    }
    
    const allRecipes = () => {
-      if(recipes.length < 100 && copyRecipes.length>=100){
+      if(recipes.length < 40 && copyRecipes.length>=40){
          setState({
             ...state,
             alphabeticalSelect: 0,
@@ -94,7 +94,7 @@ function Search() {
          })
          dispatch(cleaningFilters(copyRecipes))
       }
-      else if (recipes.length < 100 && copyRecipes.length<100) {
+      else if (recipes.length < 40 && copyRecipes.length<40) {
          dispatch(cleaningRecipes())
          dispatch(getAllrecipes())
          setState({
