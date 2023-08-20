@@ -1,75 +1,89 @@
-/* eslint-disable import/no-extraneous-dependencies */
-const { expect } = require("chai");
-const session = require("supertest-session");
-const app = require("../../src/app.js");
-const { Recipe, conn, Diet } = require("../../src/db.js");
+import { expect } from "chai";
+import session from "supertest-session";
+import app from "../../src/app.js";
+import { sequelize } from "../../src/db";
+import { Diets, Recipes } from "../../src/models";
+import { before, beforeEach, describe, it } from "node:test";
+import { Request } from "express";
 
 const agent = session(app);
 const recipe = {
-  title: "milanea a la napolitana",
-  summary: "summary",
-  image: "image",
+  title: "Milanea a la napolitana",
+  summary: "resumen de prueba",
+  score: 10,
+  healthScore: 90,
+  steps: "paso a paso de prueba",
+  image: "imagen de prueba",
+  diets: [4],
 };
 
 describe("Recipe routes", () => {
   before(() =>
-    conn.authenticate().catch((err) => {
+    sequelize.authenticate().catch((err) => {
       console.error("Unable to connect to the database:", err);
     })
   );
 
-  beforeEach(() =>Recipe.sync({ force: true }).then(() => Recipe.create(recipe)));
+  beforeEach(() =>
+    Recipes.sync({ force: true }).then(() => Recipes.create(recipe))
+  );
 
   describe("GET /", () => {
-    it("should get 200 and a array of recipes", () => agent
+    it("should get 200 and a array of recipes", () =>
+      agent
         .get("/")
         .expect(200)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           expect(res.body).to.have.length(101);
-        })).timeout(10000);
+        }))
   });
 
   describe("GET /recipes?name", () => {
-    it("should get 404 and a message if the name is not found", () => agent
+    it("should get 404 and a message if the name is not found", () =>
+      agent
         .get("/recipes?name=asjsjsajs")
         .expect(404)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           expect(res.body).to.eql([{ error: "No recipes found" }]);
-        })).timeout(10000);
+        }));
 
-    it("should get 404 and a message if the name is null", () => agent
+    it("should get 404 and a message if the name is null", () =>
+      agent
         .get("/recipes?name")
         .expect(404)
         .expect("Content-Type", /json/)
-        .expect((res) => {
-          expect(res.body).to.eql([{ error: "No hay parametro de busqueda" }]);
-        })).timeout(10000);
+        .expect((res: Request) => {
+          expect(res.body).to.eql([{ error: "No recipes found" }]);
+        }));
 
-    it("should get 200 and a array if name is valid", () => agent
+    it("should get 200 and a array if name is valid", () =>
+      agent
         .get("/recipes?name=Milanea a la napolitana")
         .expect(200)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           expect(res.body).to.have.length(1);
-        })).timeout(10000);
+        }));
   });
 
   describe("GET /recipes/:id", () => {
-    it("should get 404 and a message if the id is not found", () => agent
+    it("should get 404 and a message if the id is not found", () =>
+      agent
         .get("/recipes/ass")
         .expect(404)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           expect(res.body).to.eql({ error: `Recipe with ID ass not found` });
-        })).timeout(10000);
+        }));
 
-    it("should get 200 and a object if id is valid", () => agent
+    it("should get 200 and a object if id is valid", () =>
+      agent
         .get("/recipes/1")
         .expect(200)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           const data = Object.keys(res.body);
           expect(data).to.have.length(8);
           expect(data).to.eql([
@@ -82,7 +96,7 @@ describe("Recipe routes", () => {
             "steps",
             "image",
           ]);
-        })).timeout(10000);
+        }));
   });
 
   describe("GET /recipes/db/:id", () => {
@@ -91,38 +105,40 @@ describe("Recipe routes", () => {
         .get("/recipes/db/ass")
         .expect(404)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           expect(res.body).to.eql({ error: `Recipe with ID ass not found` });
         }));
 
     it("should get 200 and a object if id is valid", async () => {
-      const newRecipe = await Recipe.create(recipe);
+      const newRecipe = await Recipes.create(recipe);
       return agent
         .get(`/recipes/db/${newRecipe.id}`)
         .expect(200)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           expect(res.body.title).to.eql("milanea a la napolitana");
         });
     });
   });
 
   describe("GET /types", () => {
-    before(async () => await Diet.sync({ force: true }));
+    before(async () => await Diets.sync({ force: true }));
 
-    it("should get 200 and a array if the types are found", () => agent
+    it("should get 200 and a array if the types are found", () =>
+      agent
         .get(`/types`)
         .expect(200)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           expect(res.body).to.have.length(10);
-        })).timeout(10000);
+        }));
   });
 
   describe("POST /recipes", () => {
-    beforeEach(async () => await Recipe.sync({ force: true }));
+    beforeEach(async () => await Recipes.sync({ force: true }));
 
-    it("should get 200 and a object if all data is complete", () => agent
+    it("should get 200 and a object if all data is complete", () =>
+      agent
         .post(`/recipes`)
         .send({
           title: "Recipe 1",
@@ -135,7 +151,8 @@ describe("Recipe routes", () => {
         .expect(200)
         .expect("Content-Type", /json/));
 
-    it("should get 400 and error if all data is not complete", () => agent
+    it("should get 400 and error if all data is not complete", () =>
+      agent
         .post(`/recipes`)
         .send({
           summary: "summary 1",
@@ -146,12 +163,10 @@ describe("Recipe routes", () => {
         })
         .expect(400)
         .expect("Content-Type", /json/)
-        .expect((res) => {
+        .expect((res: Request) => {
           expect(res.body).to.eql({
             error: "You must enter the complete data",
           });
         }));
-
   });
-  
 });
