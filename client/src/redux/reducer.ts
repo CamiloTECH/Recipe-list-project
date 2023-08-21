@@ -1,7 +1,8 @@
+import { ReducerState } from "../models";
 import {
   ADD_RECIPE,
-  CLEAR_COMPONENT_DETAIL,
   CLEAR_COMPONENT_USER,
+  CLEAR_DETAIL,
   CLEAR_FILTERS,
   CLEAR_RECIPES,
   GET_ALL_RECIPES,
@@ -11,9 +12,9 @@ import {
   ORDER_BY_DIET,
   ORDER_BY_NAME,
   ORDER_BY_SCORE
-} from "./actions";
+} from "./actionTypes";
 
-const Inicialstate = {
+const Inicialstate: ReducerState = {
   types: [],
   recipes: [],
   createUser: {},
@@ -38,7 +39,7 @@ export default function rootReducer(
         recipes: action.payload,
         copyRecipes: action.payload
       };
-    case CLEAR_COMPONENT_DETAIL:
+    case CLEAR_DETAIL:
       return {
         ...state,
         recipesDetail: action.payload

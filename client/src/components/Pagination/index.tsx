@@ -1,14 +1,23 @@
-import { useEffect, useState } from "react";
+import { FC,  useEffect, useState } from "react";
 
+import { Recipe } from "../../models";
 import style from "./Pagination.module.css";
 
-function Pagination({
+interface Props {
+  recipes: Recipe[];
+  pagination: (page: number) => void;
+  recipesPerPage: number;
+  currentPage: number;
+  currentCards: Recipe[];
+}
+
+const Pagination: FC<Props> = ({
   recipes,
   pagination,
   recipesPerPage,
   currentPage,
   currentCards
-}) {
+}) => {
   const numberOfButtons = [];
   const maxPage = Math.ceil(recipes.length / recipesPerPage);
   const [stateButton, setStateButton] = useState({
@@ -113,6 +122,6 @@ function Pagination({
       </button>
     </>
   );
-}
+};
 
 export default Pagination;

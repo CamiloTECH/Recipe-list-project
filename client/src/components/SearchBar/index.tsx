@@ -1,53 +1,49 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
 
+import { ReducerState } from "../../models";
 import {
-  cleaningFilters,
-  cleaningRecipes,
-  getAllrecipes,
-  getRecipesName,
-  getTypesDiet,
-  orderByDiet,
+  clearFilters,
+  clearRecipes,
+  getAllRecipes,
+  getDiets,
+  getRecipesByName,
+  orderByDiets,
   orderByName,
   orderByScore
 } from "../../redux/actions";
-import style from "./Search.module.css";
+import style from "./SearchBar.module.css";
 
 function Search() {
-  const dispatch = useDispatch();
-  const [state, setState] = useState({
-    text: "",
-    alphabeticalSelect: 0,
-    scoreSelect: 0,
-    dietSelect: 0
-  });
-  const { types, recipes, copyRecipes } = useSelector((store) => {
+  const { types, recipes, copyRecipes } = useSelector((store: ReducerState) => {
     return {
       types: store.types,
       recipes: store.recipes,
       copyRecipes: store.copyRecipes
     };
   });
-  useEffect(() => {
-    if (types.length === 0) dispatch(getTypesDiet());
-    // eslint-disable-next-line
-  }, []);
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
+    text: "",
+    alphabeticalSelect: "0",
+    scoreSelect: "0",
+    dietSelect: "0"
+  });
 
   const handleButtonSearch = () => {
     if (state.text.trim()) {
-      dispatch(cleaningRecipes());
-      dispatch(getRecipesName(state.text.trim()));
+      dispatch(clearRecipes());
+      dispatch(getRecipesByName(state.text.trim()));
       setState({
         ...state,
-        alphabeticalSelect: 0,
-        scoreSelect: 0,
-        dietSelect: 0
+        alphabeticalSelect: "0",
+        scoreSelect: "0",
+        dietSelect: "0"
       });
     }
   };
 
-  const alphabeticalOrder = evento => {
+  const alphabeticalOrder = (evento: ChangeEvent<HTMLSelectElement>) => {
     if (recipes.length > 0 && recipes[0].title) {
       dispatch(orderByName(evento.target.value, recipes));
     }
@@ -57,7 +53,7 @@ function Search() {
     });
   };
 
-  const scoreOrder = evento => {
+  const scoreOrder = (evento: ChangeEvent<HTMLSelectElement>) => {
     if (recipes.length > 0 && recipes[0].title) {
       dispatch(orderByScore(evento.target.value, recipes));
     }
@@ -67,30 +63,30 @@ function Search() {
     });
   };
 
-  const dietOrder = evento => {
+  const dietOrder = (evento: ChangeEvent<HTMLSelectElement>) => {
     const index = evento.target.selectedIndex;
     const diet = evento.target.options[index].text;
 
     if (copyRecipes.length > 0 && copyRecipes[0].title) {
-      dispatch(orderByDiet(diet, copyRecipes));
+      dispatch(orderByDiets(diet, copyRecipes));
     }
     setState({
       ...state,
       dietSelect: evento.target.value,
-      alphabeticalSelect: 0,
-      scoreSelect: 0
+      alphabeticalSelect: "0",
+      scoreSelect: "0"
     });
   };
 
-  const clearFilters = () => {
+  const clearAllFilters = () => {
     setState({
       ...state,
-      alphabeticalSelect: 0,
-      scoreSelect: 0,
-      dietSelect: 0
+      alphabeticalSelect: "0",
+      scoreSelect: "0",
+      dietSelect: "0"
     });
     if (copyRecipes.length > 0 && copyRecipes[0].title) {
-      dispatch(cleaningFilters(copyRecipes));
+      dispatch(clearFilters(copyRecipes));
     }
   };
 
@@ -98,22 +94,28 @@ function Search() {
     if (recipes.length < 40 && copyRecipes.length >= 40) {
       setState({
         ...state,
-        alphabeticalSelect: 0,
-        scoreSelect: 0,
-        dietSelect: 0
+        alphabeticalSelect: "0",
+        scoreSelect: "0",
+        dietSelect: "0"
       });
-      dispatch(cleaningFilters(copyRecipes));
+      dispatch(clearFilters(copyRecipes));
     } else if (recipes.length < 40 && copyRecipes.length < 40) {
-      dispatch(cleaningRecipes());
-      dispatch(getAllrecipes());
+      dispatch(clearRecipes());
+      dispatch(getAllRecipes());
       setState({
         text: "",
-        alphabeticalSelect: 0,
-        scoreSelect: 0,
-        dietSelect: 0
+        alphabeticalSelect: "0",
+        scoreSelect: "0",
+        dietSelect: "0"
       });
     }
   };
+
+  useEffect(() => {
+    if (types.length === 0) {
+      dispatch(getDiets());
+    }
+  }, []);
 
   return (
     <div>
@@ -162,13 +164,12 @@ function Search() {
               ))}
           </select>
 
-          <button onClick={clearFilters}>Clean Filters</button>
+          <button onClick={clearAllFilters}>Clean Filters</button>
         </div>
         <div className={style.All}>
           <button onClick={allRecipes}>All Recipes</button>
         </div>
       </header>
-      <Outlet />
     </div>
   );
 }

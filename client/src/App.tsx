@@ -1,30 +1,45 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import type {} from "redux-thunk/extend-redux";
 
-import CardDetail from "./components/CardDetails/CardDetails.jsx";
-import CreateRecipe from "./components/CreateRecipe/CreateRecipe.jsx";
-import Home from "./components/home/Home.jsx";
-import LandingPage from "./components/LandingPage/LandingPage.jsx";
-import NavBar from "./components/NavBar/NavBar.jsx";
-import Search from "./components/Search/Search.jsx";
+import {
+  CardDetails,
+  CreateRecipe,
+  Home,
+  LandingPage,
+  NavBar,
+  NotFound,
+  SearchBar
+} from "./components";
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
+    <Routes>
+      <Route path="/" element={<LandingPage key={"landing"} />} />
 
-        <Route path="/home" element={<NavBar />}>
-          <Route path="/home" element={<Search />}>
-            <Route path="/home/" element={<Home />} />
-          </Route>
+      <Route
+        path="/home"
+        element={[
+          <NavBar key={"navBar"} />,
+          <SearchBar key={"searchBar"} />,
+          <Home key={"home"} />
+        ]}
+      />
 
-          <Route path="/home/add" element={<CreateRecipe />} />
-          <Route path="/home/details/:id" element={<CardDetail />} />
-        </Route>
+      <Route
+        path="/home/add"
+        element={[
+          <NavBar key={"navBar"} />,
+          <CreateRecipe key={"createRecipe"} />
+        ]}
+      />
 
-        <Route path="*" element={<Navigate to="/home" replace={true} />} />
-      </Routes>
-    </>
+      <Route
+        path="/home/details/:id"
+        element={[<NavBar key={"navBar"} />, <CardDetails key={"details"} />]}
+      />
+
+      <Route path="*" element={<NotFound key={"NotFound"} />} />
+    </Routes>
   );
 }
 

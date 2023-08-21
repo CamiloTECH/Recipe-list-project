@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
+import { ReducerState } from "../../models";
 import {
-  addRecipe,
-  cleaningRecipes,
+  clearRecipes,
   clearUser,
-  getTypesDiet
+  createRecipe,
+  getDiets
 } from "../../redux/actions";
 import style from "./Createrecipe.module.css";
 
 function CreateRecipe() {
   const navigate = useNavigate();
-  const { diets, user } = useSelector(store => {
+  const { diets, user } = useSelector((store: ReducerState) => {
     return {
       diets: store.types,
       user: store.createUser
@@ -36,11 +37,11 @@ function CreateRecipe() {
     image: "",
     summary: "",
     steps: "",
-    diets: ""
+    diets: []
   });
 
   useEffect(() => {
-    if (diets.length === 0) dispatch(getTypesDiet());
+    if (diets.length === 0) dispatch(getDiets());
 
     const llaves = Object.keys(state);
     for (const key of llaves) {
@@ -51,24 +52,24 @@ function CreateRecipe() {
         break;
       }
     }
-    // eslint-disable-next-line
   }, [state, error]);
 
   useEffect(() => {
-    if (user.id) {
+    if (user && user.id) {
       navigate(`/home/details/${user.id}`, { replace: true });
     }
-    // eslint-disable-next-line
   }, [user]);
 
   useEffect(() => {
-    return () => dispatch(clearUser());
-    // eslint-disable-next-line
+    return () => {
+      dispatch(clearUser());
+    };
   }, []);
 
-  const validation = e => {
-    const { value } = e.target;
-    const { name } = e.target;
+  const validation = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { value, name } = e.target;
     switch (name) {
       case "title":
       case "summary":
@@ -111,7 +112,7 @@ function CreateRecipe() {
           });
         }
         break;
-      case "image":
+      case "image": {
         const regex = /^https?:\/\/[\w]+(\.[\w]+)+[/#?]?.*$/;
         setState({
           ...state,
@@ -129,12 +130,12 @@ function CreateRecipe() {
           });
         }
         break;
-      case "diets":
-        let { id } = e.target;
-        id = parseInt(id);
-        let newDiets = [...state[name]];
+      }
+      case "diets": {
+        const id = parseInt(e.target.id);
+
         if (state[name].includes(id)) {
-          newDiets = newDiets.filter(diet => diet !== id);
+          const newDiets = state[name].filter(diet => diet !== id);
 
           if (newDiets.length > 0) {
             setState({
@@ -148,7 +149,7 @@ function CreateRecipe() {
           } else {
             setState({
               ...state,
-              [name]: ""
+              [name]: []
             });
             setError({
               ...error,
@@ -166,14 +167,16 @@ function CreateRecipe() {
           });
         }
         break;
+      }
       default:
         break;
     }
   };
 
-  const handleSubmit = e => {
-    dispatch(addRecipe(state));
-    dispatch(cleaningRecipes());
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(createRecipe(state));
+    dispatch(clearRecipes());
   };
 
   return (
@@ -340,7 +343,7 @@ function CreateRecipe() {
                 type="checkbox"
                 value={diet.id}
                 name="diets"
-                id={diet.id}
+                id={`${diet.id}`}
                 onChange={validation}
               />
               <label htmlFor="diets">{diet.name}</label>

@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import salad from "../../img/salad.png";
 import style from "./NavBar.module.css";
@@ -20,7 +20,6 @@ function NavBar() {
           </NavLink>
         </div>
       </nav>
-      <Outlet />
     </div>
   );
 }

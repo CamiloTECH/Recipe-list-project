@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { configure, shallow } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
-import LandingPage from "../components/LandingPage/LandingPage";
+import LandingPage from "../components/LandingPage";
 
 configure({ adapter: new Adapter() });
 

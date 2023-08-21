@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import github from "../../img/github.png";
 import linkedin from "../../img/linkedin.png";
-import { getAllrecipes } from "../../redux/actions";
-import Cards from "../Cards/Cards";
+import { ReducerState } from "../../models";
+import { getAllRecipes } from "../../redux/actions";
+import Cards from "../Cards";
 import style from "./Home.module.css";
 
 function Home() {
-  const recipes = useSelector(store => store.recipes);
+  const recipes = useSelector((store: ReducerState) => store.recipes);
   const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    if (recipes.length === 0) dispatch(getAllrecipes());
-    // eslint-disable-next-line
+    if (recipes.length === 0) dispatch(getAllRecipes());
   }, []);
 
   useEffect(() => {
@@ -22,8 +22,9 @@ function Home() {
     window.scroll(0, 0);
     const timer = setTimeout(() => setLoad(true), 10000);
 
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line
+    return () => {
+      clearTimeout(timer);
+    };
   }, [recipes]);
   return (
     <>

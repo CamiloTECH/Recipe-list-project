@@ -1,0 +1,12 @@
+export const GET_ALL_RECIPES = "getAllrecipes",
+  GET_RECIPES_NAME = "getRecipesName",
+  GET_RECIPE_DETAIL = "getRecipeDetail",
+  GET_TYPES_DIET = "getTypesDiet",
+  ADD_RECIPE = "addRecipe",
+  ORDER_BY_NAME = "orderByName",
+  ORDER_BY_SCORE = "orderByScore",
+  ORDER_BY_DIET = "orderByDiet",
+  CLEAR_FILTERS = "clearFilters",
+  CLEAR_DETAIL = "clearComponentDetail",
+  CLEAR_COMPONENT_USER = "clearComponentUser",
+  CLEAR_RECIPES = "clearRecipes";

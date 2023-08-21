@@ -11,7 +11,7 @@ import {
   orderByDiet,
   orderByName,
   orderByScore
-} from "../redux/actions";
+} from "../redux/actions/actions";
 import rootReducer from "../redux/reducer";
 
 describe("Reducer", () => {

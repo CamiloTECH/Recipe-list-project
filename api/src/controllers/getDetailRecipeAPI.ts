@@ -28,6 +28,7 @@ const getDetailRecipeAPI = async (req: Request, res: Response) => {
     }
 
     return res.json({
+      id,
       title: data.title,
       summary: data.summary,
       score: data.weightWatcherSmartPoints,

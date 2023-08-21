@@ -4,7 +4,7 @@ import { configure, shallow } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import salad from "../img/salad.png";
 
-import NavBar from "../components/NavBar/NavBar";
+import NavBar from "../components/NavBar";
 
 configure({ adapter: new Adapter() });
 

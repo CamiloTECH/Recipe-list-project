@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
-import Card from "../Card/Card";
-import Pagination from "../Pagination/Pagination";
+import { Recipe } from "../../models";
+import Card from "../Card";
+import Pagination from "../Pagination";
 import style from "./Cards.module.css";
 
-function Cards({ recipes }) {
+function Cards({ recipes }: { recipes: Recipe[] }) {
   const recipesPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
 

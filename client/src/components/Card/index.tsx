@@ -1,8 +1,16 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import style from "./Card.module.css";
 
-function Card(props) {
+interface Props {
+  diets: string[];
+  id: string | number;
+  image: string;
+  title: string;
+}
+
+const Card: FC<Props> = props => {
   return (
     <div className={style.card}>
       <img src={props.image} alt="Comida" />
@@ -12,11 +20,9 @@ function Card(props) {
         </p>
         <p className={style.dieta}>Diet:</p>
         <ul>
-          {typeof props.diets[0] === "string"
-            ? props.diets.map((diet, index) => <li key={index}>{diet}</li>)
-            : props.diets.map((diet, index) => (
-                <li key={index}>{diet.name}</li>
-              ))}
+          {props.diets.map((diet, index) => (
+            <li key={index}>{diet}</li>
+          ))}
         </ul>
       </div>
       <Link to={`/home/details/${props.id}`} className={style.link}>
@@ -24,6 +30,6 @@ function Card(props) {
       </Link>
     </div>
   );
-}
+};
 
 export default Card;
