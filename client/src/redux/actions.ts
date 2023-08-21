@@ -1,5 +1,5 @@
-import dotenv from "dotenv"
-dotenv.config()
+import { Dispatch } from "redux";
+
 export const GET_ALL_RECIPES = "getAllrecipes",
   GET_RECIPES_NAME = "getRecipesName",
   GET_RECIPE_DETAIL = "getRecipeDetail",
@@ -13,84 +13,82 @@ export const GET_ALL_RECIPES = "getAllrecipes",
   CLEAR_COMPONENT_USER = "clearComponentUser",
   CLEAR_RECIPES = "clearRecipes";
 
-const URL= process.env.REACT_APP_API
+const URL = import.meta.env.REACT_APP_API;
 
 export function getAllrecipes() {
-  return async function (dispatch) {
+  return async function (dispatch: Dispatch) {
     const response = await fetch(URL);
     const result = await response.json();
     return dispatch({
       type: GET_ALL_RECIPES,
-      payload: result,
+      payload: result
     });
   };
 }
 
-export function getRecipesName(name) {
-  return async function (dispatch) {
+export function getRecipesName(name: string) {
+  return async function (dispatch: Dispatch) {
     const response = await fetch(`${URL}/recipes?name=${name}`);
     const result = await response.json();
     return dispatch({
       type: GET_RECIPES_NAME,
-      payload: result,
+      payload: result
     });
   };
 }
 
-export function getRecipeDetailAPI(id) {
-  return function (dispatch) {
+export function getRecipeDetailAPI(id: number) {
+  return function (dispatch: Dispatch) {
     return fetch(`${URL}/recipes/${id}`)
-      .then((response) => response.json())
-      .then((result) =>
+      .then(response => response.json())
+      .then(result =>
         dispatch({
           type: GET_RECIPE_DETAIL,
-          payload: result,
+          payload: result
         })
       );
   };
 }
 
-export function getRecipeDetailDB(id) {
-  return async function (dispatch) {
+export function getRecipeDetailDB(id: string) {
+  return async function (dispatch: Dispatch) {
     const response = await fetch(`${URL}/recipes/db/${id}`);
     const result = await response.json();
     return dispatch({
       type: GET_RECIPE_DETAIL,
-      payload: result,
+      payload: result
     });
   };
 }
 
 export function getTypesDiet() {
-  return function (dispatch) {
-    return fetch(`${URL}/types`)
-      .then((response) => response.json())
-      .then((result) =>
-        dispatch({
-          type: GET_TYPES_DIET,
-          payload: result,
-        })
-      );
+  return async function (dispatch: Dispatch) {
+    const response = await fetch(`${URL}/types`);
+    const result_1 = await response.json();
+    return dispatch({
+      type: GET_TYPES_DIET,
+      payload: result_1
+    });
   };
 }
 
 export function addRecipe(recipe) {
-  return async function (dispatch) {
+  return async function (dispatch: Dispatch) {
     const response = await fetch(`${URL}/recipes`, {
       method: "POST",
       body: JSON.stringify(recipe),
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     });
     const result = await response.json();
     return dispatch({
       type: ADD_RECIPE,
-      payload: result,
+      payload: result
     });
   };
 }
 
-export function orderByName(order, recipes) {
-  let copyRecipe = [...recipes];
+export function orderByName(order: string, recipes) {
+  const copyRecipe = [...recipes];
   let recipesSorted;
   if (order === "1") {
     recipesSorted = copyRecipe.sort((a, b) => {
@@ -108,12 +106,12 @@ export function orderByName(order, recipes) {
 
   return {
     type: ORDER_BY_NAME,
-    payload: recipesSorted,
+    payload: recipesSorted
   };
 }
 
-export function orderByScore(score, recipes) {
-  let copyRecipe = [...recipes];
+export function orderByScore(score: string, recipes) {
+  const copyRecipe = [...recipes];
   let recipesSorted;
   if (score === "1") {
     recipesSorted = copyRecipe.sort((a, b) => {
@@ -131,54 +129,54 @@ export function orderByScore(score, recipes) {
 
   return {
     type: ORDER_BY_SCORE,
-    payload: recipesSorted,
+    payload: recipesSorted
   };
 }
 
-export function orderByDiet(diet, copyRecipes) {
-  let copyRecipe = [...copyRecipes];
-  let recipesSorted = [];
-  copyRecipe.forEach((recipe) => {
+export function orderByDiet(diet: string[], copyRecipes) {
+  const copyRecipe = [...copyRecipes];
+  const recipesSorted: string[] = [];
+  copyRecipe.forEach(recipe => {
     if (typeof recipe.diets[0] === "string") {
       if (recipe.diets.includes(diet)) {
         recipesSorted.push(recipe);
       }
     } else {
-      if (recipe.diets.find((objDiet) => objDiet.name === diet)) {
+      if (recipe.diets.find(objDiet => objDiet.name === diet)) {
         recipesSorted.push(recipe);
       }
     }
   });
   return {
     type: ORDER_BY_DIET,
-    payload: recipesSorted,
+    payload: recipesSorted
   };
 }
 
 export function clearComponentDetail() {
   return {
     type: CLEAR_COMPONENT_DETAIL,
-    payload: {},
+    payload: {}
   };
 }
 
 export function clearUser() {
   return {
     type: CLEAR_COMPONENT_USER,
-    payload: {},
+    payload: {}
   };
 }
 
 export function cleaningFilters(copyRecipes) {
   return {
     type: CLEAR_FILTERS,
-    payload: copyRecipes,
+    payload: copyRecipes
   };
 }
 
 export function cleaningRecipes() {
   return {
     type: CLEAR_RECIPES,
-    payload: [],
+    payload: []
   };
 }

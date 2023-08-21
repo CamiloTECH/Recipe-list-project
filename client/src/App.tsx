@@ -1,11 +1,11 @@
-import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import LandingPage from "./components/LandingPage/LandingPage.jsx";
-import Search from "./components/Search/Search";
-import NavBar from "./components/NavBar/NavBar";
-import Home from "./components/home/Home";
-import CardDetail from "./components/CardDetails/CardDetails";
+import { Navigate, Route, Routes } from "react-router-dom";
+
+import CardDetail from "./components/CardDetails/CardDetails.jsx";
 import CreateRecipe from "./components/CreateRecipe/CreateRecipe.jsx";
+import Home from "./components/home/Home.jsx";
+import LandingPage from "./components/LandingPage/LandingPage.jsx";
+import NavBar from "./components/NavBar/NavBar.jsx";
+import Search from "./components/Search/Search.jsx";
 
 function App() {
   return (

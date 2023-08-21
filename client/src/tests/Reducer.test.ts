@@ -1,18 +1,18 @@
-import rootReducer from "../redux/reducer";
 import {
-  GET_ALL_RECIPES,
-  GET_TYPES_DIET,
-  GET_RECIPE_DETAIL,
-  GET_RECIPES_NAME,
   ADD_RECIPE,
   cleaningFilters,
+  cleaningRecipes,
   clearComponentDetail,
   clearUser,
-  cleaningRecipes,
-  orderByName,
-  orderByScore,
+  GET_ALL_RECIPES,
+  GET_RECIPE_DETAIL,
+  GET_RECIPES_NAME,
+  GET_TYPES_DIET,
   orderByDiet,
+  orderByName,
+  orderByScore
 } from "../redux/actions";
+import rootReducer from "../redux/reducer";
 
 describe("Reducer", () => {
   const diets = ["gluten free", "vegan"];
@@ -22,15 +22,15 @@ describe("Reducer", () => {
       title: "titulo-b",
       score: 12,
       image: "imagen",
-      diets: [1, 2, 3, 4],
+      diets: [1, 2, 3, 4]
     },
     {
       id: 1,
       score: 15,
       title: "titulo-a",
       image: "imagen",
-      diets: [1, 2, 3, 4],
-    },
+      diets: [1, 2, 3, 4]
+    }
   ];
 
   const state = {
@@ -38,7 +38,7 @@ describe("Reducer", () => {
     copyRecipes: [],
     recipesDetail: {},
     types: [],
-    createUser: {},
+    createUser: {}
   };
 
   it("Deberia enviar el estado inicial si no se le pasa un type valido", () => {
@@ -48,7 +48,7 @@ describe("Reducer", () => {
   it("Deberia guardar en nuestra state las recipes obtenida del back cuando el type sea GET_ALL_RECIPES", () => {
     const result = rootReducer(state, {
       type: GET_ALL_RECIPES,
-      payload: data,
+      payload: data
     });
 
     expect(result).not.toEqual(state);
@@ -57,14 +57,14 @@ describe("Reducer", () => {
       copyRecipes: data,
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
   it("Deberia guardar en nuestros state la recipe obtenida del llamado al back cuando el type sea GET_RECIPES_DETAIL", () => {
     const result = rootReducer(state, {
       type: GET_RECIPE_DETAIL,
-      payload: data[0],
+      payload: data[0]
     });
     expect(result).not.toEqual(state);
     expect(result).toEqual({
@@ -72,14 +72,14 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: data[0],
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
   it("Deberia guardar en nuestros state la diets obtenida del llamado al back cuando el type sea GET_TYPES_DIET", () => {
     const result = rootReducer(state, {
       type: GET_TYPES_DIET,
-      payload: diets,
+      payload: diets
     });
     expect(result).not.toEqual(state);
     expect(result).toEqual({
@@ -87,14 +87,14 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: diets,
-      createUser: {},
+      createUser: {}
     });
   });
 
   it("Deberia guardar en nuestra state las recipes obtenida del back cuando el type sea GET_RECIPES_NAME", () => {
     const result = rootReducer(state, {
       type: GET_RECIPES_NAME,
-      payload: data,
+      payload: data
     });
 
     expect(result).not.toEqual(state);
@@ -103,14 +103,14 @@ describe("Reducer", () => {
       copyRecipes: data,
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
   it("Deberia guardar en nuestra state el id obtenido del back cuando el type sea ADD_RECIPE", () => {
     const result = rootReducer(state, {
       type: ADD_RECIPE,
-      payload: { id: 1 },
+      payload: { id: 1 }
     });
 
     expect(result).not.toEqual(state);
@@ -119,7 +119,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: { id: 1 },
+      createUser: { id: 1 }
     });
   });
 
@@ -129,7 +129,7 @@ describe("Reducer", () => {
       copyRecipes: data,
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     };
 
     const result1 = rootReducer(state, cleaningFilters(data));
@@ -140,7 +140,7 @@ describe("Reducer", () => {
       copyRecipes: data,
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
@@ -150,7 +150,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: data[0],
       types: [],
-      createUser: {},
+      createUser: {}
     };
 
     const result1 = rootReducer(state, clearComponentDetail());
@@ -161,7 +161,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
@@ -171,7 +171,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: { id: 1 },
+      createUser: { id: 1 }
     };
 
     const result1 = rootReducer(state, clearUser());
@@ -182,7 +182,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
@@ -192,7 +192,7 @@ describe("Reducer", () => {
       copyRecipes: data,
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     };
 
     const result1 = rootReducer(state, cleaningRecipes());
@@ -203,7 +203,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
@@ -214,15 +214,15 @@ describe("Reducer", () => {
         title: "titulo-a",
         image: "imagen",
         score: 15,
-        diets: [1, 2, 3, 4],
+        diets: [1, 2, 3, 4]
       },
       {
         id: 2,
         title: "titulo-b",
         score: 12,
         image: "imagen",
-        diets: [1, 2, 3, 4],
-      },
+        diets: [1, 2, 3, 4]
+      }
     ];
     const result1 = rootReducer(state, orderByName("1", data));
     const result2 = rootReducer(state, orderByName("2", dataOrder));
@@ -233,7 +233,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
 
     expect(result2).not.toEqual(state);
@@ -242,7 +242,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
@@ -253,15 +253,15 @@ describe("Reducer", () => {
         title: "titulo-a",
         image: "imagen",
         score: 15,
-        diets: [1, 2, 3, 4],
+        diets: [1, 2, 3, 4]
       },
       {
         id: 2,
         title: "titulo-b",
         score: 12,
         image: "imagen",
-        diets: [1, 2, 3, 4],
-      },
+        diets: [1, 2, 3, 4]
+      }
     ];
     const result1 = rootReducer(state, orderByScore("1", data));
     const result2 = rootReducer(state, orderByScore("2", dataOrder));
@@ -272,7 +272,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
 
     expect(result2).not.toEqual(state);
@@ -281,7 +281,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 
@@ -292,15 +292,15 @@ describe("Reducer", () => {
         title: "titulo-a",
         image: "imagen",
         score: 15,
-        diets: ["vegan", "vegetarian"],
+        diets: ["vegan", "vegetarian"]
       },
       {
         id: 2,
         title: "titulo-b",
         score: 12,
         image: "imagen",
-        diets: ["gluten free"],
-      },
+        diets: ["gluten free"]
+      }
     ];
     const result1 = rootReducer(state, orderByDiet("gluten free", data));
 
@@ -310,7 +310,7 @@ describe("Reducer", () => {
       copyRecipes: [],
       recipesDetail: {},
       types: [],
-      createUser: {},
+      createUser: {}
     });
   });
 });
