@@ -6,7 +6,7 @@ import { ORDER_BY_SCORE } from "../actionTypes";
 function orderByScore(score: string, recipes: Recipe[]) {
   return (dispatch: Dispatch) => {
     let recipesSorted;
-    if (score === "1") {
+    if (score === "asc") {
       recipesSorted = recipes.sort((a, b) => {
         if (a.score > b.score) return -1;
         if (b.score > a.score) return 1;

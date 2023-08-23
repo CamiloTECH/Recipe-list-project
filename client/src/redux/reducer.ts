@@ -17,9 +17,9 @@ import {
 const Inicialstate: ReducerState = {
   types: [],
   recipes: [],
-  createUser: {},
   copyRecipes: [],
-  recipesDetail: {}
+  createUser: undefined,
+  recipesDetail: undefined
 };
 
 export default function rootReducer(

@@ -1,4 +1,5 @@
 export interface Recipe {
+  error?: string;
   id: string | number;
   title: string;
   image: string;
@@ -17,6 +18,6 @@ export interface ReducerState {
   types: { id: number; name: string }[];
   recipes: Recipe[];
   copyRecipes: Recipe[];
-  createUser: { id: string } | undefined;
+  createUser: { id: string; error?: string } | undefined;
   recipesDetail: RecipeDetail | undefined;
 }

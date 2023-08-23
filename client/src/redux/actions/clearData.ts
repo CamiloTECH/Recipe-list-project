@@ -12,7 +12,7 @@ export function clearDetail() {
   return (dispatch: Dispatch) => {
     return dispatch({
       type: CLEAR_DETAIL,
-      payload: {}
+      payload: undefined
     });
   };
 }

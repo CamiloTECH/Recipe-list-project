@@ -6,7 +6,7 @@ import { ORDER_BY_NAME } from "../actionTypes";
 function orderByName(order: string, recipes: Recipe[]) {
   return (dispatch: Dispatch) => {
     let recipesSorted;
-    if (order === "1") {
+    if (order === "asc") {
       recipesSorted = recipes.sort((a, b) => {
         if (a.title.toLowerCase() > b.title.toLowerCase()) {
           return 1;

@@ -15,6 +15,7 @@ import {
 import style from "./SearchBar.module.css";
 
 function Search() {
+  const dispatch = useDispatch();
   const { types, recipes, copyRecipes } = useSelector((store: ReducerState) => {
     return {
       types: store.types,
@@ -22,68 +23,50 @@ function Search() {
       copyRecipes: store.copyRecipes
     };
   });
-  const dispatch = useDispatch();
-  const [state, setState] = useState({
-    text: "",
-    alphabeticalSelect: "0",
-    scoreSelect: "0",
-    dietSelect: "0"
+  const [filters, setFilters] = useState({
+    diet: "none",
+    score: "none",
+    searchName: "",
+    alphabetical: "none"
   });
 
+  const handleFilters = (
+    event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => {
+    const { name, value } = event.target;
+    const filtersValue = { ...filters, [name]: value };
+
+    if (name === "diet") {
+      dispatch(orderByDiets(value, copyRecipes));
+    } else if (name === "score") {
+      dispatch(orderByScore(value, recipes));
+      filtersValue.alphabetical = "none";
+    } else if (name === "alphabetical") {
+      dispatch(orderByName(value, recipes));
+      filtersValue.score = "none";
+    }
+    setFilters(filtersValue);
+  };
+
   const handleButtonSearch = () => {
-    if (state.text.trim()) {
+    if (filters.searchName.trim()) {
       dispatch(clearRecipes());
-      dispatch(getRecipesByName(state.text.trim()));
-      setState({
-        ...state,
-        alphabeticalSelect: "0",
-        scoreSelect: "0",
-        dietSelect: "0"
+      dispatch(getRecipesByName(filters.searchName.trim()));
+      setFilters({
+        ...filters,
+        alphabetical: "none",
+        score: "none",
+        diet: "none"
       });
     }
   };
 
-  const alphabeticalOrder = (evento: ChangeEvent<HTMLSelectElement>) => {
-    if (recipes.length > 0 && recipes[0].title) {
-      dispatch(orderByName(evento.target.value, recipes));
-    }
-    setState({
-      ...state,
-      alphabeticalSelect: evento.target.value
-    });
-  };
-
-  const scoreOrder = (evento: ChangeEvent<HTMLSelectElement>) => {
-    if (recipes.length > 0 && recipes[0].title) {
-      dispatch(orderByScore(evento.target.value, recipes));
-    }
-    setState({
-      ...state,
-      scoreSelect: evento.target.value
-    });
-  };
-
-  const dietOrder = (evento: ChangeEvent<HTMLSelectElement>) => {
-    const index = evento.target.selectedIndex;
-    const diet = evento.target.options[index].text;
-
-    if (copyRecipes.length > 0 && copyRecipes[0].title) {
-      dispatch(orderByDiets(diet, copyRecipes));
-    }
-    setState({
-      ...state,
-      dietSelect: evento.target.value,
-      alphabeticalSelect: "0",
-      scoreSelect: "0"
-    });
-  };
-
   const clearAllFilters = () => {
-    setState({
-      ...state,
-      alphabeticalSelect: "0",
-      scoreSelect: "0",
-      dietSelect: "0"
+    setFilters({
+      diet: "none",
+      score: "none",
+      searchName: "",
+      alphabetical: "none"
     });
     if (copyRecipes.length > 0 && copyRecipes[0].title) {
       dispatch(clearFilters(copyRecipes));
@@ -92,21 +75,21 @@ function Search() {
 
   const allRecipes = () => {
     if (recipes.length < 40 && copyRecipes.length >= 40) {
-      setState({
-        ...state,
-        alphabeticalSelect: "0",
-        scoreSelect: "0",
-        dietSelect: "0"
+      setFilters({
+        ...filters,
+        alphabetical: "none",
+        score: "none",
+        diet: "none"
       });
       dispatch(clearFilters(copyRecipes));
     } else if (recipes.length < 40 && copyRecipes.length < 40) {
       dispatch(clearRecipes());
       dispatch(getAllRecipes());
-      setState({
-        text: "",
-        alphabeticalSelect: "0",
-        scoreSelect: "0",
-        dietSelect: "0"
+      setFilters({
+        diet: "none",
+        score: "none",
+        searchName: "",
+        alphabetical: "none"
       });
     }
   };
@@ -123,51 +106,82 @@ function Search() {
         <div className={style.search}>
           <input
             type="text"
-            name="search"
-            value={state.text}
+            name="searchName"
+            onChange={handleFilters}
+            value={filters.searchName}
             placeholder="Search by name"
-            onChange={e => setState({ ...state, text: e.target.value })}
+            disabled={recipes.length === 0 || !!recipes[0].error}
           />
-          <button onClick={handleButtonSearch}>Search</button>
+          <button
+            onClick={handleButtonSearch}
+            disabled={
+              filters.searchName.trim().length === 0 ||
+              recipes.length === 0 ||
+              !!recipes[0].error
+            }
+          >
+            Search
+          </button>
         </div>
 
         <div className={style.option}>
           <select
             name="alphabetical"
-            value={state.alphabeticalSelect}
-            onChange={alphabeticalOrder}
+            value={filters.alphabetical}
+            onChange={handleFilters}
+            disabled={recipes.length === 0 || !!recipes[0].error}
           >
-            <option value="0" disabled>
+            <option value="none" disabled>
               Alphabetical order
             </option>
-            <option value="1">A-Z</option>
-            <option value="2">Z-A</option>
+            <option value="asc">A-Z</option>
+            <option value="des">Z-A</option>
           </select>
 
-          <select name="score" value={state.scoreSelect} onChange={scoreOrder}>
-            <option value="0" disabled>
+          <select
+            name="score"
+            value={filters.score}
+            onChange={handleFilters}
+            disabled={recipes.length === 0 || !!recipes[0].error}
+          >
+            <option value="none" disabled>
               Order by score
             </option>
-            <option value="1">Higher to Lower</option>
-            <option value="2">Lower to Higher</option>
+            <option value="asc">Higher to Lower</option>
+            <option value="des">Lower to Higher</option>
           </select>
 
-          <select name="diet" value={state.dietSelect} onChange={dietOrder}>
-            <option value="0" disabled>
+          <select
+            name="diet"
+            value={filters.diet}
+            onChange={handleFilters}
+            disabled={recipes.length === 0 || !!recipes[0].error}
+          >
+            <option value="none" disabled>
               Order by type diet
             </option>
             {types.length > 0 &&
               types.map(type => (
-                <option value={type.id} key={type.id}>
+                <option value={type.name} key={type.id}>
                   {type.name}
                 </option>
               ))}
           </select>
 
-          <button onClick={clearAllFilters}>Clean Filters</button>
+          <button
+            onClick={clearAllFilters}
+            disabled={recipes.length === 0 || !!recipes[0].error}
+          >
+            Clean Filters
+          </button>
         </div>
         <div className={style.All}>
-          <button onClick={allRecipes}>All Recipes</button>
+          <button
+            onClick={allRecipes}
+            disabled={recipes.length === 0 || !!recipes[0].error}
+          >
+            All Recipes
+          </button>
         </div>
       </header>
     </div>
