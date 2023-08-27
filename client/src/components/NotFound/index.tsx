@@ -7,7 +7,7 @@ function NotFound() {
     <div className="not-found-container">
       <h1 className="text-dark">404 - Not Found</h1>
       <NavLink to={"/home"}>
-        <h1 className="fs-1">Redirect</h1>
+        <h1 className="fs-1">Redirect Home</h1>
       </NavLink>
     </div>
   );

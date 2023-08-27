@@ -5,9 +5,10 @@ import { ORDER_BY_NAME } from "../actionTypes";
 
 function orderByName(order: string, recipes: Recipe[]) {
   return (dispatch: Dispatch) => {
-    let recipesSorted;
+    const copyRecipes = [...recipes];
+    let recipesSorted = [];
     if (order === "asc") {
-      recipesSorted = recipes.sort((a, b) => {
+      recipesSorted = copyRecipes.sort((a, b) => {
         if (a.title.toLowerCase() > b.title.toLowerCase()) {
           return 1;
         }
@@ -17,7 +18,7 @@ function orderByName(order: string, recipes: Recipe[]) {
         return 0;
       });
     } else {
-      recipesSorted = recipes.sort((a, b) => {
+      recipesSorted = copyRecipes.sort((a, b) => {
         if (a.title.toLowerCase() > b.title.toLowerCase()) {
           return -1;
         }
@@ -30,7 +31,7 @@ function orderByName(order: string, recipes: Recipe[]) {
 
     return dispatch({
       type: ORDER_BY_NAME,
-      payload: [...recipesSorted]
+      payload: recipesSorted
     });
   };
 }

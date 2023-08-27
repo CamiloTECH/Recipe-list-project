@@ -5,15 +5,16 @@ import { ORDER_BY_SCORE } from "../actionTypes";
 
 function orderByScore(score: string, recipes: Recipe[]) {
   return (dispatch: Dispatch) => {
+    const copyRecipes = [...recipes];
     let recipesSorted;
     if (score === "asc") {
-      recipesSorted = recipes.sort((a, b) => {
+      recipesSorted = copyRecipes.sort((a, b) => {
         if (a.score > b.score) return -1;
         if (b.score > a.score) return 1;
         return 0;
       });
     } else {
-      recipesSorted = recipes.sort((a, b) => {
+      recipesSorted = copyRecipes.sort((a, b) => {
         if (a.score > b.score) return 1;
         if (b.score > a.score) return -1;
         return 0;
@@ -22,7 +23,7 @@ function orderByScore(score: string, recipes: Recipe[]) {
 
     return dispatch({
       type: ORDER_BY_SCORE,
-      payload: [...recipesSorted]
+      payload: recipesSorted
     });
   };
 }

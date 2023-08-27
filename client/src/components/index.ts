@@ -4,6 +4,7 @@ export { default as Cards } from "./Cards";
 export { default as CreateRecipe } from "./CreateRecipe";
 export { default as Home } from "./Home";
 export { default as LandingPage } from "./LandingPage";
+export { default as Loading } from "./Loading";
 export { default as NavBar } from "./NavBar";
 export { default as NotFound } from "./NotFound";
 export { default as Pagination } from "./Pagination";

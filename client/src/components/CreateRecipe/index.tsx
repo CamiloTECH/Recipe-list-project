@@ -9,17 +9,25 @@ import {
   createRecipe,
   getDiets
 } from "../../redux/actions";
-import style from "./Createrecipe.module.css";
+import Loading from "../Loading";
+import style from "./CreateRecipe.module.css";
+import { validateRecipe, validateSubmit } from "./validateRecipe";
+
+export interface RecipeForm {
+  title: string;
+  score: number;
+  healthScore: number;
+  image: string;
+  summary: string;
+  steps: string;
+  diets: string[];
+}
 
 function CreateRecipe() {
   const navigate = useNavigate();
-  const { diets, user } = useSelector((store: ReducerState) => {
-    return {
-      diets: store.types,
-      user: store.createUser
-    };
-  });
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const diets = useSelector((store: ReducerState) => store.types);
   const [activeSubmit, setActiveSubmit] = useState(true);
   const [error, setError] = useState({
     title: false,
@@ -30,10 +38,10 @@ function CreateRecipe() {
     steps: false,
     diets: false
   });
-  const [state, setState] = useState({
+  const [recipe, setRecipe] = useState<RecipeForm>({
     title: "",
-    score: 0,
-    healthScore: 0,
+    score: 1,
+    healthScore: 1,
     image: "",
     summary: "",
     steps: "",
@@ -41,142 +49,51 @@ function CreateRecipe() {
   });
 
   useEffect(() => {
-    if (diets.length === 0) dispatch(getDiets());
-
-    const llaves = Object.keys(state);
-    for (const key of llaves) {
-      if (state[key] && !error[key]) {
-        setActiveSubmit(false);
-      } else {
-        setActiveSubmit(true);
-        break;
-      }
+    if (diets.length === 0) {
+      dispatch(getDiets());
     }
-  }, [state, error]);
 
-  useEffect(() => {
-    if (user && user.id) {
-      navigate(`/home/details/${user.id}`, { replace: true });
-    }
-  }, [user]);
-
-  useEffect(() => {
     return () => {
       dispatch(clearUser());
     };
   }, []);
 
-  const validation = (
+  const handleValidation = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { value, name } = e.target;
-    switch (name) {
-      case "title":
-      case "summary":
-      case "steps":
-        setState({
-          ...state,
-          [name]: value.trim()
-        });
-        if (value.trim().length > 0) {
-          setError({
-            ...error,
-            [name]: false
-          });
-        } else {
-          setError({
-            ...error,
-            [name]: true
-          });
-        }
-        break;
-      case "score":
-      case "healthScore":
-        setState({
-          ...state,
-          [name]: parseInt(value)
-        });
-        if (
-          parseInt(value) >= 1 &&
-          parseInt(value) <= 100 &&
-          !value.includes(".")
-        ) {
-          setError({
-            ...error,
-            [name]: false
-          });
-        } else {
-          setError({
-            ...error,
-            [name]: true
-          });
-        }
-        break;
-      case "image": {
-        const regex = /^https?:\/\/[\w]+(\.[\w]+)+[/#?]?.*$/;
-        setState({
-          ...state,
-          [name]: value
-        });
-        if (regex.test(value)) {
-          setError({
-            ...error,
-            [name]: false
-          });
-        } else {
-          setError({
-            ...error,
-            [name]: true
-          });
-        }
-        break;
-      }
-      case "diets": {
-        const id = parseInt(e.target.id);
-
-        if (state[name].includes(id)) {
-          const newDiets = state[name].filter(diet => diet !== id);
-
-          if (newDiets.length > 0) {
-            setState({
-              ...state,
-              [name]: newDiets
-            });
-            setError({
-              ...error,
-              [name]: false
-            });
-          } else {
-            setState({
-              ...state,
-              [name]: []
-            });
-            setError({
-              ...error,
-              [name]: true
-            });
-          }
-        } else {
-          setState({
-            ...state,
-            [name]: [...state[name], id]
-          });
-          setError({
-            ...error,
-            [name]: false
-          });
-        }
-        break;
-      }
-      default:
-        break;
+    let newValue;
+    if (name === "diets") {
+      newValue = recipe.diets.includes(value)
+        ? recipe.diets.filter(diet => diet !== value)
+        : [...recipe.diets, value];
     }
+    const finalValue = newValue || value;
+    const resultValidate = validateRecipe(finalValue, name);
+
+    const newRecipe = { ...recipe, [name]: finalValue };
+    const newErrors = { ...error, [name]: resultValidate };
+    setRecipe(newRecipe);
+    setError(newErrors);
+
+    const submit = validateSubmit(newErrors, newRecipe);
+    setActiveSubmit(submit);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(createRecipe(state));
-    dispatch(clearRecipes());
+    const validate = validateSubmit(error, recipe);
+    if (!validate) {
+      setLoading(true);
+      dispatch(clearRecipes());
+      dispatch(createRecipe(recipe))
+        .then(({ payload }) => {
+          if (payload.id) {
+            navigate(`/home/details/${payload.id}`, { replace: true });
+          }
+        })
+        .finally(() => setLoading(false));
+    }
   };
 
   return (
@@ -192,12 +109,15 @@ function CreateRecipe() {
           ) : null}
         </div>
         <input
+          required
+          id="title"
           type="text"
           name="title"
-          id="title"
+          disabled={loading}
+          value={recipe.title}
           placeholder="Enter the name"
           autoFocus
-          onChange={validation}
+          onChange={handleValidation}
           style={
             error.title
               ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
@@ -216,12 +136,16 @@ function CreateRecipe() {
           ) : null}
         </div>
         <input
-          type="number"
-          defaultValue={0}
-          name="score"
+          required
+          min={1}
+          max={100}
           id="score"
+          name="score"
+          type="number"
+          disabled={loading}
+          value={recipe.score}
+          onChange={handleValidation}
           placeholder="Enter the score"
-          onChange={validation}
           style={
             error.score
               ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
@@ -240,17 +164,21 @@ function CreateRecipe() {
           ) : null}
         </div>
         <input
+          min={1}
+          max={100}
+          required
           type="number"
-          defaultValue={0}
-          name="healthScore"
           id="healthScore"
+          name="healthScore"
+          disabled={loading}
+          value={recipe.healthScore}
           placeholder="Enter the health score"
           style={
             error.healthScore
               ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
               : {}
           }
-          onChange={validation}
+          onChange={handleValidation}
         />
 
         <div className={style.message}>
@@ -262,11 +190,14 @@ function CreateRecipe() {
           ) : null}
         </div>
         <input
+          required
           type="url"
-          name="image"
           id="image"
+          name="image"
+          disabled={loading}
+          value={recipe.image}
           placeholder="Enter the image by url"
-          onChange={validation}
+          onChange={handleValidation}
           style={
             error.image
               ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
@@ -276,7 +207,7 @@ function CreateRecipe() {
       </div>
 
       <div className={style.image}>
-        <img src={state.image} alt="Imagen not found" />
+        <img src={recipe.image} alt="Imagen not found" />
       </div>
 
       <div className={style.large}>
@@ -291,10 +222,13 @@ function CreateRecipe() {
           ) : null}
         </div>
         <textarea
-          name="summary"
-          placeholder="Enter the summary"
           rows={5}
-          onChange={validation}
+          required
+          name="summary"
+          disabled={loading}
+          value={recipe.summary}
+          onChange={handleValidation}
+          placeholder="Enter the summary"
           style={
             error.summary
               ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
@@ -313,10 +247,13 @@ function CreateRecipe() {
           ) : null}
         </div>
         <textarea
-          name="steps"
-          placeholder="Enter the steps"
           rows={5}
-          onChange={validation}
+          required
+          name="steps"
+          disabled={loading}
+          value={recipe.steps}
+          onChange={handleValidation}
+          placeholder="Enter the steps"
           style={
             error.steps
               ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
@@ -336,32 +273,43 @@ function CreateRecipe() {
             </label>
           ) : null}
         </div>
-        {diets.length > 0 &&
+        {diets.length > 0 ? (
           diets.map(diet => (
             <div className={style.diet} key={diet.id}>
               <input
+                name="diets"
                 type="checkbox"
                 value={diet.id}
-                name="diets"
-                id={`${diet.id}`}
-                onChange={validation}
+                disabled={loading}
+                checked={recipe.diets.includes(`${diet.id}`)}
+                onChange={handleValidation}
               />
               <label htmlFor="diets">{diet.name}</label>
             </div>
-          ))}
+          ))
+        ) : (
+          <div>
+            <p>No hay dietas para seleccionar</p>
+          </div>
+        )}
       </div>
-
-      <div className={style.buttons}>
-        <input
-          type="submit"
-          value="Create"
-          className={activeSubmit ? style.error : style.submit}
-          disabled={activeSubmit}
-        />
-        <Link to="/home" className={style.link}>
-          Home
-        </Link>
-      </div>
+      {loading ? (
+        <div className={style.contentLoad}>
+          <Loading />
+        </div>
+      ) : (
+        <div className={style.buttons}>
+          <input
+            type="submit"
+            value="Create"
+            className={activeSubmit ? style.error : style.submit}
+            disabled={activeSubmit}
+          />
+          <Link to="/home" className={style.link}>
+            Home
+          </Link>
+        </div>
+      )}
     </form>
   );
 }

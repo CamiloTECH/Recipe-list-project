@@ -68,7 +68,9 @@
   border-radius: 5px 5px 0px 0px;
   font-size: 1.5rem;
   margin-left: 2%;
-  transition: border-bottom 0.3s, background-color 0.3s;
+  transition:
+    border-bottom 0.3s,
+    background-color 0.3s;
 }
 
 .data input::placeholder {
@@ -80,7 +82,9 @@
 .data input:focus {
   border-bottom: 3px solid var(--color1);
   background-color: #1b4f7238;
-  transition: border-bottom 0.3s, background-color 0.3s;
+  transition:
+    border-bottom 0.3s,
+    background-color 0.3s;
 }
 
 .image {
@@ -117,7 +121,9 @@
 .large textarea:focus {
   border-bottom: 3px solid var(--color1);
   background-color: #1b4f7238;
-  transition: border-bottom 0.3s, background-color 0.3s;
+  transition:
+    border-bottom 0.3s,
+    background-color 0.3s;
 }
 
 .diets {
@@ -186,6 +192,10 @@
 
 .link {
   width: 40%;
+}
+
+.contentLoad {
+  align-self: center;
 }
 
 .error {

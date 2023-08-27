@@ -8,13 +8,14 @@ import {
   getDetailRecipeAPI,
   getDetailRecipeDB
 } from "../../redux/actions";
+import Loading from "../Loading";
 import style from "./CardDetails.module.css";
 
 function CardDetail() {
-  const [load, setLoad] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
   const recipesDetail = useSelector(
     (state: ReducerState) => state.recipesDetail
   );
@@ -22,31 +23,30 @@ function CardDetail() {
   useEffect(() => {
     window.scroll(0, 0);
     if (id) {
-      const validacion = /^[0-9]+$/;
-      id.match(validacion)
-        ? dispatch(getDetailRecipeAPI(id))
-        : dispatch(getDetailRecipeDB(id));
+      setLoading(true);
+      id.match(/^[0-9]+$/)
+        ? dispatch(getDetailRecipeAPI(id)).finally(() => setLoading(false))
+        : dispatch(getDetailRecipeDB(id)).finally(() => setLoading(false));
     } else {
       navigate("/");
     }
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoad(true), 8000);
-
     return () => {
-      clearTimeout(timer);
       dispatch(clearDetail());
     };
   }, []);
 
   return (
-    <div>
-      {recipesDetail ? (
+    <div className={loading ? style.contentLoad : undefined}>
+      {loading ? (
+        <Loading />
+      ) : recipesDetail ? (
         <div className={style.card}>
           {recipesDetail.error ? (
             <h1>Recipe with ID {id} not found </h1>
-          ) : recipesDetail.title ? (
+          ) : (
             <>
               <h1>
                 {recipesDetail.title[0].toUpperCase() +
@@ -91,14 +91,10 @@ function CardDetail() {
                 <p dangerouslySetInnerHTML={{ __html: recipesDetail.steps }} />
               </div>
             </>
-          ) : load ? (
-            <h1>No se ha encontrado la receta con ID {id}</h1>
-          ) : (
-            <div className={style.load}></div>
           )}
         </div>
       ) : (
-        <div className={style.load}></div>
+        <h1>Recipe with ID {id} not found </h1>
       )}
     </div>
   );

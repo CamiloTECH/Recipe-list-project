@@ -6,6 +6,7 @@ import linkedin from "../../img/linkedin.png";
 import { ReducerState } from "../../models";
 import { getAllRecipes } from "../../redux/actions";
 import Cards from "../Cards";
+import Loading from "../Loading";
 import style from "./Home.module.css";
 
 function Home() {
@@ -14,7 +15,9 @@ function Home() {
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    if (recipes.length === 0) dispatch(getAllRecipes());
+    if (recipes.length === 0) {
+      dispatch(getAllRecipes());
+    }
   }, []);
 
   useEffect(() => {
@@ -44,8 +47,7 @@ function Home() {
         </div>
       ) : (
         <div className={style.home}>
-          {" "}
-          <div className={style.load}></div>{" "}
+          <Loading />
         </div>
       )}
       <footer>

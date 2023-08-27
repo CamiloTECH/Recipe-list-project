@@ -15,7 +15,7 @@ function NavBar() {
           <NavLink to="/home" className={style.enlaces}>
             Home
           </NavLink>
-          <NavLink to="/home/add" className={style.enlaces}>
+          <NavLink to="/home/create" className={style.enlaces}>
             Create a new recipe
           </NavLink>
         </div>

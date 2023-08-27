@@ -26,7 +26,7 @@ function App() {
       />
 
       <Route
-        path="/home/add"
+        path="/home/create"
         element={[
           <NavBar key={"navBar"} />,
           <CreateRecipe key={"createRecipe"} />

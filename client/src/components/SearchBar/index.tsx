@@ -16,13 +16,9 @@ import style from "./SearchBar.module.css";
 
 function Search() {
   const dispatch = useDispatch();
-  const { types, recipes, copyRecipes } = useSelector((store: ReducerState) => {
-    return {
-      types: store.types,
-      recipes: store.recipes,
-      copyRecipes: store.copyRecipes
-    };
-  });
+  const types = useSelector((store: ReducerState) => store.types);
+  const recipes = useSelector((store: ReducerState) => store.recipes);
+  const copyRecipes = useSelector((store: ReducerState) => store.copyRecipes);
   const [filters, setFilters] = useState({
     diet: "none",
     score: "none",
@@ -49,9 +45,10 @@ function Search() {
   };
 
   const handleButtonSearch = () => {
-    if (filters.searchName.trim()) {
+    const searchName = filters.searchName.trim();
+    if (searchName) {
       dispatch(clearRecipes());
-      dispatch(getRecipesByName(filters.searchName.trim()));
+      dispatch(getRecipesByName(searchName));
       setFilters({
         ...filters,
         alphabetical: "none",
@@ -62,15 +59,13 @@ function Search() {
   };
 
   const clearAllFilters = () => {
+    dispatch(clearFilters(copyRecipes));
     setFilters({
       diet: "none",
       score: "none",
       searchName: "",
       alphabetical: "none"
     });
-    if (copyRecipes.length > 0 && copyRecipes[0].title) {
-      dispatch(clearFilters(copyRecipes));
-    }
   };
 
   const allRecipes = () => {
@@ -168,20 +163,10 @@ function Search() {
               ))}
           </select>
 
-          <button
-            onClick={clearAllFilters}
-            disabled={recipes.length === 0 || !!recipes[0].error}
-          >
-            Clean Filters
-          </button>
+          <button onClick={clearAllFilters}>Clean Filters</button>
         </div>
         <div className={style.All}>
-          <button
-            onClick={allRecipes}
-            disabled={recipes.length === 0 || !!recipes[0].error}
-          >
-            All Recipes
-          </button>
+          <button onClick={allRecipes}>All Recipes</button>
         </div>
       </header>
     </div>

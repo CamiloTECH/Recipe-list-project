@@ -1,194 +1,174 @@
-.load{
-  background-color: transparent;
-  border-radius: 50%;
-  border: 8px solid #1b4f72a1;
-  border-top-color: transparent ;
-  width: 35px;
-  height: 35px;
-  margin-top: 5%;
-  position: absolute;
-  right: 47%;
-  top: 13%;
-  animation: cargando 1s linear infinite;
-}
-
-@keyframes cargando {
-  0%{
-      transform: rotate(0deg);
-  }
-  100%{
-      transform: rotate(360deg);
-  }
-  
-}
-
-.card{
+.card {
   margin: 4% auto;
   border-radius: 40px;
   padding: 3%;
   background-color: #1b4f72b4;
-  font-family:'Trebuchet MS';
+  font-family: "Trebuchet MS";
   font-size: 1.5rem;
   text-align: justify;
   width: 70%;
   box-shadow: 0px 0px 30px 15px #2776ac;
 }
-hr{
-  border: 1px solid #B03A2E;
+.contentLoad {
+  padding-top: 10%;
 }
 
-h1{
+hr {
+  border: 1px solid #b03a2e;
+}
+
+h1 {
   text-align: center;
   margin: 0;
   margin-bottom: 3%;
-  color: #82E0AA;
+  color: #82e0aa;
 }
 
-.firtsPart{
+.firtsPart {
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
   width: 100%;
 }
 
-.firtsPart img{
-  width:50%;
+.firtsPart img {
+  width: 50%;
   border-radius: 20px;
 }
 
-.scores{
-  font-size:1.7rem;
-  width:45%;
+.scores {
+  font-size: 1.7rem;
+  width: 45%;
   margin: 0%;
   padding: 0;
 }
 
-.scores p{
+.scores p {
   margin: 2% 0% 2% 0%;
   color: #25a8ff;
   font-weight: bold;
 }
 
-.scores p b{
-  color:white;
+.scores p b {
+  color: white;
 }
 
-.scores ul{
-  list-style:square;
+.scores ul {
+  list-style: square;
   margin: 0%;
   font-size: 1.3rem;
   color: #25a8ff;
 }
 
-.secondPart{
+.secondPart {
   margin-top: 4%;
 }
 
-.secondPart h2{
+.secondPart h2 {
   color: white;
   font-size: 1.8rem;
 }
 
-.secondPart p{
+.secondPart p {
   margin-left: 2%;
 }
 
-.secondPart p b{
-  color: #82E0AA;
+.secondPart p b {
+  color: #82e0aa;
 }
-.secondPart p a{
+.secondPart p a {
   color: #25a8ff;
   font-weight: bold;
 }
 
-.secondPart ol li{
+.secondPart ol li {
   margin-bottom: 1.5%;
 }
 
-@media (max-width:850px) {
-  .card{
+@media (max-width: 850px) {
+  .card {
     font-size: 1.2rem;
   }
-  h1{
+  h1 {
     font-size: 1.8rem;
   }
-  
-  .scores{
-    font-size:1.2rem;
-  }
-  
-  .scores ul{
-    font-size: 1rem;
-  }
-  
-  .secondPart h2{
+
+  .scores {
     font-size: 1.2rem;
   }
-  .secondPart p{
+
+  .scores ul {
+    font-size: 1rem;
+  }
+
+  .secondPart h2 {
+    font-size: 1.2rem;
+  }
+  .secondPart p {
     font-size: 1rem;
   }
 }
-@media (max-width:600px) {
-  .card{
+@media (max-width: 600px) {
+  .card {
     width: 80%;
   }
-  h1{
+  h1 {
     font-size: 1.4rem;
   }
-  
-.firtsPart{
-  flex-direction: column;
-  align-items: center;
-}
-.firtsPart img{
-  width: 80%;
-  margin: 3% 0%;
-}
-  .scores{
-    font-size:1.1rem;
+
+  .firtsPart {
+    flex-direction: column;
+    align-items: center;
+  }
+  .firtsPart img {
+    width: 80%;
+    margin: 3% 0%;
+  }
+  .scores {
+    font-size: 1.1rem;
     text-align: center;
   }
-  .scores p{
-    margin-bottom:3% ;
+  .scores p {
+    margin-bottom: 3%;
     text-align: left;
   }
-  
-  .scores ul{
+
+  .scores ul {
     text-align: left;
   }
-  
-  .secondPart h2{
+
+  .secondPart h2 {
     font-size: 1.1rem;
   }
-  .secondPart p{
-    font-size: .8rem;
+  .secondPart p {
+    font-size: 0.8rem;
   }
-  ol{
+  ol {
     padding: 3%;
   }
 }
 
-@media (max-width:460px) {
-.card{
-  width: 90%;
-  box-shadow: none
-}
-.firtsPart img{
-  width: 70%; 
-}
+@media (max-width: 460px) {
+  .card {
+    width: 90%;
+    box-shadow: none;
+  }
+  .firtsPart img {
+    width: 70%;
+  }
 
-.scores{
-  font-size:.8rem;
-}
+  .scores {
+    font-size: 0.8rem;
+  }
 
-.scores ul{
-  font-size: .8rem;
-  padding: 0% 0% 0% 20%;
-}
-.secondPart h2{
-  font-size: .9rem;
-}
-.secondPart p{
-  font-size: .7rem;
-}
+  .scores ul {
+    font-size: 0.8rem;
+    padding: 0% 0% 0% 20%;
+  }
+  .secondPart h2 {
+    font-size: 0.9rem;
+  }
+  .secondPart p {
+    font-size: 0.7rem;
+  }
 }
