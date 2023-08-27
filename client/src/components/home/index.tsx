@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import github from "../../img/github.png";
@@ -11,43 +11,33 @@ import style from "./Home.module.css";
 
 function Home() {
   const recipes = useSelector((store: ReducerState) => store.recipes);
+  const loading = useSelector((store: ReducerState) => store.loading);
   const dispatch = useDispatch();
-  const [load, setLoad] = useState(false);
 
   useEffect(() => {
+    window.scroll(0, 0);
     if (recipes.length === 0) {
       dispatch(getAllRecipes());
     }
   }, []);
 
-  useEffect(() => {
-    setLoad(false);
-    window.scroll(0, 0);
-    const timer = setTimeout(() => setLoad(true), 10000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [recipes]);
   return (
-    <>
-      {recipes.length > 0 ? (
+    <div>
+      {loading ? (
+        <div className={style.home}>
+          <Loading />
+        </div>
+      ) : recipes.length > 0 ? (
         recipes[0].error ? (
           <div className={style.home}>
-            {" "}
-            <h2>{recipes[0].error}</h2>{" "}
+            <h2>{recipes[0].error}</h2>
           </div>
         ) : (
           <Cards recipes={recipes} />
         )
-      ) : load ? (
-        <div className={style.home}>
-          {" "}
-          <h2>No recipes found</h2>{" "}
-        </div>
       ) : (
         <div className={style.home}>
-          <Loading />
+          <h2>No recipes found</h2>
         </div>
       )}
       <footer>
@@ -69,7 +59,7 @@ function Home() {
           </a>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 

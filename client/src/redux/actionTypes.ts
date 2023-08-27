@@ -9,4 +9,4 @@ export const GET_ALL_RECIPES = "getAllrecipes",
   CLEAR_FILTERS = "clearFilters",
   CLEAR_DETAIL = "clearComponentDetail",
   CLEAR_COMPONENT_USER = "clearComponentUser",
-  CLEAR_RECIPES = "clearRecipes";
+  LOADING = "loading";

@@ -5,7 +5,7 @@ import {
   CLEAR_COMPONENT_USER,
   CLEAR_DETAIL,
   CLEAR_FILTERS,
-  CLEAR_RECIPES
+  LOADING
 } from "../actionTypes";
 
 export function clearDetail() {
@@ -35,11 +35,11 @@ export function clearFilters(copyRecipes: Recipe[]) {
   };
 }
 
-export function clearRecipes() {
+export function loading(load: boolean) {
   return (dispatch: Dispatch) => {
     return dispatch({
-      type: CLEAR_RECIPES,
-      payload: []
+      type: LOADING,
+      payload: load
     });
   };
 }

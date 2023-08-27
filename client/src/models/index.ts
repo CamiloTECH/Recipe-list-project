@@ -15,9 +15,10 @@ export interface RecipeDetail extends Recipe {
 }
 
 export interface ReducerState {
-  types: { id: number; name: string }[];
+  loading: boolean;
   recipes: Recipe[];
   copyRecipes: Recipe[];
+  types: { id: number; name: string }[];
   createUser: { id: string; error?: string } | undefined;
   recipesDetail: RecipeDetail | undefined;
 }

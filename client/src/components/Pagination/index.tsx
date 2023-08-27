@@ -1,4 +1,4 @@
-import { FC,  useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import { Recipe } from "../../models";
 import style from "./Pagination.module.css";

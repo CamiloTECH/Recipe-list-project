@@ -4,9 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { ReducerState } from "../../models";
 import {
-  clearRecipes,
   clearUser,
   createRecipe,
+  getAllRecipes,
   getDiets
 } from "../../redux/actions";
 import Loading from "../Loading";
@@ -85,10 +85,10 @@ function CreateRecipe() {
     const validate = validateSubmit(error, recipe);
     if (!validate) {
       setLoading(true);
-      dispatch(clearRecipes());
       dispatch(createRecipe(recipe))
         .then(({ payload }) => {
           if (payload.id) {
+            dispatch(getAllRecipes());
             navigate(`/home/details/${payload.id}`, { replace: true });
           }
         })

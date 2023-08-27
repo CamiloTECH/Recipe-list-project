@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { ReducerState } from "../../models";
 import {
   clearFilters,
-  clearRecipes,
   getAllRecipes,
   getDiets,
   getRecipesByName,
@@ -18,6 +17,7 @@ function Search() {
   const dispatch = useDispatch();
   const types = useSelector((store: ReducerState) => store.types);
   const recipes = useSelector((store: ReducerState) => store.recipes);
+  const loading = useSelector((store: ReducerState) => store.loading);
   const copyRecipes = useSelector((store: ReducerState) => store.copyRecipes);
   const [filters, setFilters] = useState({
     diet: "none",
@@ -34,6 +34,8 @@ function Search() {
 
     if (name === "diet") {
       dispatch(orderByDiets(value, copyRecipes));
+      filtersValue.score = "none";
+      filtersValue.alphabetical = "none";
     } else if (name === "score") {
       dispatch(orderByScore(value, recipes));
       filtersValue.alphabetical = "none";
@@ -44,22 +46,26 @@ function Search() {
     setFilters(filtersValue);
   };
 
-  const handleButtonSearch = () => {
-    const searchName = filters.searchName.trim();
-    if (searchName) {
-      dispatch(clearRecipes());
-      dispatch(getRecipesByName(searchName));
-      setFilters({
-        ...filters,
-        alphabetical: "none",
-        score: "none",
-        diet: "none"
-      });
-    }
-  };
-
   const clearAllFilters = () => {
     dispatch(clearFilters(copyRecipes));
+    const newFilters = {
+      diet: "none",
+      score: "none",
+      searchName: "",
+      alphabetical: "none"
+    };
+    if (recipes.length < 40 && copyRecipes.length < 40) {
+      newFilters.searchName = filters.searchName;
+    }
+    setFilters(newFilters);
+  };
+
+  const allRecipes = () => {
+    if (recipes.length < 40 && copyRecipes.length >= 40) {
+      dispatch(clearFilters(copyRecipes));
+    } else if (recipes.length < 40 && copyRecipes.length < 40) {
+      dispatch(getAllRecipes());
+    }
     setFilters({
       diet: "none",
       score: "none",
@@ -68,23 +74,15 @@ function Search() {
     });
   };
 
-  const allRecipes = () => {
-    if (recipes.length < 40 && copyRecipes.length >= 40) {
+  const handleSearch = () => {
+    const searchName = filters.searchName.trim();
+    if (searchName) {
+      dispatch(getRecipesByName(searchName));
       setFilters({
         ...filters,
         alphabetical: "none",
         score: "none",
         diet: "none"
-      });
-      dispatch(clearFilters(copyRecipes));
-    } else if (recipes.length < 40 && copyRecipes.length < 40) {
-      dispatch(clearRecipes());
-      dispatch(getAllRecipes());
-      setFilters({
-        diet: "none",
-        score: "none",
-        searchName: "",
-        alphabetical: "none"
       });
     }
   };
@@ -105,15 +103,11 @@ function Search() {
             onChange={handleFilters}
             value={filters.searchName}
             placeholder="Search by name"
-            disabled={recipes.length === 0 || !!recipes[0].error}
+            disabled={loading}
           />
           <button
-            onClick={handleButtonSearch}
-            disabled={
-              filters.searchName.trim().length === 0 ||
-              recipes.length === 0 ||
-              !!recipes[0].error
-            }
+            onClick={handleSearch}
+            disabled={filters.searchName.trim().length === 0 || loading}
           >
             Search
           </button>
@@ -124,7 +118,7 @@ function Search() {
             name="alphabetical"
             value={filters.alphabetical}
             onChange={handleFilters}
-            disabled={recipes.length === 0 || !!recipes[0].error}
+            disabled={recipes.length === 0 || !!recipes[0].error || loading}
           >
             <option value="none" disabled>
               Alphabetical order
@@ -137,7 +131,7 @@ function Search() {
             name="score"
             value={filters.score}
             onChange={handleFilters}
-            disabled={recipes.length === 0 || !!recipes[0].error}
+            disabled={recipes.length === 0 || !!recipes[0].error || loading}
           >
             <option value="none" disabled>
               Order by score
@@ -150,7 +144,7 @@ function Search() {
             name="diet"
             value={filters.diet}
             onChange={handleFilters}
-            disabled={recipes.length === 0 || !!recipes[0].error}
+            disabled={recipes.length === 0 || !!recipes[0].error || loading}
           >
             <option value="none" disabled>
               Order by type diet
@@ -163,10 +157,14 @@ function Search() {
               ))}
           </select>
 
-          <button onClick={clearAllFilters}>Clean Filters</button>
+          <button onClick={clearAllFilters} disabled={loading}>
+            Clean Filters
+          </button>
         </div>
         <div className={style.All}>
-          <button onClick={allRecipes}>All Recipes</button>
+          <button onClick={allRecipes} disabled={loading}>
+            All Recipes
+          </button>
         </div>
       </header>
     </div>

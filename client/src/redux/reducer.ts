@@ -4,11 +4,11 @@ import {
   CLEAR_COMPONENT_USER,
   CLEAR_DETAIL,
   CLEAR_FILTERS,
-  CLEAR_RECIPES,
   GET_ALL_RECIPES,
   GET_RECIPE_DETAIL,
   GET_RECIPES_NAME,
   GET_TYPES_DIET,
+  LOADING,
   ORDER_BY_DIET,
   ORDER_BY_NAME,
   ORDER_BY_SCORE
@@ -17,6 +17,7 @@ import {
 const Inicialstate: ReducerState = {
   types: [],
   recipes: [],
+  loading: false,
   copyRecipes: [],
   createUser: undefined,
   recipesDetail: undefined
@@ -48,12 +49,6 @@ export default function rootReducer(
       return {
         ...state,
         createUser: action.payload
-      };
-    case CLEAR_RECIPES:
-      return {
-        ...state,
-        recipes: action.payload,
-        copyRecipes: action.payload
       };
     case CLEAR_FILTERS:
       return {
@@ -90,6 +85,11 @@ export default function rootReducer(
       return {
         ...state,
         createUser: action.payload
+      };
+    case LOADING:
+      return {
+        ...state,
+        loading: action.payload
       };
     default:
       return state;
