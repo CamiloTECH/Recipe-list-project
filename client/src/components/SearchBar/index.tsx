@@ -95,30 +95,43 @@ function Search() {
 
   return (
     <div>
-      <header className={style.header}>
-        <div className={style.search}>
-          <input
-            type="text"
-            name="searchName"
-            onChange={handleFilters}
-            value={filters.searchName}
-            placeholder="Search by name"
-            disabled={loading}
-          />
-          <button
-            onClick={handleSearch}
-            disabled={filters.searchName.trim().length === 0 || loading}
-          >
-            Search
-          </button>
+      <div className={style.header}>
+        <div className={style.contentSection}>
+          <label className={style.titleSection} htmlFor="text">
+            Advanced search
+          </label>
+          <div className={style.search}>
+            <input
+              id="text"
+              type="text"
+              name="searchName"
+              onChange={handleFilters}
+              value={filters.searchName}
+              placeholder="Search by name"
+              disabled={loading}
+              className={style.inputSearch}
+            />
+            <button
+              onClick={handleSearch}
+              disabled={filters.searchName.trim().length === 0 || loading}
+              className={style.buttonSearch}
+            >
+              Search
+            </button>
+          </div>
         </div>
 
-        <div className={style.option}>
+        <div className={style.contentSection}>
+          <label className={style.titleSection} htmlFor="alphabetical">
+            Alphabetical order
+          </label>
           <select
+            id="alphabetical"
             name="alphabetical"
             value={filters.alphabetical}
             onChange={handleFilters}
             disabled={recipes.length === 0 || !!recipes[0].error || loading}
+            className={style.filterRecipe}
           >
             <option value="none" disabled>
               Alphabetical order
@@ -126,12 +139,20 @@ function Search() {
             <option value="asc">A-Z</option>
             <option value="des">Z-A</option>
           </select>
+        </div>
 
+        <div className={style.contentSection}>
+          <label className={style.titleSection} htmlFor="score">
+            {" "}
+            Order by score
+          </label>
           <select
+            id="score"
             name="score"
             value={filters.score}
             onChange={handleFilters}
             disabled={recipes.length === 0 || !!recipes[0].error || loading}
+            className={style.filterRecipe}
           >
             <option value="none" disabled>
               Order by score
@@ -139,12 +160,19 @@ function Search() {
             <option value="asc">Higher to Lower</option>
             <option value="des">Lower to Higher</option>
           </select>
+        </div>
 
+        <div className={style.contentSection}>
+          <label className={style.titleSection} htmlFor="diet">
+            Diet
+          </label>
           <select
+            id="diet"
             name="diet"
             value={filters.diet}
             onChange={handleFilters}
             disabled={recipes.length === 0 || !!recipes[0].error || loading}
+            className={style.filterRecipe}
           >
             <option value="none" disabled>
               Order by type diet
@@ -156,17 +184,25 @@ function Search() {
                 </option>
               ))}
           </select>
+        </div>
 
-          <button onClick={clearAllFilters} disabled={loading}>
+        <div className={style.buttonsClearRecipes}>
+          <button
+            onClick={clearAllFilters}
+            disabled={loading}
+            className={style.clearRecipes}
+          >
             Clean Filters
           </button>
-        </div>
-        <div className={style.All}>
-          <button onClick={allRecipes} disabled={loading}>
+          <button
+            onClick={allRecipes}
+            disabled={loading}
+            className={style.clearRecipes}
+          >
             All Recipes
           </button>
         </div>
-      </header>
+      </div>
     </div>
   );
 }

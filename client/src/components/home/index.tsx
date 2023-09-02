@@ -5,6 +5,7 @@ import github from "../../img/github.png";
 import linkedin from "../../img/linkedin.png";
 import { ReducerState } from "../../models";
 import { getAllRecipes } from "../../redux/actions";
+import { SearchBar } from "..";
 import Cards from "../Cards";
 import Loading from "../Loading";
 import style from "./Home.module.css";
@@ -23,23 +24,30 @@ function Home() {
 
   return (
     <div>
-      {loading ? (
-        <div className={style.home}>
-          <Loading />
+      <div className={style.contentHome}>
+        <div>
+          <SearchBar />
         </div>
-      ) : recipes.length > 0 ? (
-        recipes[0].error ? (
-          <div className={style.home}>
-            <h2>{recipes[0].error}</h2>
-          </div>
-        ) : (
-          <Cards recipes={recipes} />
-        )
-      ) : (
-        <div className={style.home}>
-          <h2>No recipes found</h2>
+        <div>
+          {loading ? (
+            <div className={style.home}>
+              <Loading />
+            </div>
+          ) : recipes.length > 0 ? (
+            recipes[0].error ? (
+              <div className={style.home}>
+                <h2>{recipes[0].error}</h2>
+              </div>
+            ) : (
+              <Cards recipes={recipes} />
+            )
+          ) : (
+            <div className={style.home}>
+              <h2>No recipes found</h2>
+            </div>
+          )}
         </div>
-      )}
+      </div>
       <footer>
         <p>&copy;2022 Camilo Montoya</p>
         <div className={style.info}>

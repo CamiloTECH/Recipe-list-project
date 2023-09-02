@@ -7,8 +7,7 @@ import {
   Home,
   LandingPage,
   NavBar,
-  NotFound,
-  SearchBar
+  NotFound
 } from "./components";
 
 function App() {
@@ -18,11 +17,7 @@ function App() {
 
       <Route
         path="/home"
-        element={[
-          <NavBar key={"navBar"} />,
-          <SearchBar key={"searchBar"} />,
-          <Home key={"home"} />
-        ]}
+        element={[<NavBar key={"navBar"} />, <Home key={"home"} />]}
       />
 
       <Route
