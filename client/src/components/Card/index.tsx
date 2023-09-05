@@ -14,6 +14,7 @@ const Card: FC<Props> = props => {
   return (
     <div className={style.card}>
       <img src={props.image} alt="Comida" />
+
       <div className={style.contentTitle}>
         <div className={style.info}>
           <p className={style.title}>
