@@ -23,8 +23,8 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <div className={style.contentHome}>
+    <div className={style.contentHome}>
+      <div className={style.contentMain}>
         <div>
           <SearchBar />
         </div>

@@ -23,16 +23,6 @@ function Cards({ recipes }: { recipes: Recipe[] }) {
 
   return (
     <>
-      <div className={style.buttons}>
-        <Pagination
-          recipes={recipes}
-          pagination={cPage}
-          recipesPerPage={recipesPerPage}
-          currentPage={currentPage}
-          currentCards={currentCards}
-        />
-      </div>
-
       <div className={style.cards}>
         {currentCards.map(recipe => (
           <Card
@@ -43,6 +33,16 @@ function Cards({ recipes }: { recipes: Recipe[] }) {
             key={recipe.id}
           />
         ))}
+      </div>
+      
+      <div className={style.buttons}>
+        <Pagination
+          recipes={recipes}
+          pagination={cPage}
+          recipesPerPage={recipesPerPage}
+          currentPage={currentPage}
+          currentCards={currentCards}
+        />
       </div>
     </>
   );

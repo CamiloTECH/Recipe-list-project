@@ -15,8 +15,12 @@
   height: 200px;
   min-height: 200px;
   background-color: rgba(0, 0, 0, 0.452);
+  transform: scale(1.2);
+  transition: transform .3s ease;
 }
-
+.card:hover img {
+  transform: scale(1);
+}
 .contentTitle {
   cursor: pointer;
   background-color: #82e0ab;
@@ -38,7 +42,6 @@
 .title {
   height: 100px;
   text-align: start;
-  
 }
 
 .link {

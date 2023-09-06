@@ -12,29 +12,31 @@ import {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage key={"landing"} />} />
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<LandingPage key={"landing"} />} />
 
-      <Route
-        path="/home"
-        element={[<NavBar key={"navBar"} />, <Home key={"home"} />]}
-      />
+        <Route
+          path="/home"
+          element={[<NavBar key={"navBar"} />, <Home key={"home"} />]}
+        />
 
-      <Route
-        path="/home/create"
-        element={[
-          <NavBar key={"navBar"} />,
-          <CreateRecipe key={"createRecipe"} />
-        ]}
-      />
+        <Route
+          path="/home/create"
+          element={[
+            <NavBar key={"navBar"} />,
+            <CreateRecipe key={"createRecipe"} />
+          ]}
+        />
 
-      <Route
-        path="/home/details/:id"
-        element={[<NavBar key={"navBar"} />, <CardDetails key={"details"} />]}
-      />
+        <Route
+          path="/home/details/:id"
+          element={[<NavBar key={"navBar"} />, <CardDetails key={"details"} />]}
+        />
 
-      <Route path="*" element={<NotFound key={"NotFound"} />} />
-    </Routes>
+        <Route path="*" element={<NotFound key={"NotFound"} />} />
+      </Routes>
+    </div>
   );
 }
 

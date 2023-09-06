@@ -8,8 +8,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-attachment: fixed;
-  width: 80%;
   margin: 0 auto;
+}
+.app {
+  width: 65%;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 95px 1fr;
+  gap: 50px;
 }
 
 code {
