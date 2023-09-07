@@ -1,3 +1,6 @@
+.link {
+  text-decoration: none;
+}
 .card {
   border-radius: 5px;
   display: flex;
@@ -7,32 +10,34 @@
   align-items: center;
   overflow: hidden;
   background-color: #82e0ab;
-  height: 300px;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.185);
+  height: 310px;
 }
 
-.card img {
+.card .image {
   width: 100%;
   height: 200px;
   min-height: 200px;
   background-color: rgba(0, 0, 0, 0.452);
   transform: scale(1.2);
-  transition: transform .3s ease;
+  transition: transform 0.2s ease;
 }
-.card:hover img {
+.card:hover .image {
   transform: scale(1);
 }
 .contentTitle {
-  cursor: pointer;
   background-color: #82e0ab;
   box-sizing: border-box;
   padding: 10px;
+  position: relative;
   min-width: 100%;
   transform: translateY(0px);
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
   font-size: 1.2rem;
 }
-.contentTitle:hover {
-  transform: translateY(-50px);
+.card:hover .contentTitle {
+  transform: translateY(-60px);
 }
 
 .info p {
@@ -43,18 +48,18 @@
   height: 100px;
   text-align: start;
 }
-
-.link {
-  text-align: center;
-  text-decoration: none;
-  color: #b03a2e;
-  font-weight: bold;
-  transition: color 0.2s;
+.buttonDetail {
+  opacity: 0;
+  background-color: chocolate;
+  padding: 10px;
+  margin: 0px;
+  border-radius: 5px;
+  transition: opacity 0.4s ease;
 }
 
-.link:hover {
-  color: white;
-  transition: color 0.2s;
+.card:hover .buttonDetail {
+  opacity: 1;
+  transition: opacity 0.2s ease;
 }
 
 @media (max-width: 1190px) {

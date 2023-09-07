@@ -1,6 +1,18 @@
-@media (max-width: 540px) {
+.previousButtonDisabled {
+  box-shadow: none;
+  color: #82e0aa9d;
+  width: max-content;
+  cursor: default;
+  padding: 0.6% 1%;
+}
+.previousButton {
+  width: max-content;
+  color: #82e0aa;
+  padding: 0.6% 1%;
+}
 
-  .sButtons{
+@media (max-width: 540px) {
+  .sButtons {
     display: none;
   }
 }

@@ -34,7 +34,7 @@ function Cards({ recipes }: { recipes: Recipe[] }) {
           />
         ))}
       </div>
-      
+
       <div className={style.buttons}>
         <Pagination
           recipes={recipes}

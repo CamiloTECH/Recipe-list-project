@@ -1,3 +1,8 @@
+import {
+  faChevronLeft,
+  faChevronRight
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useEffect, useState } from "react";
 
 import { Recipe } from "../../models";
@@ -55,27 +60,14 @@ const Pagination: FC<Props> = ({
     <>
       <button
         onClick={() => pagination(currentPage - 1)}
-        className={style.bigButtons}
-        disabled={stateButton.previus}
-        style={
+        className={
           stateButton.previus
-            ? {
-                boxShadow: "none",
-                backgroundColor: "#B03A2E9d",
-                color: "#82E0AA9d",
-                width: "max-content",
-                cursor: "default",
-                padding: ".6% 1%"
-              }
-            : {
-                width: "max-content",
-                backgroundColor: "#B03A2E",
-                color: "#82E0AA",
-                padding: ".6% 1%"
-              }
+            ? style.previousButtonDisabled
+            : style.previousButton
         }
+        disabled={stateButton.previus}
       >
-        Previus Page
+        <FontAwesomeIcon icon={faChevronLeft} />
       </button>
 
       {numberOfButtons.map(pag => (
@@ -118,7 +110,7 @@ const Pagination: FC<Props> = ({
               }
         }
       >
-        Next Page
+        <FontAwesomeIcon icon={faChevronRight} />
       </button>
     </>
   );
