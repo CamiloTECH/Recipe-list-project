@@ -35,15 +35,13 @@ function Cards({ recipes }: { recipes: Recipe[] }) {
         ))}
       </div>
 
-      <div className={style.buttons}>
-        <Pagination
-          recipes={recipes}
-          pagination={cPage}
-          recipesPerPage={recipesPerPage}
-          currentPage={currentPage}
-          currentCards={currentCards}
-        />
-      </div>
+      <Pagination
+        recipes={recipes}
+        pagination={cPage}
+        recipesPerPage={recipesPerPage}
+        currentPage={currentPage}
+        currentCards={currentCards}
+      />
     </>
   );
 }

@@ -1,18 +1,69 @@
-.previousButtonDisabled {
+.contentButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.contentButtons .buttonPaginated {
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  background-color: transparent;
+  color:  #1b4f72;
+}
+.contentButtons .buttonPaginated.restPage:hover {
+  color:  #1b4f7293;
+}
+
+.contentButtons .buttonPaginated.currentPage {
+  background-color: #1b4f72;
+  color: white;
+  border-radius: 50%;
+  height: 30px;
+  padding: 0px;
+  width: 30px;
+}
+.contentButtons .buttonPaginated.buttonActive:hover {
+  color: #1b4f72;
+}
+.contentButtons .buttonPaginated.buttonDisabled {
   box-shadow: none;
-  color: #82e0aa9d;
+  color: #82e0ab75;
   width: max-content;
   cursor: default;
-  padding: 0.6% 1%;
 }
-.previousButton {
+.contentButtons .buttonPaginated.buttonActive {
   width: max-content;
-  color: #82e0aa;
-  padding: 0.6% 1%;
+  color: #63db97;
 }
 
 @media (max-width: 540px) {
   .sButtons {
     display: none;
+  }
+}
+
+@media (max-width: 940px) {
+  .contentButtons button {
+    padding: 5px 0px;
+    width: 4%;
+  }
+  .contentButtons {
+    gap: 0.5%;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 780px) {
+  .contentButtons {
+    gap: 0%;
+  }
+}
+
+@media (max-width: 540px) {
+  .contentButtons {
+    gap: 5%;
+    justify-content: center;
   }
 }

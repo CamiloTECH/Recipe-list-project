@@ -53,18 +53,15 @@ const Pagination: FC<Props> = ({
         next: false
       });
     }
-    // eslint-disable-next-line
   }, [currentPage, currentCards]);
 
   return (
-    <>
+    <div className={style.contentButtons}>
       <button
         onClick={() => pagination(currentPage - 1)}
-        className={
-          stateButton.previus
-            ? style.previousButtonDisabled
-            : style.previousButton
-        }
+        className={`${style.buttonPaginated} ${
+          stateButton.previus ? style.buttonDisabled : style.buttonActive
+        }`}
         disabled={stateButton.previus}
       >
         <FontAwesomeIcon icon={faChevronLeft} />
@@ -74,45 +71,23 @@ const Pagination: FC<Props> = ({
         <button
           key={pag}
           onClick={() => pagination(pag + 1)}
-          className={style.sButtons}
-          style={
-            currentPage === pag + 1
-              ? {
-                  backgroundColor: "#B03A2E",
-                  color: "#82E0AA",
-                  fontWeight: "bold"
-                }
-              : {}
-          }
+          className={`${style.buttonPaginated} ${
+            currentPage === pag + 1 ? style.currentPage : style.restPage
+          }`}
         >
           {pag + 1}
         </button>
       ))}
       <button
         onClick={() => pagination(currentPage + 1)}
-        className={style.bigButtons}
         disabled={stateButton.next}
-        style={
-          stateButton.next
-            ? {
-                boxShadow: "none",
-                backgroundColor: "#B03A2E9d",
-                color: "#82E0AA9d",
-                width: "max-content",
-                cursor: "default",
-                padding: ".6% 1%"
-              }
-            : {
-                width: "max-content",
-                backgroundColor: "#B03A2E",
-                color: "#82E0AA",
-                padding: ".6% 1%"
-              }
-        }
+        className={`${style.buttonPaginated} ${
+          stateButton.next ? style.buttonDisabled : style.buttonActive
+        }`}
       >
         <FontAwesomeIcon icon={faChevronRight} />
       </button>
-    </>
+    </div>
   );
 };
 

@@ -6,37 +6,7 @@
   gap: 2rem;
   align-items: center;
   justify-content: center;
-}
-
-.buttons {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1%;
-}
-
-.buttons button {
-  padding: 9px 0px;
-  font-size: 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 3%;
-  border: none;
-  color: #82e0aa;
-  background-color: #1b4f72;
-  box-shadow: 1px 1px 1px black;
-  transition: background-color 0.5s;
-}
-.buttons button:hover {
-  background-color: #82e0aa;
-  color: #1b4f72;
-  transition: background-color 1s;
-}
-
-.buttons button:active {
-  transform: translateY(1px);
-  box-shadow: none;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 1190px) {
@@ -45,43 +15,22 @@
     font-size: 1.3rem;
   }
 }
-@media (max-width: 940px) {
-  .buttons button {
-    padding: 5px 0px;
-    width: 4%;
-  }
-  .buttons{
-    gap: .5%;
-    justify-content: space-around;
-  }
-}
 
 @media (max-width: 780px) {
   .cards {
     justify-content: space-around;
     gap: 2rem 0rem;
   }
-  .buttons{
-    gap: 0%;
-  }
 }
 
 @media (max-width: 665px) {
-.cards{
-  font-size: 1.2rem;
-}
-}
-
-@media (max-width: 540px) {
-
-  .buttons{
-    gap: 5%;
-    justify-content: center;
+  .cards {
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 370px) {
-.cards{
-  margin-top: 10%;
-}
+  .cards {
+    margin-top: 10%;
+  }
 }
