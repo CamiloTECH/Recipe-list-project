@@ -25,26 +25,19 @@ function Home() {
   return (
     <div className={style.contentHome}>
       <div className={style.contentMain}>
-        <div>
-          <SearchBar />
-        </div>
-        <div>
+        <SearchBar />
+
+        <div className={style.home}>
           {loading ? (
-            <div className={style.home}>
-              <Loading />
-            </div>
+            <Loading />
           ) : recipes.length > 0 ? (
             recipes[0].error ? (
-              <div className={style.home}>
-                <h2>{recipes[0].error}</h2>
-              </div>
+              <h2>{recipes[0].error}</h2>
             ) : (
               <Cards recipes={recipes} />
             )
           ) : (
-            <div className={style.home}>
-              <h2>No recipes found</h2>
-            </div>
+            <h2>No recipes found</h2>
           )}
         </div>
       </div>

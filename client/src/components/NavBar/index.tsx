@@ -5,22 +5,20 @@ import style from "./NavBar.module.css";
 
 function NavBar() {
   return (
-    <div>
-      <nav className={style.navigation}>
-        <NavLink to="/home" className={style.logo}>
-          <img src={salad} alt="logotipo" />
-          <p>RECIPES</p>
+    <nav className={style.navigation}>
+      <NavLink to="/home" className={style.logo}>
+        <img src={salad} alt="logotipo" />
+        <p>RECIPES</p>
+      </NavLink>
+      <div className={style.rutas}>
+        <NavLink to="/home" className={style.enlaces}>
+          Home
         </NavLink>
-        <div className={style.rutas}>
-          <NavLink to="/home" className={style.enlaces}>
-            Home
-          </NavLink>
-          <NavLink to="/home/create" className={style.enlaces}>
-            Create a new recipe
-          </NavLink>
-        </div>
-      </nav>
-    </div>
+        <NavLink to="/home/create" className={style.enlaces}>
+          Create a new recipe
+        </NavLink>
+      </div>
+    </nav>
   );
 }
 

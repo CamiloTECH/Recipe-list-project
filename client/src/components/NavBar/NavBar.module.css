@@ -4,6 +4,8 @@
   align-items: center;
   padding: 0.5rem 0rem;
   color: black;
+  width: 65%;
+  margin: 0 auto;
 }
 
 .logo {

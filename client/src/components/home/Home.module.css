@@ -7,16 +7,17 @@
 
 .contentMain {
   display: grid;
+  align-items: flex-start;
   grid-template-columns: 300px 1fr;
   gap: 50px;
+  width: 65%;
+  margin: 0 auto;
 }
 
 .home {
   font-size: 1.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 58vh;
+  height: 100%;
+  width: 100%;
 }
 
 footer {

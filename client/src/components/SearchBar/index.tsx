@@ -94,114 +94,112 @@ function Search() {
   }, []);
 
   return (
-    <div>
-      <div className={style.header}>
-        <div className={style.contentSection}>
-          <label className={style.titleSection} htmlFor="text">
-            Advanced search
-          </label>
-          <div className={style.search}>
-            <input
-              id="text"
-              type="text"
-              name="searchName"
-              onChange={handleFilters}
-              value={filters.searchName}
-              placeholder="Search by name"
-              disabled={loading}
-              className={style.inputSearch}
-            />
-            <button
-              onClick={handleSearch}
-              disabled={filters.searchName.trim().length === 0 || loading}
-              className={style.buttonSearch}
-            >
-              Search
-            </button>
-          </div>
+    <div className={style.header}>
+      <div className={style.contentSection}>
+        <label className={style.titleSection} htmlFor="text">
+          Advanced search
+        </label>
+        <div className={style.search}>
+          <input
+            id="text"
+            type="text"
+            name="searchName"
+            onChange={handleFilters}
+            value={filters.searchName}
+            placeholder="Search by name"
+            disabled={loading}
+            className={style.inputSearch}
+          />
+          <button
+            onClick={handleSearch}
+            disabled={filters.searchName.trim().length === 0 || loading}
+            className={style.buttonSearch}
+          >
+            Search
+          </button>
         </div>
+      </div>
 
-        <div className={style.contentSection}>
-          <label className={style.titleSection} htmlFor="alphabetical">
+      <div className={style.contentSection}>
+        <label className={style.titleSection} htmlFor="alphabetical">
+          Alphabetical order
+        </label>
+        <select
+          id="alphabetical"
+          name="alphabetical"
+          value={filters.alphabetical}
+          onChange={handleFilters}
+          disabled={recipes.length === 0 || !!recipes[0].error || loading}
+          className={style.filterRecipe}
+        >
+          <option value="none" disabled>
             Alphabetical order
-          </label>
-          <select
-            id="alphabetical"
-            name="alphabetical"
-            value={filters.alphabetical}
-            onChange={handleFilters}
-            disabled={recipes.length === 0 || !!recipes[0].error || loading}
-            className={style.filterRecipe}
-          >
-            <option value="none" disabled>
-              Alphabetical order
-            </option>
-            <option value="asc">A-Z</option>
-            <option value="des">Z-A</option>
-          </select>
-        </div>
+          </option>
+          <option value="asc">A-Z</option>
+          <option value="des">Z-A</option>
+        </select>
+      </div>
 
-        <div className={style.contentSection}>
-          <label className={style.titleSection} htmlFor="score">
-            {" "}
+      <div className={style.contentSection}>
+        <label className={style.titleSection} htmlFor="score">
+          {" "}
+          Order by score
+        </label>
+        <select
+          id="score"
+          name="score"
+          value={filters.score}
+          onChange={handleFilters}
+          disabled={recipes.length === 0 || !!recipes[0].error || loading}
+          className={style.filterRecipe}
+        >
+          <option value="none" disabled>
             Order by score
-          </label>
-          <select
-            id="score"
-            name="score"
-            value={filters.score}
-            onChange={handleFilters}
-            disabled={recipes.length === 0 || !!recipes[0].error || loading}
-            className={style.filterRecipe}
-          >
-            <option value="none" disabled>
-              Order by score
-            </option>
-            <option value="asc">Higher to Lower</option>
-            <option value="des">Lower to Higher</option>
-          </select>
-        </div>
+          </option>
+          <option value="asc">Higher to Lower</option>
+          <option value="des">Lower to Higher</option>
+        </select>
+      </div>
 
-        <div className={style.contentSection}>
-          <label className={style.titleSection} htmlFor="diet">
-            Diet
-          </label>
-          <select
-            id="diet"
-            name="diet"
-            value={filters.diet}
-            onChange={handleFilters}
-            disabled={recipes.length === 0 || !!recipes[0].error || loading}
-            className={style.filterRecipe}
-          >
-            <option value="none" disabled>
-              Order by type diet
-            </option>
-            {types.length > 0 &&
-              types.map(type => (
-                <option value={type.name} key={type.id}>
-                  {type.name}
-                </option>
-              ))}
-          </select>
-        </div>
+      <div className={style.contentSection}>
+        <label className={style.titleSection} htmlFor="diet">
+          Diet
+        </label>
+        <select
+          id="diet"
+          name="diet"
+          value={filters.diet}
+          onChange={handleFilters}
+          disabled={recipes.length === 0 || !!recipes[0].error || loading}
+          className={style.filterRecipe}
+        >
+          <option value="none" disabled>
+            Order by type diet
+          </option>
+          {types.length > 0 &&
+            types.map(type => (
+              <option value={type.name} key={type.id}>
+                {type.name}
+              </option>
+            ))}
+        </select>
+      </div>
 
-        <div className={style.buttonsClearRecipes}>
-          <button
-            onClick={clearAllFilters}
-            disabled={loading}
-            className={style.clearRecipes}
-          >
-            Clean Filters
-          </button>
-          <button
-            onClick={allRecipes}
-            disabled={loading}
-            className={style.clearRecipes}
-          >
-            All Recipes
-          </button>
-        </div>
+      <div className={style.buttonsClearRecipes}>
+        <button
+          onClick={clearAllFilters}
+          disabled={loading}
+          className={style.clearRecipes}
+        >
+          Clean Filters
+        </button>
+        <button
+          onClick={allRecipes}
+          disabled={loading}
+          className={style.clearRecipes}
+        >
+          All Recipes
+        </button>
       </div>
     </div>
   );

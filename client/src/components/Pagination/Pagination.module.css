@@ -1,6 +1,5 @@
 .contentButtons {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 10px;
 }
@@ -10,19 +9,19 @@
   border: none;
   font-weight: bold;
   background-color: transparent;
-  color:  #1b4f72;
+  color: #1b4f72;
+  height: 30px;
+  width: 30px;
+  padding: 0px;
 }
 .contentButtons .buttonPaginated.restPage:hover {
-  color:  #1b4f7293;
+  color: #1b4f7293;
 }
 
 .contentButtons .buttonPaginated.currentPage {
   background-color: #1b4f72;
   color: white;
   border-radius: 50%;
-  height: 30px;
-  padding: 0px;
-  width: 30px;
 }
 .contentButtons .buttonPaginated.buttonActive:hover {
   color: #1b4f72;
