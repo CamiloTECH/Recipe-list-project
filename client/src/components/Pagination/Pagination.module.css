@@ -9,7 +9,7 @@
   border: none;
   font-weight: bold;
   background-color: transparent;
-  color: #1b4f72;
+  color: var(--second-color);
   height: 30px;
   width: 30px;
   padding: 0px;
@@ -19,7 +19,7 @@
 }
 
 .contentButtons .buttonPaginated.currentPage {
-  background-color: #1b4f72;
+  background-color: var(--second-color);
   color: white;
   border-radius: 50%;
 }
@@ -34,7 +34,7 @@
 }
 .contentButtons .buttonPaginated.buttonActive {
   width: max-content;
-  color: #63db97;
+  color: var(--text-color);
 }
 
 @media (max-width: 540px) {

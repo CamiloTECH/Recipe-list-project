@@ -57,15 +57,17 @@ const Pagination: FC<Props> = ({
 
   return (
     <div className={style.contentButtons}>
-      <button
-        onClick={() => pagination(currentPage - 1)}
-        className={`${style.buttonPaginated} ${
-          stateButton.previus ? style.buttonDisabled : style.buttonActive
-        }`}
-        disabled={stateButton.previus}
-      >
-        <FontAwesomeIcon icon={faChevronLeft} />
-      </button>
+      {!stateButton.previus && (
+        <button
+          onClick={() => pagination(currentPage - 1)}
+          className={`${style.buttonPaginated} ${
+            stateButton.previus ? style.buttonDisabled : style.buttonActive
+          }`}
+          disabled={stateButton.previus}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
+      )}
 
       {numberOfButtons.map(pag => (
         <button
@@ -78,15 +80,17 @@ const Pagination: FC<Props> = ({
           {pag + 1}
         </button>
       ))}
-      <button
-        onClick={() => pagination(currentPage + 1)}
-        disabled={stateButton.next}
-        className={`${style.buttonPaginated} ${
-          stateButton.next ? style.buttonDisabled : style.buttonActive
-        }`}
-      >
-        <FontAwesomeIcon icon={faChevronRight} />
-      </button>
+      {!stateButton.next && (
+        <button
+          onClick={() => pagination(currentPage + 1)}
+          disabled={stateButton.next}
+          className={`${style.buttonPaginated} ${
+            stateButton.next ? style.buttonDisabled : style.buttonActive
+          }`}
+        >
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+      )}
     </div>
   );
 };

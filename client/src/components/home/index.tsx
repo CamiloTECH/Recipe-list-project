@@ -32,12 +32,12 @@ function Home() {
             <Loading />
           ) : recipes.length > 0 ? (
             recipes[0].error ? (
-              <h2>{recipes[0].error}</h2>
+              <h2 className={style.messageError}>{recipes[0].error}</h2>
             ) : (
               <Cards recipes={recipes} />
             )
           ) : (
-            <h2>No recipes found</h2>
+            <h2 className={style.messageError}>No recipes</h2>
           )}
         </div>
       </div>

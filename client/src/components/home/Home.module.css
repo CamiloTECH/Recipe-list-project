@@ -19,6 +19,10 @@
   height: 100%;
   width: 100%;
 }
+.messageError {
+  text-align: center;
+  margin: 0px;
+}
 
 footer {
   display: flex;

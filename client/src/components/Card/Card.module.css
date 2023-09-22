@@ -9,7 +9,7 @@
   color: white;
   align-items: center;
   overflow: hidden;
-  background-color: #82e0ab;
+  background-color: var(--second-color);
   text-decoration: none;
   border: 1px solid rgba(0, 0, 0, 0.185);
   height: 310px;
@@ -27,7 +27,7 @@
   transform: scale(1);
 }
 .contentTitle {
-  background-color: #82e0ab;
+  background-color: var(--second-color);
   box-sizing: border-box;
   padding: 10px;
   position: relative;
@@ -50,8 +50,10 @@
 }
 .buttonDetail {
   opacity: 0;
-  background-color: chocolate;
+  background-color: var(--third-color);
   padding: 10px;
+  color: var(--second-color);
+  font-weight: 600;
   margin: 0px;
   border-radius: 5px;
   transition: opacity 0.4s ease;

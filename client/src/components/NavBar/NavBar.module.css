@@ -1,9 +1,19 @@
+.containerNav {
+  width: 100%;
+  position: sticky;
+  inset: 0;
+  height: min-content;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.925);
+  box-shadow: 25px 26px 35px 5px transparent;
+}
+
 .navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0rem;
-  color: black;
+  color: var(--second-color);
   width: 65%;
   margin: 0 auto;
 }
@@ -20,11 +30,12 @@
   width: 25%;
 }
 
-.logo p,
+.logo .titleNav,
 .enlaces {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1b4f72;
+  color: var(--second-color);
+  margin: 0px;
 }
 
 .rutas {
@@ -46,7 +57,7 @@
   content: "";
   position: absolute;
   width: 0%;
-  background-color: #b03a2e;
+  background-color: var(--third-color);
   height: 3px;
   left: 0px;
   bottom: 0px;
