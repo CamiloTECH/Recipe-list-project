@@ -22,8 +22,9 @@ const Card: FC<Props> = props => {
               {props.title[0].toUpperCase() + props.title.slice(1)}
             </p>
           </div>
-
-          <p className={style.buttonDetail}>See more details</p>
+          <div>
+            <p className={style.buttonDetail}>See more details</p>
+          </div>
         </div>
       </div>
     </Link>

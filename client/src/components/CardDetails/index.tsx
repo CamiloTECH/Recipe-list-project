@@ -43,56 +43,55 @@ function CardDetail() {
       {loading ? (
         <Loading />
       ) : recipesDetail ? (
-        <div className={style.card}>
-          {recipesDetail.error ? (
-            <h1>Recipe with ID {id} not found </h1>
-          ) : (
-            <>
-              <h1>
-                {recipesDetail.title[0].toUpperCase() +
-                  recipesDetail.title.slice(1)}
-              </h1>
-              <div className={style.firtsPart}>
-                <img src={recipesDetail.image} alt="Not found" />
-                <div className={style.scores}>
-                  <p>
-                    <b>Score:</b> {recipesDetail.score}⭐
-                  </p>
-                  <p>
-                    <b>HealtScore:</b> {recipesDetail.healthScore}🌿
-                  </p>
-                  <p>
-                    <b>Type of Diet:</b>
-                  </p>
+        recipesDetail.error ? (
+          <h1>Recipe with ID {id} not found </h1>
+        ) : (
+          <div className={style.card}>
+            <div>
+              <div>
+                <h1>{recipesDetail.title}</h1>
+                <div>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: recipesDetail.summary }}
+                  />
+                </div>
+                <p>
+                  <b>Score:</b> {recipesDetail.score}⭐
+                </p>
+                <p>
+                  <b>HealtScore:</b> {recipesDetail.healthScore}🌿
+                </p>
+              </div>
+              <img src={recipesDetail.image} alt="Not found" />
+            </div>
+            <div>
+              <div>
+                <div>
+                  <p>Type of Diet:</p>
                   <ul>
                     {recipesDetail.diets.map((diet, index) => (
                       <li key={index}>{diet}</li>
                     ))}
                   </ul>
-                  <p>
-                    <b>Type of Dish:</b>
-                  </p>
-                  <ul>
-                    {recipesDetail.dishes &&
-                      recipesDetail.dishes.map((dish, index) => (
+                </div>
+                {recipesDetail.dishes && (
+                  <div>
+                    <p>Type of Dish:</p>
+                    <ul>
+                      {recipesDetail.dishes.map((dish, index) => (
                         <li key={index}>{dish}</li>
                       ))}
-                  </ul>
-                </div>
+                    </ul>
+                  </div>
+                )}
               </div>
-              <div className={style.secondPart}>
-                <hr />
-                <h2>Summary:</h2>
-                <p
-                  dangerouslySetInnerHTML={{ __html: recipesDetail.summary }}
-                />
-                <hr />
+              <div>
                 <h2>Steps:</h2>
                 <p dangerouslySetInnerHTML={{ __html: recipesDetail.steps }} />
               </div>
-            </>
-          )}
-        </div>
+            </div>
+          </div>
+        )
       ) : (
         <h1>Recipe with ID {id} not found </h1>
       )}
