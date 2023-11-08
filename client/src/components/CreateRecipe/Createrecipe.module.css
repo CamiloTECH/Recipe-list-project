@@ -1,7 +1,8 @@
 .form {
   width: 30%;
-  margin: 3% auto;
-  padding: 2%;
+  margin: 0% auto;
+  margin-bottom: 30px;
+  padding: 0% 2%;
   border-radius: 5px;
 }
 .form .titleForm {
@@ -30,17 +31,17 @@
 }
 .labelError {
   margin-left: 6%;
-  font-size: 0.8rem;
-  color: var(--third-color);
+  font-size: 0.9rem;
+  color: red;
   text-align: right;
   font-weight: bold;
 }
 
 .inputSection {
   padding: 1%;
+  box-sizing: border-box;
   outline: none;
   width: 100%;
-  margin-left: 5px;
   border: 1px solid rgba(209, 213, 219);
   color: black;
   border-radius: 5px;
@@ -56,74 +57,79 @@
 }
 
 .inputSection:focus {
-  background-color: #1b4f7238;
+  background-color: rgba(240, 240, 240, 0.637);
   border-color: rgb(189, 189, 189);
   transition:
     border-bottom 0.3s,
     background-color 0.3s;
 }
-
+.inputSection.inputError {
+  background-color: rgba(255, 0, 0, 0.15);
+  border-color: rgba(255, 0, 0, 0.1);
+}
+.inputSection.inputError::placeholder {
+  color: rgba(0, 0, 0, 0.336);
+}
+.contentDiets {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: flex-start;
+}
 .diet {
-  margin: 2% 0% 0% 4%;
   width: max-content;
+  margin-bottom: 5px;
 }
 
-.diet label {
-  font-size: 1.5rem;
-  color: var(--color1);
-  font-weight: 500;
+.diet .dietName {
+  color: var(--second-color);
+  font-weight: bold;
+  margin-left: 5px;
+  text-transform: capitalize;
 }
-.diet input:checked + label {
-  color: var(--color3);
+.diet input {
+  cursor: pointer;
 }
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 15%;
+.diet input:checked + .dietName {
+  color: var(--third-color);
 }
 
+.error {
+  color: var(--second-color);
+  background-color: white;
+}
+
+.submit {
+  color: var(--text-color);
+  background-color: white;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.37);
+}
 .submit,
 .error {
-  text-decoration: none;
   text-align: center;
-  width: 50%;
+  font-size: 20px;
   height: min-content;
-  justify-self: center;
-  align-self: center;
-  padding: 5%;
-  font-size: 1.5rem;
+  padding: 5px 40px;
   font-weight: bold;
   cursor: pointer;
-  border: none;
-  background-color: var(--color1);
-  color: var(--color3);
-  border-radius: 10px;
-  box-shadow: 1px 1px 2px black;
-  transition: background-color 0.7s;
+  border: 1px solid rgba(209, 213, 219);
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
 .submit:hover {
-  background-color: #82e0aa;
-  color: #1b4f72;
-  transition: background-color 0.7s;
+  color: var(--second-color);
+  background-color: #64b89641;
+  transition: all 0.3s ease;
 }
-
 .submit:active {
-  transform: translateY(1px);
   box-shadow: none;
+  transform: translateY(1px);
 }
-
-.contentLoad {
-  align-self: center;
-}
-
 .error {
   cursor: default;
   box-shadow: none;
-  background-color: #1b4f729d;
-  color: #82e0aa9d;
+  color: #82e0ab62;
 }
 
 @media (max-width: 1140px) {

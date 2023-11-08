@@ -118,12 +118,9 @@ function CreateRecipe() {
             value={recipe.title}
             placeholder="Enter the name"
             onChange={handleValidation}
-            className={style.inputSection}
-            style={
-              error.title
-                ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
-                : {}
-            }
+            className={`${style.inputSection} ${
+              error.title ? style.inputError : null
+            }`}
           />
         </div>
 
@@ -147,12 +144,9 @@ function CreateRecipe() {
             value={recipe.score}
             onChange={handleValidation}
             placeholder="Enter the score"
-            className={style.inputSection}
-            style={
-              error.score
-                ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
-                : {}
-            }
+            className={`${style.inputSection} ${
+              error.score ? style.inputError : null
+            }`}
           />
         </div>
 
@@ -175,13 +169,10 @@ function CreateRecipe() {
             disabled={loading}
             value={recipe.healthScore}
             onChange={handleValidation}
-            className={style.inputSection}
+            className={`${style.inputSection} ${
+              error.healthScore ? style.inputError : null
+            }`}
             placeholder="Enter the health score"
-            style={
-              error.healthScore
-                ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
-                : {}
-            }
           />
         </div>
 
@@ -200,18 +191,11 @@ function CreateRecipe() {
             disabled={loading}
             value={recipe.image}
             onChange={handleValidation}
-            className={style.inputSection}
+            className={`${style.inputSection} ${
+              error.image ? style.inputError : null
+            }`}
             placeholder="Enter the image by url"
-            style={
-              error.image
-                ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
-                : {}
-            }
           />
-        </div>
-
-        <div className={style.sectionsForm}>
-          <img src={recipe.image} alt="Imagen not found" />
         </div>
 
         <div className={style.sectionsForm}>
@@ -230,13 +214,10 @@ function CreateRecipe() {
             disabled={loading}
             value={recipe.summary}
             onChange={handleValidation}
-            className={style.inputSection}
+            className={`${style.inputSection} ${
+              error.summary ? style.inputError : null
+            }`}
             placeholder="Enter the summary"
-            style={
-              error.summary
-                ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
-                : {}
-            }
           />
         </div>
 
@@ -257,12 +238,9 @@ function CreateRecipe() {
             value={recipe.steps}
             onChange={handleValidation}
             placeholder="Enter the steps"
-            className={style.inputSection}
-            style={
-              error.steps
-                ? { borderBottomColor: "#E8FF06", backgroundColor: "#E8FF0638" }
-                : {}
-            }
+            className={`${style.inputSection} ${
+              error.steps ? style.inputError : null
+            }`}
           />
         </div>
 
@@ -276,19 +254,21 @@ function CreateRecipe() {
             )}
           </div>
           {diets.length > 0 ? (
-            diets.map(diet => (
-              <div className={style.diet} key={diet.id}>
-                <input
-                  name="diets"
-                  type="checkbox"
-                  value={diet.id}
-                  disabled={loading}
-                  onChange={handleValidation}
-                  checked={recipe.diets.includes(`${diet.id}`)}
-                />
-                <label htmlFor="diets">{diet.name}</label>
-              </div>
-            ))
+            <div className={style.contentDiets}>
+              {diets.map(diet => (
+                <div className={style.diet} key={diet.id}>
+                  <input
+                    name="diets"
+                    type="checkbox"
+                    value={diet.id}
+                    disabled={loading}
+                    onChange={handleValidation}
+                    checked={recipe.diets.includes(`${diet.id}`)}
+                  />
+                  <label className={style.dietName}>{diet.name}</label>
+                </div>
+              ))}
+            </div>
           ) : (
             <div>
               <p>No hay dietas para seleccionar</p>
