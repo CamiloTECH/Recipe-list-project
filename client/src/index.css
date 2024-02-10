@@ -16,10 +16,9 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 95px 1fr;
+  grid-template-rows: 95px 1fr min-content;
   gap: 50px;
 }
-
 code {
   font-family: "Shadows Into Light", cursive;
 }
@@ -29,4 +28,11 @@ select,
 input,
 a {
   font-family: "Dosis", sans-serif;
+}
+
+@media (max-width: 600px) {
+  .app {
+    grid-template-rows: min-content 1fr min-content;
+    gap: 40px;
+  }
 }

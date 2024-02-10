@@ -1,0 +1,38 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--second-color);
+  padding: 10px;
+}
+.info {
+  display: flex;
+  gap: 15px;
+}
+.footer p {
+  margin: 0px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: max-content;
+  color: var(--text-color);
+}
+.icons {
+  height: 50px;
+  fill: var(--text-color);
+}
+.info a {
+  width: 100%;
+}
+
+.info .icons:hover {
+  filter: drop-shadow(1px 1px 5px var(--third-color));
+}
+
+@media (max-width: 450px) {
+  .footer p {
+    font-size: 1.2rem;
+  }
+  .icons {
+    height: 30px;
+  }
+}

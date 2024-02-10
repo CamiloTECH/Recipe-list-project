@@ -1,19 +1,16 @@
 .contentHome {
-  display: grid;
-  grid-template-rows: 1fr 90px;
   box-sizing: border-box;
-  gap: 50px;
+  width: 65%;
+  margin: 0 auto;
 }
-
 .contentMain {
   display: grid;
   align-items: flex-start;
   grid-template-columns: 300px 1fr;
   gap: 50px;
-  width: 65%;
+  width: 100%;
   margin: 0 auto;
 }
-
 .home {
   font-size: 1.8rem;
   height: 100%;
@@ -23,97 +20,54 @@
   text-align: center;
   margin: 0px;
 }
-
-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #1b4f72e3;
-  padding: 1% 2%;
-}
-
-.info {
-  display: flex;
-  width: 50%;
-  justify-content: flex-end;
-  gap: 7%;
-}
-footer p {
-  font-size: 1.5rem;
-  font-weight: bold;
-  width: max-content;
-  color: #82e0aa;
-  text-shadow: 3px 3px 10px #ff1900;
-  width: 100%;
-}
-.info a {
-  width: 13%;
-  justify-content: flex-end;
-}
-.info img {
-  width: 100%;
-  filter: drop-shadow(1px 1px 10px #e94f3e);
-}
-
-.info img:hover {
-  filter: drop-shadow(1px 1px 5px #48ffff);
-}
-
-@media (max-width: 1135px) {
-  footer p {
-    width: 100%;
-  }
-  .info a {
-    width: 15%;
+@media (max-width: 1700px) {
+  .contentHome {
+    width: 80%;
   }
 }
-@media (max-width: 1120px) {
-  .home {
-    height: 64vh;
+@media (max-width: 1400px) {
+  .contentHome {
+    width: 90%;
+  }
+  .contentMain {
+    gap: 35px;
   }
 }
-
-@media (max-width: 960px) {
-  .home {
-    height: 73vh;
+@media (max-width: 1200px) {
+  .contentHome {
+    width: 95%;
+  }
+  .contentMain {
+    gap: 30px;
+    grid-template-columns: 250px 1fr;
   }
 }
-@media (max-width: 665px) {
-  .home {
-    height: 63vh;
-  }
-  footer p {
-    font-size: 1.1rem;
-  }
-  .info a {
-    width: 17%;
+@media (max-width: 1000px) {
+  .contentMain {
+    grid-template-columns: 300px 1fr;
   }
 }
-@media (max-width: 510px) {
-  .home {
-    height: 41vh;
+@media (max-width: 900px) {
+  .contentMain {
+    gap: 25px;
+    grid-template-columns: 250px 1fr;
   }
 }
-@media (max-width: 486px) {
-  .home {
-    height: 50vh;
+@media (max-width: 800px) {
+  .contentHome {
+    width: 85%;
+  }
+  .contentMain {
+    grid-template-columns: 1fr;
   }
 }
-
-@media (max-width: 390px) {
-  .home {
-    height: 49vh;
-  }
-  footer p {
-    font-size: 0.8rem;
-  }
-  .info a {
-    width: 17%;
+@media (max-width: 600px) {
+  .contentHome {
+    width: 90%;
   }
 }
-
-@media (max-width: 285px) {
-  .home {
-    height: 51.7vh;
+@media (max-width: 450px) {
+  .contentHome {
+    width: 80%;
   }
 }

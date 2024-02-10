@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import github from "../../img/github.png";
-import linkedin from "../../img/linkedin.png";
 import { ReducerState } from "../../models";
 import { getAllRecipes } from "../../redux/actions";
 import { SearchBar } from "..";
@@ -41,25 +39,6 @@ function Home() {
           )}
         </div>
       </div>
-      <footer>
-        <p>&copy;2022 Camilo Montoya</p>
-        <div className={style.info}>
-          <a
-            href="https://www.linkedin.com/in/camilomontoya-fullstackdev"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={linkedin} alt="Linkedln" />
-          </a>
-          <a
-            href="https://github.com/CamiloTECH/Recipe-list-project"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={github} alt="gitHub" />
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }

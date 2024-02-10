@@ -2,6 +2,7 @@ export { default as Card } from "./Card";
 export { default as CardDetails } from "./CardDetails";
 export { default as Cards } from "./Cards";
 export { default as CreateRecipe } from "./CreateRecipe";
+export { default as Footer } from "./Footer";
 export { default as Home } from "./Home";
 export { default as LandingPage } from "./LandingPage";
 export { default as Loading } from "./Loading";

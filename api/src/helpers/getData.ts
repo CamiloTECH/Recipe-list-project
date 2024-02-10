@@ -26,7 +26,7 @@ interface RecipeResponse {
 const getData = async () => {
   try {
     const { data } = await axios.get(
-      `${URL_API}/complexSearch?number=5&addRecipeInformation=true&apiKey=${API_KEY}`
+      `${URL_API}/complexSearch?number=15&addRecipeInformation=true&apiKey=${API_KEY}`
     );
 
     const recipes: RecipeResponse[] = data.results.map((recipe: Recipe) => {

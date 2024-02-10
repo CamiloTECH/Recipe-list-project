@@ -65,7 +65,7 @@ function Search() {
       dispatch(clearFilters(copyRecipes));
     } else if (recipes.length < 40 && copyRecipes.length < 40) {
       dispatch(getAllRecipes());
-    }
+    } 
     setFilters({
       diet: "none",
       score: "none",

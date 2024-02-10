@@ -85,3 +85,13 @@
   color: var(--text-color);
   transition: color ease 0.2s;
 }
+
+@media (max-width: 800px) {
+  .header {
+    gap: 15px;
+    flex-direction: column-reverse;
+  }
+  .titleSection {
+    display: none;
+  }
+}
