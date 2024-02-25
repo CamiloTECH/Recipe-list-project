@@ -23,53 +23,34 @@ const Pagination: FC<Props> = ({
   currentPage,
   currentCards
 }) => {
-  const numberOfButtons = [];
-  const maxPage = Math.ceil(recipes.length / recipesPerPage);
-  const [stateButton, setStateButton] = useState({
-    next: false,
-    previus: false
-  });
-  for (let i = 0; i < maxPage; i++) numberOfButtons.push(i);
+  const [totalPages, setTotalPages] = useState<number[]>([]);
+
+  const handleMaxPage = () => {
+    const maxPage = Math.ceil(recipes.length / recipesPerPage);
+    const totalPagesButtons = [];
+
+    for (let i = 0; i < maxPage; i++) {
+      totalPagesButtons.push(i);
+    }
+    setTotalPages(totalPagesButtons);
+  };
 
   useEffect(() => {
-    if (maxPage === 1) {
-      setStateButton({
-        previus: true,
-        next: true
-      });
-    } else if (currentPage === maxPage) {
-      setStateButton({
-        previus: false,
-        next: true
-      });
-    } else if (currentPage === 1) {
-      setStateButton({
-        next: false,
-        previus: true
-      });
-    } else {
-      setStateButton({
-        previus: false,
-        next: false
-      });
-    }
+    handleMaxPage();
   }, [currentPage, currentCards]);
 
   return (
     <div className={style.contentButtons}>
-      {!stateButton.previus && (
+      {totalPages.length > 1 && currentPage !== 1 ? (
         <button
           onClick={() => pagination(currentPage - 1)}
-          className={`${style.buttonPaginated} ${
-            stateButton.previus ? style.buttonDisabled : style.buttonActive
-          }`}
-          disabled={stateButton.previus}
+          className={`${style.buttonPaginated} ${style.buttonActive}`}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-      )}
+      ) : null}
 
-      {numberOfButtons.map(pag => (
+      {totalPages.map(pag => (
         <button
           key={pag}
           onClick={() => pagination(pag + 1)}
@@ -80,17 +61,15 @@ const Pagination: FC<Props> = ({
           {pag + 1}
         </button>
       ))}
-      {!stateButton.next && (
+
+      {totalPages.length > 1 && currentPage !== totalPages.length ? (
         <button
           onClick={() => pagination(currentPage + 1)}
-          disabled={stateButton.next}
-          className={`${style.buttonPaginated} ${
-            stateButton.next ? style.buttonDisabled : style.buttonActive
-          }`}
+          className={`${style.buttonPaginated} ${style.buttonActive}`}
         >
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
-      )}
+      ) : null}
     </div>
   );
 };

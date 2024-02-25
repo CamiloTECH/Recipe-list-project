@@ -57,7 +57,7 @@
   text-align: start;
   font-size: 22px;
   font-weight: bold;
-  
+
   color: var(--second-color);
   margin-bottom: 15px;
   display: block;
@@ -97,8 +97,90 @@
   margin: 0px;
   padding: 0px 0px 25px 10px;
 }
-.contentSteps ol{
+.contentSteps ol {
   list-style: none;
   margin: 0px;
   padding: 0px;
+}
+.contentSteps p {
+  margin: 0px;
+}
+
+@media (max-width: 1300px) {
+  .card {
+    width: 85%;
+    gap: 70px;
+  }
+}
+@media (max-width: 900px) {
+  .card {
+    width: 90%;
+    gap: 50px;
+  }
+  .contentAllInfo {
+    display: block;
+  }
+  .contentTypes {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .contentMainInfo {
+    margin-top: 50px;
+  }
+}
+@media (max-width: 800px) {
+  .headerInfo {
+    min-height: 250px;
+  }
+  .typesDiet,
+  .typesDish {
+    min-width: 200px;
+  }
+}
+@media (max-width: 700px) {
+  .headerInfo {
+    min-height: 200px;
+  }
+  .typesDiet,
+  .typesDish {
+    min-width: 180px;
+  }
+
+  .contentGeneraInfo {
+    padding: 0 20px;
+  }
+  .contentGeneraInfo .title {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+  .contentGeneraInfo .dataHealth {
+    font-size: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .headerInfo {
+    min-height: auto;
+  }
+  .typesDiet,
+  .typesDish {
+    min-width: 120px;
+  }
+  .contentGeneraInfo {
+    padding: 0 20px;
+  }
+  .contentGeneraInfo .title {
+    font-size: 20px;
+  }
+  .contentGeneraInfo .dataHealth {
+    font-size: 15px;
+  }
+
+  .titleType {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .listItem {
+    font-size: 14px;
+    padding: 5px 0px 5px 5px;
+  }
 }

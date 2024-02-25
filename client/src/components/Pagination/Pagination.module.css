@@ -26,12 +26,7 @@
 .contentButtons .buttonPaginated.buttonActive:hover {
   color: #1b4f72;
 }
-.contentButtons .buttonPaginated.buttonDisabled {
-  box-shadow: none;
-  color: #82e0ab75;
-  width: max-content;
-  cursor: default;
-}
+
 .contentButtons .buttonPaginated.buttonActive {
   width: max-content;
   color: var(--text-color);
