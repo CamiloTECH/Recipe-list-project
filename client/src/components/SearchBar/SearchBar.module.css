@@ -85,6 +85,9 @@
   color: var(--text-color);
   transition: color ease 0.2s;
 }
+.disabled {
+  cursor: not-allowed;
+}
 
 @media (max-width: 800px) {
   .header {

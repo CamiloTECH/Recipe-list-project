@@ -65,7 +65,7 @@ function Search() {
       dispatch(clearFilters(copyRecipes));
     } else if (recipes.length < 40 && copyRecipes.length < 40) {
       dispatch(getAllRecipes());
-    } 
+    }
     setFilters({
       diet: "none",
       score: "none",
@@ -130,7 +130,11 @@ function Search() {
           value={filters.alphabetical}
           onChange={handleFilters}
           disabled={recipes.length === 0 || !!recipes[0].error || loading}
-          className={style.filterRecipe}
+          className={`${style.filterRecipe} ${
+            recipes.length === 0 || !!recipes[0].error || loading
+              ? style.disabled
+              : ""
+          }`}
         >
           <option value="none" disabled>
             Alphabetical order
@@ -151,7 +155,11 @@ function Search() {
           value={filters.score}
           onChange={handleFilters}
           disabled={recipes.length === 0 || !!recipes[0].error || loading}
-          className={style.filterRecipe}
+          className={`${style.filterRecipe} ${
+            recipes.length === 0 || !!recipes[0].error || loading
+              ? style.disabled
+              : ""
+          }`}
         >
           <option value="none" disabled>
             Order by score
@@ -170,8 +178,10 @@ function Search() {
           name="diet"
           value={filters.diet}
           onChange={handleFilters}
-          disabled={recipes.length === 0 || !!recipes[0].error || loading}
-          className={style.filterRecipe}
+          disabled={!!recipes[0]?.error || loading}
+          className={`${style.filterRecipe} ${
+            !!recipes[0]?.error || loading ? style.disabled : ""
+          }`}
         >
           <option value="none" disabled>
             Order by type diet
