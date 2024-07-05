@@ -1,7 +1,6 @@
 .form {
   width: 30%;
-  margin: 0% auto;
-  margin-bottom: 30px;
+  margin: 6% auto;
   padding: 0% 2%;
   border-radius: 5px;
 }
@@ -171,7 +170,6 @@
 @media (max-width: 620px) {
   .form h2 {
     font-size: 2rem;
-    margin-bottom: 2%;
   }
 
   .data input,

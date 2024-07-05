@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <nav className={style.containerNav}>
       <div className={style.navigation}>
-        <NavLink to="/home" className={style.logo}>
+        <NavLink to="/" className={style.logo}>
           <img src={salad} alt="logotipo" />
           <p className={style.titleNav}>RECIPES</p>
         </NavLink>

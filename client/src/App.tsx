@@ -15,7 +15,14 @@ function App() {
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={<LandingPage key={"landing"} />} />
+        <Route
+          path="/"
+          element={[
+            <NavBar key={"navBar"} />,
+            <LandingPage key={"landing"} />,
+            <Footer key={"footer"} />
+          ]}
+        />
 
         <Route
           path="/home"

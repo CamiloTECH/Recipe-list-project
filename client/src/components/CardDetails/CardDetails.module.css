@@ -1,5 +1,5 @@
 .card {
-  margin: 4% auto;
+  margin: 6% auto;
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -160,13 +160,16 @@
 @media (max-width: 600px) {
   .headerInfo {
     min-height: auto;
+    flex-direction: column-reverse;
   }
   .typesDiet,
   .typesDish {
     min-width: 120px;
   }
   .contentGeneraInfo {
-    padding: 0 20px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
   }
   .contentGeneraInfo .title {
     font-size: 20px;
@@ -182,5 +185,9 @@
   .listItem {
     font-size: 14px;
     padding: 5px 0px 5px 5px;
+  }
+  .contentImage {
+    overflow: hidden;
+    width: 100%;
   }
 }

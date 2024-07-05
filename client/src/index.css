@@ -16,8 +16,7 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 95px 1fr min-content;
-  gap: 50px;
+  grid-template-rows: min-content 1fr min-content;
 }
 code {
   font-family: "Shadows Into Light", cursive;
